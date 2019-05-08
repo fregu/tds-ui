@@ -59,7 +59,7 @@ export default function Link({
   }
   return (
     <ConditionalWrapper
-      if={to.match(/^\//)}
+      if={url.match(/^\//)}
       wrap={children => <NavLink to={url} {...linkProps} children={children} />}
       else={children => <a href={url} {...linkProps} children={children} />}
     >

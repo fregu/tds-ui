@@ -15,6 +15,9 @@
   background: var(--color-white);
   color: var(--color-action);
 }
+.Button--withIcon.Button--hiddenText {
+  padding: 0.5em;
+}
 .Button--primary {
   background: var(--color-action);
   color: var(--color-white);

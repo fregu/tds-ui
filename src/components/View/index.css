@@ -1,0 +1,75 @@
+@keyframes appear {
+  0% {
+    opacity: 0.2;
+    transform: translateY(-50%) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(-50%) scale(1);
+  }
+}
+
+.View-wrapper--overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.25);
+  z-index: var(--z-fullview);
+}
+.View--fullView {
+  position: absolute;
+  top: 50%;
+  top: 50vh;
+  left: 0;
+  left: 0;
+  width: 100%;
+  width: 100vw;
+  transform: translateY(-50%);
+  margin: 0;
+  box-sizing: border-box;
+  height: 100vh;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: var(--color-white, #fff);
+  transform-origin: 50% 50%;
+  animation: appear 0.25s ease-out;
+  padding-top: calc(var(--layout-gutter) * 2);
+  padding-left: 0;
+  padding-right: 0;
+  padding-bottom: calc(var(--layout-gutter) * 2);
+  z-index: var(--z-fullview);
+}
+.View-closeButton {
+  position: fixed;
+  right: 1em;
+  top: 1em;
+  z-index: 1;
+}
+.View--fullView .View-content {
+  max-height: 100%;
+  min-height: 50%;
+  width: 100%;
+}
+@media print {
+  .View-wrapper--overlay {
+    position: absolute;
+    min-height: 100%;
+    height: auto;
+    bottom: auto;
+  }
+  .View--fullView {
+    position: relative;
+    top: 0;
+    transform: none;
+    height: auto;
+    max-height: none;
+  }
+  .View--fullView .View-content {
+    height: auto;
+    max-height: none;
+  }
+}

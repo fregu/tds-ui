@@ -3,7 +3,7 @@ import React, { type Node } from 'react'
 import Icon, { type Props as IconProps } from 'ui/components/Icon'
 import Link, { type Props as LinkProps } from 'ui/components/Link'
 import classNames from 'classnames/bind'
-const cx = classNames({})
+const cx = classNames.bind({})
 
 export type Props = {
   className?: string,

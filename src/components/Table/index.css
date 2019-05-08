@@ -1,0 +1,110 @@
+.Table {
+  margin: 0;
+  position: relative;
+  font-size: var(--text-size-small);
+}
+
+.Table-table {
+  border-spacing: 0;
+  font-size: inherit;
+}
+.Table--fill .Table-table {
+  min-width: 100%;
+}
+.Table-header {
+  background: var(--color-silver);
+}
+
+.Table-row {
+}
+
+.Table-toggleContent {
+}
+.Table-row--linked:hover {
+  background: var(--color-light-turquoise);
+}
+.Table--striped .Table-table {
+  border: 1px solid var(--color-light-grey);
+  border-bottom: none;
+}
+.Table--striped .Table-head,
+.Table--striped .Table-cell {
+  border-bottom: 1px solid var(--color-light-grey);
+}
+.Table-row--expanded .Table-cell {
+  border-bottom: none;
+}
+.Table--tableHeader .Table-head {
+  text-transform: uppercase;
+  color: var(--color-dark-grey);
+  font-size: var(--text-smaller);
+}
+
+.Table-head {
+  font-weight: var(--font-wight-medium);
+}
+
+.Table-head--sortable {
+  cursor: pointer;
+}
+.Table-headSortIcon {
+  padding-left: 0.5em;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.Table-head--sortable:hover {
+  background-color: var(--color-black6);
+}
+
+.Table-head,
+.Table-cell {
+  position: relative;
+  text-align: left;
+  padding: 1em var(--layout-gutter) !important;
+  border-top: none !important;
+}
+.Table--striped .Table-head {
+  padding-top: 0.75em !important;
+  padding-bottom: 0.75em !important;
+  font-weight: var(--font-weight-medium);
+}
+
+.Table-cellLink::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.Table-head[align='left'],
+.Table-cell[align='left'] {
+  text-align: left;
+}
+.Table-head[align='center'],
+.Table-cell[align='center'] {
+  text-align: center;
+}
+.Table-head[align='right'],
+.Table-cell[align='right'] {
+  text-align: right;
+}
+.Table-head[valign='top'],
+.Table-cell[valign='top'] {
+  vertical-align: top;
+}
+.Table-head[valign='middle'],
+.Table-cell[valign='middle'] {
+  vertical-align: middle;
+}
+.Table-head[valign='bottom'],
+.Table-cell[valign='bottom'] {
+  vertical-align: bottom;
+}
+
+.Table-cell--empty {
+  padding: 0 !important;
+  width: 1px;
+}

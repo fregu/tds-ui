@@ -21,19 +21,19 @@
   margin-top: -0.5em;
   width: 1em;
   height: 1em;
-  box-shadow: 0 0 0 1px var(--ui-color-black38);
-  transition: var(--ui-transition);
+  box-shadow: 0 0 0 1px var(--color-black38);
+  transition: var(--transition);
 }
 .FormCheckbox-label:hover::before {
-  box-shadow: 0 0 0 1px var(--ui-color-black60);
+  box-shadow: 0 0 0 1px var(--color-black60);
 }
 .FormCheckbox-input:focus + .FormCheckbox-label::before {
-  box-shadow: 0 1px 2px 0 var(--ui-color-light-turquoise),
-    inset 0 0 0 1px var(--ui-color-turquoise);
+  box-shadow: 0 1px 2px 0 var(--color-light-turquoise),
+    inset 0 0 0 1px var(--color-turquoise);
 }
 .FormCheckbox-input:checked + .FormCheckbox-label::before {
-  color: var(--ui-color-white);
-  background: var(--ui-color-red);
+  color: var(--color-white);
+  background: var(--color-red);
 }
 .FormCheckbox-checkIcon {
   text-align: center;
@@ -43,19 +43,19 @@
   top: 50%;
   margin-top: -0.5em;
   opacity: 0;
-  transition: opacity var(--ui-transition);
-  color: var(--ui-color-white);
+  transition: opacity var(--transition);
+  color: var(--color-white);
 }
 .FormCheckbox-input:checked + .FormCheckbox-label .FormCheckbox-checkIcon {
   opacity: 1;
 }
 .FormCheckbox--disabled .FormCheckbox-label {
-  color: var(--ui-color-grey);
+  color: var(--color-grey);
   pointer-events: none;
 }
 .FormCheckbox-input:disabled + .FormCheckbox-label::before,
 .FormCheckbox-input:disabled + .FormCheckbox-label:hover::before {
-  background: var(--ui-color-light-grey);
+  background: var(--color-light-grey);
   box-shadow: none;
 }
 .FormCheckbox-input:disabled + .FormCheckbox-label .FormCheckbox-checkIcon {

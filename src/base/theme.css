@@ -1,0 +1,29 @@
+:root .theme-white {
+  background-color: var(--color-white);
+  color: var(--color-text);
+}
+:root .theme-black {
+  background-color: var(--color-black);
+  color: var(--color-white);
+}
+:root .theme-dark-grey {
+  background-color: var(--color-dark-grey);
+  color: var(--color-white);
+}
+:root .theme-grey {
+  background-color: var(--color-grey);
+  color: var(--color-white);
+}
+:root .theme-light-grey {
+  background-color: var(--color-light-grey);
+  color: var(--color-text);
+}
+:root .theme-primary {
+  background-color: var(--color-primary-action);
+  color: var(--color-white);
+}
+
+:root .theme-secondary {
+  background-color: var(--color-secondary-action);
+  color: var(--color-white);
+}

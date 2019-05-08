@@ -1,0 +1,15 @@
+.Divider {
+  border: none;
+  background: none;
+  color: var(--color-light-grey);
+  border-top: 1px solid;
+  margin: calc(var(--layout-gutter) * 3) 0;
+  display: block;
+}
+.Divider--blank {
+  border: none;
+  margin-top: 0;
+}
+.Divider--thin {
+  margin: var(--layout-gutter) 0;
+}

@@ -1,0 +1,30 @@
+@keyframes popin {
+  0% {
+    transform: scale(0.9) translateX(90%);
+    opacity: 0.2;
+  }
+  100% {
+    transform: scale(1) translateX(0);
+    opacity: 1;
+  }
+}
+.Toaster {
+  position: relative;
+  margin-top: 1em;
+  z-index: 6;
+  left: 0;
+  bottom: 0;
+  width: 250px;
+  background: var(--color-white, #fff);
+  color: var(--color-text, #000);
+  padding: var(--layout-gutter);
+  box-shadow: inset 0 0 0 1px var(--color-light-grey),
+    0 2px 10px 0 rgba(0, 0, 0, 0.16);
+  animation: popin 0.25s ease-out;
+}
+.Toaster--success {
+  border-left: 5px solid var(--color-green);
+}
+.Toaster--error {
+  border-left: 5px solid var(--color-red);
+}

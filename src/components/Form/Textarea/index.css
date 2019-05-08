@@ -30,7 +30,7 @@
   padding: 0.75em 1em;
   box-sizing: border-box;
   resize: none;
-  border: 1px solid var(--ui-color-black38);
+  border: 1px solid var(--color-black38);
 }
 
 .Textarea-pre {
@@ -52,7 +52,7 @@
 }
 
 .Textarea-input[disabled] {
-  background: var(--ui-color-lighter-grey);
+  background: var(--color-lighter-grey);
 }
 
 .Textarea-input:focus,
@@ -61,12 +61,12 @@
 .Textarea--valid .Textarea-input:active,
 .Textarea--invalid .Textarea-input:focus,
 .Textarea--invalid .Textarea-input:active {
-  border: 1px solid var(--ui-color-turquoise);
+  border: 1px solid var(--color-turquoise);
   outline: none;
 }
 
 .Textarea-optionalLabel {
   float: right;
   font-style: normal;
-  color: var(--ui-color-grey);
+  color: var(--color-grey);
 }

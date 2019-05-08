@@ -4,6 +4,9 @@ import Link from 'ui/components/Link'
 import Icon, { type Props as IconProps } from 'ui/components/Icon'
 import classNames from 'classnames/bind'
 import styles from './index.css'
+import Connect from 'ui/helpers/Connect'
+import { confirmAction } from 'ui/store/actions/dialog'
+import { redirectTo } from 'ui/store/actions/navigation'
 const cx = classNames.bind(styles)
 
 export type Props = {
@@ -45,43 +48,55 @@ export default function Button({
 }: Props) {
   const ButtonTag = to || href ? Link : 'button'
   return (
-    <ButtonTag
-      className={cx(
-        'Button',
-        {
-          'Button--plain': plain,
-          'Button--hiddenText': hiddenText,
-          'Button--fill': fill,
-          'Button--disabled': disabled,
-          'Button--withIcon': icon,
-          'Button--iconAfter': iconAfter,
-          'Button--primary': primary,
-          [`theme-${theme || ''}`]: theme
-        },
-        className
-      )}
-      disabled={disabled}
-      onClick={event => {
-        if (disabled || onClick) {
-          event.stopPropagation()
-        }
-        if (typeof onClick === 'function') {
-          onClick(event)
-        }
-      }}
-      {...attributes}
-    >
-      <div className={cx('Button-wrapper')}>
-        {icon ? (
-          <Icon {...icon} className={cx('Button--icon', icon.className)} />
-        ) : null}
-        <span
-          className={cx('Button-text', { 'hidden-text': hiddenText })}
-          dangerouslySetInnerHTML={text ? { __html: text } : null}
+    <Connect mapDispatchToProps={{ confirmAction }}>
+      {({ confirmAction }) => (
+        <ButtonTag
+          className={cx(
+            'Button',
+            {
+              'Button--plain': plain,
+              'Button--hiddenText': hiddenText,
+              'Button--fill': fill,
+              'Button--disabled': disabled,
+              'Button--withIcon': icon,
+              'Button--iconAfter': iconAfter,
+              'Button--primary': primary,
+              [`theme-${theme || ''}`]: theme
+            },
+            className
+          )}
+          title={(hiddenText && text) || null}
+          disabled={disabled}
+          onClick={event => {
+            if (disabled) {
+              event.stopPropagation()
+              return
+            }
+
+            if (confirm) {
+              event.preventDefault()
+              confirmAction(confirm, () =>
+                to ? redirectTo(to) : onClick(event)
+              )
+            } else if (typeof onClick === 'function') {
+              onClick(event)
+            }
+          }}
+          {...attributes}
         >
-          {children}
-        </span>
-      </div>
-    </ButtonTag>
+          <div className={cx('Button-wrapper')}>
+            {icon ? (
+              <Icon {...icon} className={cx('Button--icon', icon.className)} />
+            ) : null}
+            <span
+              className={cx('Button-text', { 'hidden-text': hiddenText })}
+              dangerouslySetInnerHTML={text ? { __html: text } : null}
+            >
+              {children}
+            </span>
+          </div>
+        </ButtonTag>
+      )}
+    </Connect>
   )
 }

@@ -220,7 +220,7 @@ class Input extends Component<Props, State> {
           <Label
             htmlFor={id}
             className={cx('Input-label', {
-              'ui-text-hidden': hiddenLabel
+              'text-hidden': hiddenLabel
             })}
             disabled={disabled}
             required={required}

@@ -1,0 +1,44 @@
+.DefinitionList {
+}
+.DefinitionList--block {
+}
+.DefinitionList--noMargin .DefinitionList-pair {
+  margin: 0;
+}
+.DefinitionList--small {
+  font-size: var(--font-size-small);
+}
+.DefinitionList-pair {
+  display: block;
+  margin: 0 0 1em;
+}
+.DefinitionList-pair:last-child {
+  margin-bottom: 0;
+}
+.DefinitionList-title {
+  font: inherit;
+  margin: 0 0.5em 0 0;
+  color: var(--color-black60);
+}
+.DefinitionList-definition {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+}
+.DefinitionList--inline .DefinitionList-pair,
+.DefinitionList--spread .DefinitionList-pair {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.DefinitionList--spread .DefinitionList-pair {
+  justify-content: space-between;
+}
+.DefinitionList--inline .DefinitionList-definition:not(:last-child)::after {
+  content: ', ';
+  margin-right: 0.5em;
+}
+.DefinitionList--hiddenTitle .DefinitionList-title {
+  position: absolute;
+  left: -999em;
+}

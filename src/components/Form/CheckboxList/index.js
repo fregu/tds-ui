@@ -45,7 +45,7 @@ export default function CheckboxList({
       )}
     >
       {label ? (
-        <legend className={cx('ui-text-weight-bold ui-text-label')}>
+        <legend className={cx('text-weight-bold ui-text-label')}>
           {label}
         </legend>
       ) : null}

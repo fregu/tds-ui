@@ -1,4 +1,5 @@
 @import './normalize.css';
+@import './animation.css';
 @import './breakpoints.css';
 @import './color.css';
 @import './columns.css';
@@ -8,4 +9,5 @@
 @import './layout.css';
 @import './no.css';
 @import './text.css';
+@import './theme.css';
 @import './widths.css';

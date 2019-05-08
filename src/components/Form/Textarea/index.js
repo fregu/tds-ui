@@ -53,7 +53,7 @@ export default class Textarea extends Component<Props, State> {
           <Label
             htmlFor={id}
             className={cx('Textarea-label', {
-              'ui-text-hidden': hiddenLabel
+              'text-hidden': hiddenLabel
             })}
             required={required}
             disabled={disabled}

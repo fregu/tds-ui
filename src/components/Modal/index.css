@@ -44,7 +44,7 @@
   transform: none;
 }
 .Modalbox-header {
-  padding: var(--layout-gutter) var(--ui-layout-gutter) 0;
+  padding: var(--layout-gutter) var(--layout-gutter) 0;
 }
 .Modalbox--withTitle .Modal-header {
   border-bottom: thin solid var(--color-light-grey);
