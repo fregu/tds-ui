@@ -1,0 +1,21 @@
+:root .no-margin {
+  margin: 0;
+}
+:root .no-margin-top {
+  margin-top: 0;
+}
+:root .no-margin-bottom {
+  margin-bottom: 0;
+}
+:root .no-padding {
+  padding: 0;
+}
+:root .no-background {
+  background: none;
+}
+:root .no-shadow {
+  box-shadow: none;
+}
+:root .no-border {
+  border: none;
+}

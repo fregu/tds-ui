@@ -1,0 +1,80 @@
+:root {
+  --gutter-gap: var(--layout-gutter);
+  --gutter-wide-gap: calc(var(--layout-gutter) * 1.5);
+}
+.Gutter-wrapper {
+  /* overflow: hidden; */
+}
+.Gutter {
+  margin: calc(var(--gutter-gap) / -2);
+  display: flex;
+  flex-flow: row wrap;
+  align-items: flex-start;
+  box-sizing: border-box;
+  padding-bottom: 1px;
+}
+.Gutter-item {
+  box-sizing: border-box;
+}
+.Gutter--fill {
+  min-width: 100%;
+}
+.Gutter--fill > .Gutter-item {
+  flex-grow: 1;
+}
+.Gutter--vertical > .Gutter-item {
+  width: 100%;
+}
+.Gutter > .Gutter-item {
+  padding: calc(var(--gutter-gap) / 2);
+}
+.Gutter--tightGap {
+  margin: calc(var(--gutter-gap) / -4);
+}
+.Gutter--tightGap > .Gutter-item {
+  padding: calc(var(--gutter-gap) / 4);
+}
+.Gutter--wideGap {
+  margin: calc(var(--gutter-wide-gap) / -2);
+}
+.Gutter--wideGap > .Gutter-item {
+  padding: calc(var(--gutter-wide-gap) / 2);
+}
+.Gutter--vertical {
+  flex-direction: column;
+}
+.Gutter--start {
+  justify-content: flex-start;
+}
+.Gutter--end {
+  justify-content: flex-end;
+}
+.Gutter--center {
+  justify-content: center;
+}
+.Gutter--spread {
+  justify-content: space-between;
+}
+
+.Gutter--top {
+  align-items: flex-start;
+}
+.Gutter--middle {
+  align-items: center;
+}
+.Gutter--bottom {
+  align-items: flex-end;
+}
+
+.Gutter--vertical.Gutter--top {
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.Gutter--vertical.Gutter--bottom {
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+.Gutter--vertical.Gutter--middle {
+  align-items: flex-start;
+  justify-content: center;
+}

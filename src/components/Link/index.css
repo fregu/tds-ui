@@ -1,0 +1,40 @@
+:root {
+  --Link-color: var(--color-link);
+  --Link-color-hover: var(--color-link);
+  --Link-decoration: none;
+  --Link-decoration-hover: underline;
+}
+.Link {
+  display: inline-block;
+  font: inherit;
+  color: var(--Link-color);
+  text-decoration: none;
+}
+.Link--plain {
+  color: inherit;
+}
+.Link--block {
+  display: block;
+}
+
+.Link:hover,
+.Link:focus {
+  color: var(--Link-color-hover);
+}
+.Link:hover .Link-text,
+.Link:focus .Link-text {
+  text-decoration: var(--Link-decoration-hover);
+}
+
+.Link-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+.Link-icon {
+  flex: 0;
+}
+.Link-text {
+  flex: 1;
+}

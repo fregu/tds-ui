@@ -1,0 +1,10 @@
+.Figure {
+  display: block;
+  margin: 0;
+}
+
+.Figure-image {
+  max-width: 100%;
+  display: block;
+  height: auto;
+}

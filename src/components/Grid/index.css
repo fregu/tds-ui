@@ -1,0 +1,41 @@
+:root {
+  --grid-gap: var(--layout-gutter, 20px);
+  --grid-wide-gap: calc(var(--grid-gap) * 1.5);
+}
+.Grid {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.Grid--top {
+  align-items: flex-start;
+}
+.Grid--center {
+  align-items: center;
+}
+.Grid--bottom {
+  align-items: flex-end;
+}
+.Grid-cell {
+  display: inline-block;
+  flex: 0 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+.Grid--wideGap,
+.Grid--withGap {
+  margin: calc(var(--grid-gap) / -2);
+}
+.Grid--wideGap > .Grid-cell,
+.Grid--withGap > .Grid-cell {
+  padding: calc(var(--grid-gap) / 2);
+}
+
+@media (--min-small) {
+  .Grid--wideGap {
+    margin: calc(var(--grid-wide-gap) / -2);
+  }
+  .Grid--wideGap > .Grid-cell {
+    padding: calc(var(--grid-wide-gap) / 2);
+  }
+}

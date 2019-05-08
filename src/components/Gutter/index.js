@@ -1,0 +1,68 @@
+// @flow
+import React from 'react'
+import classNames from 'classnames/bind'
+import styles from './index.css'
+const cx = classNames.bind(styles)
+
+type Props = {
+  /** Vertical direction */
+  vertical?: boolean,
+  valign?: 'top' | 'middle' | 'top',
+  align?: 'start' | 'center' | 'end',
+  /** Tighter gaps */
+  tight?: boolean,
+  /** Wider gaps */
+  wide?: boolean,
+  /** Fill out the entire width */
+  fill?: boolean,
+  /** Spred all children over the width */
+  spread?: boolean,
+  children: any,
+  className?: string,
+  modifiers?: Array<string>,
+  attributes?: any
+}
+
+export default function Gutter({
+  vertical,
+  tight,
+  wide,
+  align = 'left',
+  valign = 'middle',
+  fill,
+  spread,
+  children,
+  className,
+  modifiers = [],
+  attributes = {}
+}: Props) {
+  return (
+    <div className={cx('Gutter-wrapper', className)} {...attributes}>
+      <div
+        className={cx(
+          'Gutter',
+          'Gutter--' + align,
+          'Gutter--' + valign,
+          {
+            'Gutter--wideGap': wide,
+            'Gutter--tightGap': tight,
+            'Gutter--vertical': vertical,
+            'Gutter--fill': fill,
+            'Gutter--spread': spread
+          },
+          modifiers.map(mod => 'Gutter--' + mod)
+        )}
+      >
+        {Array.isArray(children) ? (
+          children.filter(Boolean).map((child, index) => (
+            <div key={index} className={cx('Gutter-item')}>
+              {child}
+            </div>
+          ))
+        ) : (
+          <div className={cx('Gutter-item')}>{children}</div>
+        )}
+      </div>
+    </div>
+  )
+}

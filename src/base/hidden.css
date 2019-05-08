@@ -1,0 +1,80 @@
+@import './breakpoints.css';
+:root .hidden-text {
+  position: absolute;
+  left: -999em;
+}
+:root .hidden {
+  display: none;
+}
+@media (--min-small) {
+  :root .s-hidden-text {
+    position: absolute;
+    left: -999em;
+  }
+  :root .s-hidden {
+    display: none;
+  }
+}
+@media (--min-medium) {
+  :root .m-hidden-text {
+    position: absolute;
+    left: -999em;
+  }
+  :root .m-hidden {
+    display: none;
+  }
+}
+@media (--min-large) {
+  :root .l-hidden-text {
+    position: absolute;
+    left: -999em;
+  }
+  :root .l-hidden {
+    display: none;
+  }
+}
+@media (--min-xlarge) {
+  :root .xl-hidden-text {
+    position: absolute;
+    left: -999em;
+  }
+  :root .xl-hidden {
+    display: none;
+  }
+}
+@media (--max-xlarge) {
+  :root .xlmax-hidden-text {
+    position: absolute;
+    left: -999em;
+  }
+  :root .xlmax-hidden {
+    display: none;
+  }
+}
+@media (--max-large) {
+  :root .lmax-hidden-text {
+    position: absolute;
+    left: -999em;
+  }
+  :root .lmax-hidden {
+    display: none;
+  }
+}
+@media (--max-medium) {
+  :root .mmax-hidden-text {
+    position: absolute;
+    left: -999em;
+  }
+  :root .mmax-hidden {
+    display: none;
+  }
+}
+@media (--max-small) {
+  :root .smax-hidden-text {
+    position: absolute;
+    left: -999em;
+  }
+  :root .smax-hidden {
+    display: none;
+  }
+}

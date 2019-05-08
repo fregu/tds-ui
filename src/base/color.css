@@ -1,0 +1,69 @@
+:root {
+  --color-background: #ffffff;
+  --color-text: #333333;
+  --color-link: darkblue;
+  --color-action: red;
+  --color-primary-action: purple;
+  --color-primary-secondary: purple;
+  --color-error: darkred;
+  --color-warning: orange;
+  --color-information: lightblue;
+  --color-focus: turquoise;
+  --color-disabled: var(--color-light-grey);
+
+  --color-lighter-grey: #efefef;
+  --color-light-grey: #dfdfde;
+  --color-medium-grey: #ccc;
+  --color-dark-grey: #999;
+  --color-darker-grey: #666;
+
+  --color-black: #000;
+  --color-white: #fff;
+}
+:global .color-background {
+  color: var(--color-background);
+}
+:global .color-text {
+  color: var(--color-text);
+}
+:global .color-link {
+  color: var(--color-link);
+}
+:global .color-action,
+:global .color-primary-action {
+  color: var(--color-primary-action);
+}
+:global .color-secondary-action {
+  color: var(--color-secondary-action);
+}
+
+:global .color-error {
+  color: var(--color-error);
+}
+:global .color-warning {
+  color: var(--color-warning);
+}
+:global .color-information {
+  color: var(--color-information);
+}
+:global .color-lighter-grey {
+  color: var(--color-lighter-grey);
+}
+:global .color-light-grey {
+  color: var(--color-light-grey);
+}
+:global .color-medium-grey {
+  color: var(--color-medium-grey);
+}
+:global .color-dark-grey {
+  color: var(--color-dark-grey);
+}
+:global .color-darker-grey {
+  color: var(--color-darker-grey);
+}
+:global .color-black {
+  color: var(--color-black);
+}
+:global .color-white {
+  color: var(--color-white);
+}

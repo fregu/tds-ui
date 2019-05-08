@@ -1,0 +1,113 @@
+.Input {
+  width: 280px;
+}
+.Input-inputWrapper {
+  width: 100%;
+  display: inline-block;
+}
+.Input-input {
+  background: #fff;
+  box-sizing: border-box;
+  font: inherit;
+  border: 1px solid var(--color-light-grey);
+  color: inherit;
+  line-height: 2.25em;
+  min-height: 2.5em;
+  display: inline-block;
+  font-size: inherit;
+  padding: 0 0 0 0.5em;
+  box-shadow: none;
+  width: 100%;
+}
+.Input-input:hover {
+  border: 1px solid var(--color-medium-grey);
+}
+.Input--fill .Input-inputWrapper {
+  max-width: none;
+  display: block;
+}
+.Input--fill {
+  width: auto;
+}
+.Input-label {
+  margin-bottom: 0.25em;
+}
+.Input-inputWrapper {
+  position: relative;
+}
+.Input-inputIcon {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 1.25em;
+}
+.Input-inputIcon + .Input-input {
+  padding-left: 2.5em;
+}
+.Input-input[size='1'] {
+  width: 3em;
+}
+.Input-input[size='2'] {
+  width: 5em;
+}
+.Input-input[size='3'] {
+  width: 7em;
+}
+.Input-input[size='4'] {
+  width: 9em;
+}
+.Input-input[size='5'] {
+  width: 11em;
+}
+.Input-input[size='6'] {
+  width: 13em;
+}
+.Input-input[size='7'] {
+  width: 15em;
+}
+.Input-input[size='8'] {
+  width: 17em;
+}
+.Input-input[size='9'] {
+  width: 19em;
+}
+.Input-input[size='10'] {
+  width: 21em;
+}
+
+.Input--invalid .Input-input {
+  border-color: var(--color-error);
+  background-color: rgba(194, 64, 23, 0.12);
+}
+.Input-error {
+  display: block;
+  margin: 0.5em 0;
+  font-size: var(--font-size-small);
+  color: var(--color-error);
+}
+.Input-errorIcon {
+  margin: -0.4em 0.25em 0 0;
+}
+
+.Input-input:focus,
+.Input-input:active,
+.Input--valid .Input-input:focus,
+.Input--valid .Input-input:active,
+.Input--invalid .Input-input:focus,
+.Input--invalid .Input-input:active {
+  border: 1px solid var(--color-focus);
+  box-shadow: 0 1px 3px rgba(0, 160, 186, 0.25);
+  outline: none;
+}
+
+.Input-input[disabled] {
+  border-color: var(--color-disabled);
+  background: var(--color-lighter-grey);
+  box-shadow: none;
+}
+
+.Input--search .Input-input {
+  border-radius: 2em;
+  border: 1px solid var(--color-light-grey);
+  padding-right: 0.75em;
+}

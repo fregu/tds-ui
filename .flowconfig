@@ -1,0 +1,16 @@
+[ignore]
+.*/dist/.*
+
+[include]
+
+[libs]
+
+[lints]
+
+[options]
+module.name_mapper='^ui' ->'<PROJECT_ROOT>/src'
+
+module.name_mapper.extension='gql' -> ''
+module.name_mapper.extension='svg' -> ''
+
+[strict]

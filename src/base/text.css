@@ -1,0 +1,84 @@
+:root {
+  --font-family-base: Arial, sans-serif;
+  --font-family-heading: serif;
+
+  --line-height-base: 1.5em;
+  --line-height-heading: 1.25em;
+
+  --font-size-base: 16px;
+  --font-size-smaller: 0.75em;
+  --font-size-small: 0.875em;
+  --font-size-large: 1.125em;
+  --font-size-larger: 1.25em;
+  --font-size-huge: 1.75em;
+
+  --font-size-heading1: 2rem;
+  --font-size-heading2: 1.8rem;
+  --font-size-heading3: 1.5rem;
+  --font-size-heading4: 1.25rem;
+  --font-size-heading5: 1.1rem;
+  --font-size-heading6: 1rem;
+
+  --font-weight-thin: 100;
+  --font-weight-normal: 400;
+  --font-weight-bold: 600;
+  --font-weight-black: 900;
+
+  --font-heading1: var(--font-weight-normal) var(--font-size-heading1) /
+    var(--line-height-heading) var(--font-family-heading);
+  --font-heading2: var(--font-weight-normal) var(--font-size-heading2) /
+    var(--line-height-heading) var(--font-family-heading);
+  --font-heading3: var(--font-weight-normal) var(--font-size-heading3) /
+    var(--line-height-heading) var(--font-family-heading);
+  --font-heading4: var(--font-weight-bold) var(--font-size-heading4) /
+    var(--line-height-heading) var(--font-family-heading);
+  --font-heading5: var(--font-weight-bold) var(--font-size-heading5) /
+    var(--line-height-heading) var(--font-family-heading);
+  --font-heading6: var(--font-weight-bold) var(--font-size-heading6) /
+    var(--line-height-heading) var(--font-family-heading);
+}
+:global .font-size-base {
+  font-size: var(--font-size-base);
+}
+:global .text-base {
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-normal);
+  text-decoration: none;
+  font-style: normal;
+  text-transform: none;
+}
+:global .text-strong,
+:global .text-bold {
+  font-weight: var(--font-weight-bold);
+}
+:global .text-italic {
+  font-style: italic;
+}
+:global .text-uppercase {
+  text-transform: uppercase;
+}
+:global .text-capitalize {
+  text-transform: capitalize;
+}
+:global .text-lowercase {
+  text-transform: lowercase;
+}
+:global .text-heading1 {
+  font: var(--font-heading1);
+}
+:global .text-heading2 {
+  font: var(--font-heading2);
+}
+:global .text-heading3 {
+  font: var(--font-heading3);
+}
+:global .text-heading4 {
+  font: var(--font-heading4);
+}
+:global .text-heading5 {
+  font: var(--font-heading5);
+}
+:global .text-heading6 {
+  font: var(--font-heading6);
+}

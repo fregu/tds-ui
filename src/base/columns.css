@@ -1,0 +1,71 @@
+@import './breakpoints.css';
+
+html {
+  column-gap: 20px;
+}
+.columns-1 {
+  column-count: 1;
+}
+.columns-2 {
+  column-count: 2;
+}
+.columns-3 {
+  column-count: 3;
+}
+.columns-4 {
+  column-count: 4;
+}
+.columns-5 {
+  column-count: 5;
+}
+@media (--min-small) {
+  .s-columns-1 {
+    column-count: 1;
+  }
+  .s-columns-2 {
+    column-count: 2;
+  }
+  .s-columns-3 {
+    column-count: 3;
+  }
+  .s-columns-4 {
+    column-count: 4;
+  }
+  .s-columns-5 {
+    column-count: 5;
+  }
+}
+@media (--min-medium) {
+  .m-columns-1 {
+    column-count: 1;
+  }
+  .m-columns-2 {
+    column-count: 2;
+  }
+  .m-columns-3 {
+    column-count: 3;
+  }
+  .m-columns-4 {
+    column-count: 4;
+  }
+  .m-columns-5 {
+    column-count: 5;
+  }
+}
+@media (--min-large) {
+  .l-columns-1 {
+    column-count: 1;
+  }
+  .l-columns-2 {
+    column-count: 2;
+  }
+  .l-columns-3 {
+    column-count: 3;
+  }
+  .l-columns-4 {
+    column-count: 4;
+  }
+  .l-columns-5 {
+    column-count: 5;
+  }
+}
