@@ -46,19 +46,21 @@ export default function Layout({ className, children }: Props) {
           setUrl,
           dispatch
         }) => {
-          if (!init) {
-            initApp()
-          }
-          const currentUrl = window.location.pathname.replace(root, '')
-          if (redirect && redirect !== currentUrl) {
-            return (
-              <Redirect
-                to={redirect.replace(/^\//, `${window?.rootPath || ''}/`)}
-              />
-            )
-          }
-          if (url !== currentUrl) {
-            setUrl(currentUrl)
+          if (typeof window !== 'undefined') {
+            if (!init) {
+              initApp()
+            }
+            const currentUrl = window.location.pathname.replace(root, '')
+            if (redirect && redirect !== currentUrl) {
+              return (
+                <Redirect
+                  to={redirect.replace(/^\//, `${window?.rootPath || ''}/`)}
+                />
+              )
+            }
+            if (url !== currentUrl) {
+              setUrl(currentUrl)
+            }
           }
           return (
             <div className={cx('Layout-wrapper')}>

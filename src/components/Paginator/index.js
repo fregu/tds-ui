@@ -17,7 +17,7 @@ type Props = {
 export default function Paginator({
   children,
   count = 5,
-  showMoreCount = 5,
+  showMoreCount,
   showMoreText = 'Show more',
   showMoreButton = {},
   wrap = children => children
@@ -31,8 +31,11 @@ export default function Paginator({
           </div>
           {children.length > showCount ? (
             <Button
+              fill
               {...showMoreButton}
-              onClick={() => setState({ showCount: showCount + showMoreCount })}
+              onClick={() =>
+                setState({ showCount: showCount + (showMoreCount || count) })
+              }
               text={showMoreText}
             />
           ) : null}
