@@ -31,6 +31,7 @@
 }
 .Button--disabled {
   cursor: normal;
+  color: var(--color-disabled);
 }
 .Button--fill {
   display: block;

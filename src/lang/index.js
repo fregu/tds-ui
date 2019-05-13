@@ -1,3 +1,6 @@
+import calendar from './calendar.json'
+export { default as calendar } from './calendar.json'
+
 export const strings = {
   general: {
     name: 'Namn',
@@ -18,6 +21,7 @@ export const strings = {
     download: 'Ladda ner'
   }
 }
+
 export const system = {
   form: {
     errorMessages: {
@@ -38,4 +42,4 @@ export const system = {
   }
 }
 
-export default { strings, system }
+export default { strings, system, calendar }

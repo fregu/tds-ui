@@ -28,13 +28,21 @@ export default function Radio({
   disabled,
   label,
   className,
+  onChange,
   checked,
   defaultChecked,
   modifiers = []
 }: Props) {
   return (
     <div
-      className={cx('Radio', className, modifiers.map(mod => 'Radio--' + mod))}
+      className={cx(
+        'Radio',
+        className,
+        {
+          'Radio--disabled': disabled
+        },
+        modifiers.map(mod => 'Radio--' + mod)
+      )}
     >
       <input
         id={id}
@@ -42,12 +50,20 @@ export default function Radio({
         className={cx('Radio-input')}
         value={value}
         name={name}
+        onChange={e =>
+          typeof onChange === 'function' ? onChange(e, value) : {}
+        }
         checked={checked}
         defaultChecked={defaultChecked}
         disabled={disabled}
         required={required}
       />
-      <Label className={cx('Radio-label')} htmlFor={id} text={label} />
+      <Label
+        className={cx('Radio-label')}
+        htmlFor={id}
+        text={label}
+        disabled={disabled}
+      />
     </div>
   )
 }

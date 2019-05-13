@@ -67,21 +67,25 @@ export default function Button({
           )}
           title={(hiddenText && text) || null}
           disabled={disabled}
-          onClick={event => {
-            if (disabled) {
-              event.stopPropagation()
-              return
-            }
+          onClick={
+            confirm || onClick
+              ? event => {
+                  if (disabled) {
+                    event.stopPropagation()
+                    return
+                  }
 
-            if (confirm) {
-              event.preventDefault()
-              confirmAction(confirm, () =>
-                to ? redirectTo(to) : onClick(event)
-              )
-            } else if (typeof onClick === 'function') {
-              onClick(event)
-            }
-          }}
+                  if (confirm) {
+                    event.preventDefault()
+                    confirmAction(confirm, () =>
+                      to ? redirectTo(to) : onClick(event)
+                    )
+                  } else if (typeof onClick === 'function') {
+                    onClick(event)
+                  }
+                }
+              : null
+          }
           {...attributes}
         >
           <div className={cx('Button-wrapper')}>

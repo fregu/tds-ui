@@ -53,7 +53,7 @@ dateFormat.i18n = {
 }
 
 export default function dateHandler(startDate) {
-  let date = startDate ? new Date(startDate) : new Date()
+  let date = !isNaN(startDate) || startDate ? new Date(startDate) : new Date()
 
   return (
     !isNaN(date.getDate()) && {
@@ -108,7 +108,6 @@ export default function dateHandler(startDate) {
             break
           case 'day':
           case 'days':
-          case 'date':
           case 'week':
           case 'weeks':
             date.setDate(value)
@@ -120,6 +119,20 @@ export default function dateHandler(startDate) {
           case 'year':
           case 'years':
             date.setFullYear(value)
+            break
+          case 'time':
+            const timeSplit = value.split(':')
+            date.setHours(timeSplit[0])
+            date.setMinutes(timeSplit[1])
+            if (timeSplit[2]) {
+              date.setSeconds(timeSplit[2])
+            }
+            break
+          case 'date':
+            const dateSplit = value.split('-')
+            date.setFullYear(dateSplit[0])
+            date.setMonth(dateSplit[1])
+            date.setDate(dateSplit[2])
             break
           default:
         }
@@ -156,6 +169,9 @@ export default function dateHandler(startDate) {
             format = 'd mmmm, yyyy'
             break
           }
+          case 'dateTime':
+            format = 'yyyy-mm-dd HH:MM'
+            break
           case 'time':
             format = 'HH:MM'
             break
@@ -166,14 +182,20 @@ export default function dateHandler(startDate) {
           case 'fullDate':
             format = 'dddd, d mmmm, yyyy'
             break
+          case 'fullDateTime':
+            format = 'dddd, d mmmm HH:MM, yyyy'
+            break
           case 'iso':
             format = 'isoDateTime'
             break
+          case 'weekday':
+            format = 'dddd'
+            break
           case 'default':
-          default:
             format = 'ddd d mmm yyyy HH:MM:ss'
             break
         }
+
         return format ? dateFormat(date, format) : date
       }
     }

@@ -1,0 +1,27 @@
+.Hero {
+  position: relative;
+  width: 100vw;
+  transform: translateX(-50%);
+  left: 50%;
+  display: flex;
+  min-height: 35vh;
+  max-height: 50vh;
+  align-items: center;
+}
+.Hero--dimensions {
+  max-height: none;
+  min-height: none;
+}
+.Hero-background {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-size: cover;
+  background-position: 50% 50%;
+}
+.Hero-content {
+  flex: 1;
+  padding: calc(2 * var(--layout-gutter)) var(--layout-gutter);
+}

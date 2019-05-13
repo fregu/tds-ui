@@ -8,9 +8,7 @@
   content: '';
   display: block;
 }
-[class*='dimension-'] > * {
-  position: absolute;
-}
+
 .dimension-1by1::after {
   padding-bottom: 100%;
 }

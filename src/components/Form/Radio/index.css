@@ -7,6 +7,15 @@
   position: absolute;
   left: -999em;
 }
+.Radio--disabled {
+  color: var(--color-disabled);
+  pointer-events: none;
+}
+.Radio--disabled .Radio-label::before,
+.Radio--disabled .Radio-label:hover::before {
+  background: var(--color-disabled);
+  box-shadow: 0 0 0 1px var(--color-grey);
+}
 .Radio-label {
   padding-left: 1.5em;
   position: relative;
@@ -21,16 +30,15 @@
   margin-top: -0.5em;
   width: 1em;
   height: 1em;
-  box-shadow: 0 0 0 1px var(--color-black38);
+  box-shadow: 0 0 0 1px var(--color-grey);
   transition: var(--transition);
   border-radius: 2em;
 }
 .Radio-label:hover::before {
-  box-shadow: 0 0 0 1px var(--color-black60);
+  box-shadow: 0 0 0 1px var(--color-dark-grey);
 }
 .Radio-input:focus + .Radio-label::before {
-  box-shadow: 0 1px 2px 0 var(--color-turquoise),
-    inset 0 0 1px 0 var(--color-turquoise);
+  box-shadow: 0 1px 2px 0 var(--color-focus), inset 0 0 1px 0 var(--color-focus);
 }
 .Radio-input:checked + .Radio-label::before {
   color: var(--color-white);

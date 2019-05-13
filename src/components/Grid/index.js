@@ -43,7 +43,7 @@ type GridProps = {
 }
 export default function Grid({
   className,
-  align = 'top',
+  align,
   withGap,
   modifiers = [],
   widths = {},
@@ -74,11 +74,12 @@ export default function Grid({
 export class GridCell extends Component<GridCellProps> {
   name = 'GridCell'
   render() {
-    const { widths = {}, children } = this.props
+    const { widths = {}, className, children } = this.props
     return (
       <div
         className={cx(
           'Grid-cell',
+          className,
           Object.keys(widths).map(
             breakpoint =>
               `${breakpoint && `${breakpoint}-`}width-${widths[breakpoint] ||
