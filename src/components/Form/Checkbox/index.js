@@ -19,10 +19,10 @@ type Props = {
   modifiers?: Array<string>
 }
 
-export default function FormCheckbox({
+export default function Checkbox({
   id,
   name,
-  value,
+  value = true,
   attributes = {},
   required,
   disabled,

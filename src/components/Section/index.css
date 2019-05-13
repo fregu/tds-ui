@@ -1,2 +1,69 @@
 .Section {
+  display: flex;
+  flex: 1 0 auto;
+}
+.Section-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 auto;
+}
+.Section--bordered {
+  box-shadow: var(--shadow-default);
+  padding: var(--layout-gutter);
+}
+
+.Section-contentWrapper {
+  flex: 1;
+}
+
+.Section-figure {
+  flex: 1;
+}
+.Section-header {
+}
+.Section-title {
+}
+.Section-content {
+}
+.Section-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.Section--imageLeft .Section-wrapper {
+  flex-direction: row;
+}
+.Section--imageRight .Section-wrapper {
+  flex-direction: row-reverse;
+}
+.Section--imageBottom .Section-wrapper {
+  flex-direction: column-reverse;
+}
+.Section--bordered .Section-figure {
+  margin: calc(-1 * var(--layout-gutter));
+}
+.Section--bordered.Section--imageTop .Section-figure {
+  margin-bottom: 0;
+}
+.Section--bordered.Section--imageLeft .Section-figure {
+  margin-right: 0;
+}
+.Section--bordered.Section--imageBottom .Section-figure {
+  margin-top: 0;
+}
+.Section--bordered.Section--imageRight .Section-figure {
+  margin-left: 0;
+}
+.Section--imageTop .Section-figure {
+  padding: 0 0 var(--layout-gutter);
+}
+.Section--imageLeft .Section-figure {
+  padding: 0 var(--layout-gutter) 0 0;
+}
+.Section--imageRight .Section-figure {
+  padding: 0 0 0 var(--layout-gutter);
+}
+.Section--imageBottom .Section-figure {
+  padding: var(--layout-gutter) 0 0;
 }

@@ -5,7 +5,7 @@
   --Link-decoration-hover: underline;
 }
 .Link {
-  display: inline-block;
+  display: inline;
   font: inherit;
   color: var(--Link-color);
   text-decoration: none;
@@ -17,12 +17,12 @@
   display: block;
 }
 
-.Link:hover,
-.Link:focus {
+.Link:hover:not(.Link--plain),
+.Link:focus:not(.Link--plain) {
   color: var(--Link-color-hover);
 }
-.Link:hover .Link-text,
-.Link:focus .Link-text {
+.Link:hover:not(.Link--plain) .Link-text,
+.Link:focus:not(.Link--plain) .Link-text {
   text-decoration: var(--Link-decoration-hover);
 }
 

@@ -13,7 +13,7 @@ h4,
 h5 {
   font-family: var(--font-family-heading);
   font-weight: normal;
-  margin: 1em 0 0.5em;
+  margin: 0 0 0.5em;
 }
 p {
   margin: 0.75em 0;

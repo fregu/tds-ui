@@ -18,7 +18,9 @@ export type Props = {
   image?: FigureProps,
   imagePosition?: 'left' | 'top' | 'right' | 'bottom',
   icon?: IconProps,
-  title?: TitleProps
+  title?: TitleProps,
+  theme?: string,
+  bordered?: boolean
 }
 
 export default function Section({
@@ -29,24 +31,31 @@ export default function Section({
   icon,
   imagePosition = 'left',
   title,
-  className
+  className,
+  theme,
+  bordered
 }: Props) {
   return (
     <section
       className={cx('Section', className, {
-        'Figure--withImage': image,
-        [`Figure--image${imagePosition.charAt(0).toUpperCase() +
+        'Section--withImage': image,
+        [`Section--image${imagePosition.charAt(0).toUpperCase() +
           imagePosition.slice(1)}`]: image && imagePosition,
-        'Figure--withIcon': icon,
-        'Figure--withTitle': title
+        'Section--withIcon': icon,
+        'Section--withTitle': title,
+        'Section--bordered': bordered,
+        [`Section--withTheme theme-${theme || ''}`]: theme
       })}
     >
       <ConditionalWrapper
         if={to}
         wrap={children => (
-          <Link to={to} plain>
+          <Link to={to} plain className={cx('Section-wrapper')}>
             {children}
           </Link>
+        )}
+        else={children => (
+          <div className={cx('Section-wrapper')}>{children}</div>
         )}
       >
         {image ? (

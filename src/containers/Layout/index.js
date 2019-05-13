@@ -50,13 +50,10 @@ export default function Layout({ className, children }: Props) {
             if (!init) {
               initApp()
             }
+            const root = window?.rootPath || ''
             const currentUrl = window.location.pathname.replace(root, '')
             if (redirect && redirect !== currentUrl) {
-              return (
-                <Redirect
-                  to={redirect.replace(/^\//, `${window?.rootPath || ''}/`)}
-                />
-              )
+              return <Redirect to={redirect.replace(/^\//, `${root || ''}/`)} />
             }
             if (url !== currentUrl) {
               setUrl(currentUrl)

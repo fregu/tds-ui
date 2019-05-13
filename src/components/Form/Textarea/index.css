@@ -30,7 +30,7 @@
   padding: 0.75em 1em;
   box-sizing: border-box;
   resize: none;
-  border: 1px solid var(--color-black38);
+  border: 1px solid var(--color-grey);
 }
 
 .Textarea-pre {
@@ -61,7 +61,7 @@
 .Textarea--valid .Textarea-input:active,
 .Textarea--invalid .Textarea-input:focus,
 .Textarea--invalid .Textarea-input:active {
-  border: 1px solid var(--color-turquoise);
+  border: 1px solid var(--color-focus);
   outline: none;
 }
 

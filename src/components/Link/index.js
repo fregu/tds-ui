@@ -63,17 +63,21 @@ export default function Link({
       wrap={children => <NavLink to={url} {...linkProps} children={children} />}
       else={children => <a href={url} {...linkProps} children={children} />}
     >
-      <div className={cx('Link-wrapper')}>
-        {icon ? (
-          <Icon {...icon} className={cx('Link-icon', icon.className)} />
-        ) : null}
-        <span
-          className={cx('Link-text')}
-          dangerouslySetInnerHTML={text ? { __html: text } : null}
-        >
-          {children}
-        </span>
-      </div>
+      {plain ? (
+        children
+      ) : (
+        <div className={cx('Link-wrapper')}>
+          {icon ? (
+            <Icon {...icon} className={cx('Link-icon', icon.className)} />
+          ) : null}
+          <span
+            className={cx('Link-text')}
+            dangerouslySetInnerHTML={text ? { __html: text } : null}
+          >
+            {children}
+          </span>
+        </div>
+      )}
     </ConditionalWrapper>
   )
 }

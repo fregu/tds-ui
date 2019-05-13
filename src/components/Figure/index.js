@@ -8,10 +8,11 @@ type dimensionProp = '1by1' | '4by3' | '16by9'
 export type Props = {
   className?: string,
   url?: 'string',
-  size?: 'cover' | 'contain' | 'auto',
   defer?: boolean,
   caption?: string,
   children?: Node,
+  fit?: 'contain' | 'cover',
+  size?: 'small' | 'medium' | 'large' | 'orginal',
   dimension?: dimensionProp,
   dimensions?: {
     ''?: dimensionProp,
@@ -24,27 +25,36 @@ export type Props = {
 export default function Figure({
   className,
   url,
+  fit,
   size,
   defer, // TODO: defer loading
+  caption,
   dimension,
   dimensions = {}
 }: Props) {
   return (
     <figure
-      className={cx(
-        'Figure',
-        className,
-        {
-          [`Figure--${size || ''}`]: size,
-          [`dimesion-${dimension || ''}`]: dimension
-        },
-        Object.keys(dimensions).map(
-          prefix =>
-            `${prefix ? prefix + '-' : ''}dimesion-${dimensions[prefix] || ''}`
-        )
-      )}
+      className={cx('Figure', className, {
+        [`Figure--${size || ''}`]: size,
+        'Figure--fit': fit,
+        [`Figure--${fit || ''}`]: fit,
+        [`Figure--withDimension`]: dimension || Object.keys(dimensions).length,
+        [`dimesion-${dimension || ''}`]: dimension
+      })}
     >
-      <div className={cx('Figure-wrapper')}>
+      <div
+        className={cx(
+          'Figure-wrapper',
+          {
+            [`dimension-${dimension || ''}`]: dimension
+          },
+          Object.keys(dimensions).map(
+            prefix =>
+              `${prefix ? prefix + '-' : ''}dimension-${dimensions[prefix] ||
+                ''}`
+          )
+        )}
+      >
         <img src={url} className={cx('Figure-image')} />
       </div>
       {caption ? (

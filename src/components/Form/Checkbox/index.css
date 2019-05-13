@@ -21,19 +21,19 @@
   margin-top: -0.5em;
   width: 1em;
   height: 1em;
-  box-shadow: 0 0 0 1px var(--color-black38);
+  box-shadow: 0 0 0 1px var(--color-light-grey);
   transition: var(--transition);
 }
 .FormCheckbox-label:hover::before {
-  box-shadow: 0 0 0 1px var(--color-black60);
+  box-shadow: 0 0 0 1px var(--color-dark-grey);
 }
 .FormCheckbox-input:focus + .FormCheckbox-label::before {
-  box-shadow: 0 1px 2px 0 var(--color-light-turquoise),
-    inset 0 0 0 1px var(--color-turquoise);
+  box-shadow: 0 1px 2px 0 var(--color-focus),
+    inset 0 0 0 1px var(--color-light-grey);
 }
 .FormCheckbox-input:checked + .FormCheckbox-label::before {
   color: var(--color-white);
-  background: var(--color-red);
+  background: var(--color-dark-grey);
 }
 .FormCheckbox-checkIcon {
   text-align: center;
