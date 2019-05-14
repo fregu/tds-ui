@@ -20,9 +20,11 @@ export type Props = {
   iconAfter?: boolean,
   to?: string,
   href?: string,
+  tag?: Node | string,
   plain?: boolean,
   fill?: boolean,
   hiddenText?: boolean,
+  noPadding?: boolean,
   disabled?: boolean,
   attributes?: any,
   primary?: boolean
@@ -42,11 +44,13 @@ export default function Button({
   theme,
   to,
   href,
+  tag,
+  noPadding,
   confirm,
   primary,
   ...attributes
 }: Props) {
-  const ButtonTag = to || href ? Link : 'button'
+  const ButtonTag = tag || (to || href ? Link : 'button')
   return (
     <Connect mapDispatchToProps={{ confirmAction }}>
       {({ confirmAction }) => (
@@ -58,6 +62,7 @@ export default function Button({
               'Button--hiddenText': hiddenText,
               'Button--fill': fill,
               'Button--disabled': disabled,
+              'Button--noPadding': noPadding,
               'Button--withIcon': icon,
               'Button--iconAfter': iconAfter,
               'Button--primary': primary,

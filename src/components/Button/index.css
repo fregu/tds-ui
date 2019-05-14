@@ -33,6 +33,9 @@
   cursor: normal;
   color: var(--color-disabled);
 }
+.Button--noPadding {
+  padding: 0;
+}
 .Button--fill {
   display: block;
   width: 100%;
@@ -47,10 +50,11 @@
   flex: 0;
 }
 .Button-text {
-  flex: 0 0 auto;
+  flex: 1 0 auto;
 }
 .Button--withIcon .Button-text {
   padding-left: 0.5em;
+  flex: 0;
 }
 .Button--withIcon.Button--iconAfter .Button-wrapper {
   flex-direction: row-reverse;

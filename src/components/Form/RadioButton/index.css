@@ -1,0 +1,24 @@
+:root {
+  --radiobutton-selected-background-color: var(--color-red);
+  --radiobutton-selected-text-color: #fff;
+}
+.RadioButton-radio {
+  padding: 0;
+}
+.RadioButton-label {
+  padding: 0 1em;
+}
+.RadioButton-label::before {
+  content: none;
+}
+:checked + .RadioButton-label {
+  background: var(--radiobutton-selected-background-color);
+  color: var(--radiobutton-selected-text-color);
+}
+.RadioButton-icon {
+  opacity: 0;
+  margin-right: -0.5em;
+}
+:checked + .RadioButton-label .RadioButton-icon {
+  opacity: 1;
+}

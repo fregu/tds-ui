@@ -1,7 +1,7 @@
 // @flow
-import React from 'react'
+import React, { type Node } from 'react'
 import classNames from 'classnames/bind'
-import Label from '../Label'
+import Label, { type Props as LabelProps } from '../Label'
 import styles from './index.css'
 const cx = classNames.bind(styles)
 
@@ -9,11 +9,12 @@ type Props = {
   id: string,
   name?: string,
   value?: string,
-  label: string,
+  label: string | LabelProps,
   attributes?: any,
   disabled?: boolean,
   required?: boolean,
   defaultChecked?: boolean,
+  children?: Node,
   checked?: boolean,
   className?: string,
   modifiers?: Array<string>
@@ -27,6 +28,7 @@ export default function Radio({
   required,
   disabled,
   label,
+  children,
   className,
   onChange,
   checked,
@@ -59,11 +61,14 @@ export default function Radio({
         required={required}
       />
       <Label
-        className={cx('Radio-label')}
         htmlFor={id}
-        text={label}
+        text={typeof label === 'string' ? label : null}
         disabled={disabled}
-      />
+        {...(typeof label !== 'string' ? label : {})}
+        className={cx('Radio-label', label.className)}
+      >
+        {children}
+      </Label>
     </div>
   )
 }

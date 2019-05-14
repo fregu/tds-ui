@@ -6,7 +6,7 @@ import Icon, { type Props as IconProps } from 'ui/components/Icon'
 import styles from './index.css'
 const cx = classNames.bind(styles)
 
-type Props = {
+export type Props = {
   className?: string,
   modifiers?: Array<string>,
   htmlFor: string,

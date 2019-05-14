@@ -45,17 +45,3 @@
   background: var(--color-red);
   box-shadow: 0 0 0 1px var(--color-red), inset 0 0 0 3px var(--color-white);
 }
-.Radio-checkIcon {
-  text-align: center;
-  line-height: 1em;
-  position: absolute;
-  left: 0;
-  top: 50%;
-  margin-top: -0.5em;
-  opacity: 0;
-  transition: opacity var(--transition);
-  color: var(--color-white);
-}
-.Radio-input:checked + .Radio-label .Radio-checkIcon {
-  opacity: 1;
-}

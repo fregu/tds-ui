@@ -3,8 +3,10 @@ import React from 'react'
 import classNames from 'classnames/bind'
 import { Radio } from 'ui/components/Form'
 import Button from 'ui/components/Button'
+import Icon from 'ui/components/Icon'
 import State from 'ui/helpers/State'
 
+import styles from './index.css'
 const cx = classNames.bind({})
 
 export type Props = {
@@ -20,6 +22,7 @@ export default function RadioButton({
   defaultChecked,
   onChange,
   className,
+  hiddenInput,
   disabled,
   ...buttonProps
 }: Props) {
@@ -27,19 +30,16 @@ export default function RadioButton({
     <State>
       {({ isChecked = checked, setState }) => (
         <Button
+          noPadding
           fill
           {...buttonProps}
           disabled={disabled}
           className={cx('RadioButton', className)}
-          onClick={() => {
-            setState({ checked: true })
-            if (onChange) {
-              onChange({}, true)
-            }
-          }}
+          tag={'div'}
         >
           <Radio
-            {...{ name, value, id, label, checked: isChecked, disabled }}
+            className={cx('RadioButton-radio')}
+            {...{ name, value, id, checked: isChecked, disabled }}
             onChange={(e, state) => {
               if (state !== checked) {
                 setState({ checked: state })
@@ -47,6 +47,16 @@ export default function RadioButton({
               if (onChange) {
                 onChange(e, state)
               }
+            }}
+            label={{
+              className: 'RadioButton-label',
+              fill: true,
+              content: (
+                <div className="flex-row flex-spread flex-middle">
+                  <span className={cx('RadioButton-text')}>{label}</span>
+                  <Icon type={'check'} className={cx('RadioButton-icon')} />
+                </div>
+              )
             }}
           />
         </Button>
