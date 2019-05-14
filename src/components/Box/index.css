@@ -1,0 +1,16 @@
+.Box {
+  background-color: var(--color-white);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: 50% 50%;
+}
+
+.Box-content {
+  padding: var(--layout-gutter);
+}
+.Box--shadowed {
+  box-shadow: var(--shadow-default);
+}
+.Box--bordered {
+  border: 1px solid currentColor;
+}

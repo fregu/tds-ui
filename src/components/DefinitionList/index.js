@@ -13,28 +13,31 @@ type DefinitionPairProps = {
   titleClass?: string,
   definitionClass?: string
 }
-type Modifiers = 'block' | 'inline' | 'hiddenTitle' | 'noMargin'
+
 type Props = {
   className?: string,
-  modifiers?: Array<Modifiers>,
+  inline?: boolean,
+  hiddenTitle?: boolean,
+  noMargin?: boolean,
   items: Array<DefinitionPairProps>,
   widths?: WidthProps
 }
 
 export default function DefinitionList({
   className,
-  /** 'block' | 'inline' | 'hiddenTitle' */
-  modifiers = [],
+  inline,
+  hiddenTitle,
+  noMargin,
   items = [],
   widths
 }: Props) {
   return (
     <div
-      className={cx(
-        'DefinitionList',
-        className,
-        modifiers.map(mod => 'DefinitionList--' + mod)
-      )}
+      className={cx('DefinitionList', className, {
+        'DefinitionList--inline': inline,
+        'DefinitionList--hiddenTitle': hiddenTitle,
+        'DefinitionList--noMargin': noMargin
+      })}
     >
       <ConditionalWrapper
         if={!!widths}

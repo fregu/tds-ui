@@ -5,8 +5,8 @@
   left: 50%;
   display: flex;
   min-height: 35vh;
-  max-height: 50vh;
   align-items: center;
+  z-index: 0;
 }
 .Hero--dimensions {
   max-height: none;
@@ -20,6 +20,7 @@
   left: 0;
   background-size: cover;
   background-position: 50% 50%;
+  z-index: -1;
 }
 .Hero-content {
   flex: 1;
