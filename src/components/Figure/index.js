@@ -4,10 +4,11 @@ import classNames from 'classnames/bind'
 import './index.css'
 const cx = classNames.bind({})
 
-type dimensionProp = '1by1' | '4by3' | '16by9'
+export type dimensionProp = '1by1' | '4by3' | '16by9'
 export type Props = {
   className?: string,
   url?: 'string',
+  srcSet?: 'string',
   defer?: boolean,
   caption?: string,
   children?: Node,
@@ -25,6 +26,7 @@ export type Props = {
 export default function Figure({
   className,
   url,
+  srcSet,
   fit,
   size,
   defer, // TODO: defer loading
@@ -55,7 +57,7 @@ export default function Figure({
           )
         )}
       >
-        <img src={url} className={cx('Figure-image')} />
+        <img src={url} srcSet={srcSet} className={cx('Figure-image')} />
       </div>
       {caption ? (
         <figcaption className={cx('Figure-caption')}>{caption}</figcaption>

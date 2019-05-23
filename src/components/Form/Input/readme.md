@@ -13,7 +13,7 @@ Input field for any type of form where single row input is needed
   <Input label="Nummer" type="number" defaultValue="2" />
   <Input
     label="Datum"
-    icon={{ type: 'calendar', className: cx('color-red'), size: 'big' }}
+    icon={{ type: 'calendar', className: 'color-red', size: 'big' }}
     type="date"
   />
   <Input label="Size" size="2" type="number" defaultValue="2" />

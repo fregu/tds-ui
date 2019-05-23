@@ -37,10 +37,10 @@
   --font-heading6: var(--font-weight-bold) var(--font-size-heading6) /
     var(--line-height-heading) var(--font-family-heading);
 }
-:global .font-size-base {
+:root .font-size-base {
   font-size: var(--font-size-base);
 }
-:global .text-base {
+:root .text-base {
   font-family: var(--font-family-base);
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-normal);
@@ -48,37 +48,37 @@
   font-style: normal;
   text-transform: none;
 }
-:global .text-strong,
-:global .text-bold {
+:root .text-strong,
+:root .text-bold {
   font-weight: var(--font-weight-bold);
 }
-:global .text-italic {
+:root .text-italic {
   font-style: italic;
 }
-:global .text-uppercase {
+:root .text-uppercase {
   text-transform: uppercase;
 }
-:global .text-capitalize {
+:root .text-capitalize {
   text-transform: capitalize;
 }
-:global .text-lowercase {
+:root .text-lowercase {
   text-transform: lowercase;
 }
-:global .text-heading1 {
+:root .text-heading1 {
   font: var(--font-heading1);
 }
-:global .text-heading2 {
+:root .text-heading2 {
   font: var(--font-heading2);
 }
-:global .text-heading3 {
+:root .text-heading3 {
   font: var(--font-heading3);
 }
-:global .text-heading4 {
+:root .text-heading4 {
   font: var(--font-heading4);
 }
-:global .text-heading5 {
+:root .text-heading5 {
   font: var(--font-heading5);
 }
-:global .text-heading6 {
+:root .text-heading6 {
   font: var(--font-heading6);
 }

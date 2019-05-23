@@ -14,7 +14,7 @@ export default function Hero({
   theme,
   dimensions,
   dimension,
-  background: { url, color, position, size = 'cover' } = {}
+  background: { url, color, position, size = 'cover', repeat } = {}
 }: Props) {
   return (
     <div
@@ -39,7 +39,8 @@ export default function Hero({
           ...(url ? { backgroundImage: `url(${url})` } : {}),
           ...(color ? { backgroundColor: color } : {}),
           ...(position ? { backgroundPosition: position } : {}),
-          ...(size ? { backgroundSize: size } : {})
+          ...(size ? { backgroundSize: size } : {}),
+          ...(repeat ? { backgroundRepeat: repeat } : {})
         }}
       />
       <div className={cx('Hero-content', 'layout-container')}>{children}</div>

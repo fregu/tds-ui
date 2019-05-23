@@ -1,0 +1,28 @@
+.Tabs {
+}
+.Tabs-list {
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+  padding: 0;
+}
+.Tabs--spread .Tabs-list {
+  justify-content: stretch;
+}
+.Tabs--wrap .Tabs-list {
+  flex-wrap: wrap;
+}
+
+.Tabs-item {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.Tabs-tab {
+}
+.Tabs-tab--selected {
+}
+.Tabs-content {
+}
+.Tabs-panel {
+}
