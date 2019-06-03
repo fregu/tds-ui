@@ -1,0 +1,38 @@
+.Carousel {
+  position: relative;
+}
+.Carousel-wrapper {
+  overflow: auto;
+  position: relative;
+}
+.Carousel-items {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+.Carousel-item {
+  width: 100%;
+  flex: 0 0 auto;
+  display: flex;
+}
+.Carousel-item > * {
+  flex: 1 0 auto;
+}
+.Carousel-image {
+  width: 100%;
+  height: 100%;
+}
+.Carousel-actions {
+}
+.Carousel-stepleft {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  left: 0;
+}
+.Carousel-stepRight {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  right: 0;
+}

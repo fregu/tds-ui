@@ -12,6 +12,7 @@ export type Props = {
   defer?: boolean,
   caption?: string,
   children?: Node,
+  onClick?: Function,
   fit?: 'contain' | 'cover',
   size?: 'small' | 'medium' | 'large' | 'orginal',
   dimension?: dimensionProp,
@@ -32,13 +33,16 @@ export default function Figure({
   defer, // TODO: defer loading
   caption,
   dimension,
-  dimensions = {}
+  dimensions = {},
+  onClick
 }: Props) {
   return (
     <figure
+      onClick={onClick}
       className={cx('Figure', className, {
         [`Figure--${size || ''}`]: size,
         'Figure--fit': fit,
+        'Figure--clickable': onClick,
         [`Figure--${fit || ''}`]: fit,
         [`Figure--withDimension`]: dimension || Object.keys(dimensions).length,
         [`dimesion-${dimension || ''}`]: dimension

@@ -9,6 +9,9 @@
 .Figure--wrapper {
   flex: 1;
 }
+.Figure--clickable .Figure-image {
+  cursor: pointer;
+}
 
 .Figure-image {
   max-width: 100%;
