@@ -5,6 +5,7 @@ import Icon, { type Props as IconProps } from 'ui/components/Icon'
 import classNames from 'classnames/bind'
 import styles from './index.css'
 import Connect from 'ui/helpers/Connect'
+import { type Props as DialogProps } from 'ui/components/Dialog'
 import { confirmAction } from 'ui/store/actions/dialog'
 import { redirectTo } from 'ui/store/actions/navigation'
 const cx = classNames.bind(styles)
@@ -28,7 +29,7 @@ export type Props = {
   disabled?: boolean,
   attributes?: any,
   primary?: boolean,
-  confirm?: string
+  confirm?: string | DialogProps
 }
 
 export default function Button({
