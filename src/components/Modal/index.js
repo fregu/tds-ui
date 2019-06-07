@@ -4,6 +4,8 @@ import classNames from 'classnames/bind'
 import Title from 'ui/components/Title'
 import Button from 'ui/components/Button'
 import Connect from 'ui/helpers/Connect'
+import Figure, { Props as FigureProps } from 'ui/components/Figure'
+import Carousel from 'ui/components/Carousel'
 import { closeModal } from 'ui/store/actions/modal'
 import { strings } from 'ui/lang'
 import styles from './index.css'
@@ -12,10 +14,12 @@ const cx = classNames.bind(styles)
 type Props = {
   className?: string,
   title?: string,
+  images?: Array<FigureProps>,
   content?: any,
   children?: any,
   onClose?: Function,
   persistent?: boolean,
+  size?: 'small' | 'medium' | 'large',
   modifiers?: Array<string>
 }
 
@@ -32,10 +36,12 @@ export default class Modal extends Component<Props> {
     const {
       className,
       title,
+      images,
       content,
       children,
       onClose,
       persistent,
+      size,
       modifiers = []
     } = this.props
     return (
@@ -63,15 +69,16 @@ export default class Modal extends Component<Props> {
                 className={cx(
                   'Modalbox',
                   {
-                    'Modalbox--withTitle': title
+                    'Modalbox--withTitle': title,
+                    [`Modalbox--${size}`]: size
                   },
                   className,
                   modifiers.map(mod => 'Modalbox--' + mod)
                 )}
                 ref={el => el && (this.box = el)}
               >
-                <header className={cx('Modalbox-header')}>
-                  {title ? (
+                {title ? (
+                  <header className={cx('Modalbox-header')}>
                     <Title
                       className={cx('Modalbox-title')}
                       level={2}
@@ -79,22 +86,31 @@ export default class Modal extends Component<Props> {
                     >
                       {title}
                     </Title>
-                  ) : null}
-                  {!persistent ? (
-                    <Button
-                      plain
-                      hiddenText
-                      className={cx('Modalbox-closebutton')}
-                      onClick={closeModal}
-                      size="large"
-                      icon={{ type: 'close' }}
-                      text={strings.general.close}
-                    />
-                  ) : null}
-                </header>
-                <div className={cx('Modalbox-content')}>
-                  {content || children}
-                </div>
+                  </header>
+                ) : null}
+                {!persistent ? (
+                  <Button
+                    plain
+                    hiddenText
+                    className={cx('Modalbox-closebutton')}
+                    onClick={closeModal}
+                    size="large"
+                    icon={{ type: 'close' }}
+                    text={strings.general.close}
+                  />
+                ) : null}
+
+                {images ? (
+                  <Carousel
+                    className={cx('Modalbox-images')}
+                    items={images.map(image => ({ image }))}
+                  />
+                ) : null}
+                {content || children ? (
+                  <div className={cx('Modalbox-content')}>
+                    {content || children}
+                  </div>
+                ) : null}
               </section>
               <span onFocus={this.setFocus} />
             </Fragment>

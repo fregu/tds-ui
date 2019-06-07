@@ -6,8 +6,9 @@
   flex: 1 0 auto;
   display: flex;
 }
-.Figure--wrapper {
+.Figure--fit .Figure-wrapper {
   flex: 1;
+  align-self: center;
 }
 .Figure--clickable .Figure-image {
   cursor: pointer;
