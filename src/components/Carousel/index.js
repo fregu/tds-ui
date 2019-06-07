@@ -58,14 +58,10 @@ export default class Carousel extends Component<Props, State> {
         this.setState({ activeIndex: currentIndex })
       }
     }
-
-    //isAnimating = true
   }
   scrollStop = (snapToActive?: boolean) => {
     if (isAnimating) {
-      //setTimeout(() => {
       isAnimating = false
-      //}, 250)
     }
     clearTimeout(scrollingTimeout)
 
