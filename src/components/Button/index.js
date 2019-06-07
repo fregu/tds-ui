@@ -5,6 +5,7 @@ import Icon, { type Props as IconProps } from 'ui/components/Icon'
 import classNames from 'classnames/bind'
 import styles from './index.css'
 import Connect from 'ui/helpers/Connect'
+import { type Props as DialogProps } from 'ui/components/Dialog'
 import { confirmAction } from 'ui/store/actions/dialog'
 import { redirectTo } from 'ui/store/actions/navigation'
 const cx = classNames.bind(styles)
@@ -27,7 +28,8 @@ export type Props = {
   noPadding?: boolean,
   disabled?: boolean,
   attributes?: any,
-  primary?: boolean
+  primary?: boolean,
+  confirm?: string | DialogProps
 }
 
 export default function Button({
@@ -50,7 +52,9 @@ export default function Button({
   primary,
   ...attributes
 }: Props) {
-  const ButtonTag = tag || (to || href ? Link : 'button')
+  const isLink = to || href
+  const ButtonTag = tag || (isLink ? Link : 'button')
+  const clickProps = isLink ? { to, href } : {}
   return (
     <Connect mapDispatchToProps={{ confirmAction }}>
       {({ confirmAction }) => (
@@ -91,6 +95,7 @@ export default function Button({
                 }
               : null
           }
+          {...clickProps}
           {...attributes}
         >
           <div className={cx('Button-wrapper')}>

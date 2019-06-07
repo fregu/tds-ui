@@ -11,7 +11,7 @@ import { closeDialog } from 'ui/store/actions/dialog'
 import styles from './index.css'
 const cx = classNames.bind(styles)
 
-type Props = {
+export type Props = {
   className?: string,
   headerContent?: Node,
   title?: string,
