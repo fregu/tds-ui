@@ -27,7 +27,8 @@ export type Props = {
   noPadding?: boolean,
   disabled?: boolean,
   attributes?: any,
-  primary?: boolean
+  primary?: boolean,
+  confirm?: string
 }
 
 export default function Button({
@@ -50,7 +51,10 @@ export default function Button({
   primary,
   ...attributes
 }: Props) {
-  const ButtonTag = tag || (to || href ? Link : 'button')
+  // const ButtonTag = tag || (to || href ? Link : 'button')
+  const isLink = to || href
+  const ButtonTag = tag || (isLink ? Link : 'button')
+  const clickProps = isLink ? { to, href } : {}
   return (
     <Connect mapDispatchToProps={{ confirmAction }}>
       {({ confirmAction }) => (
@@ -91,6 +95,7 @@ export default function Button({
                 }
               : null
           }
+          {...clickProps}
           {...attributes}
         >
           <div className={cx('Button-wrapper')}>
