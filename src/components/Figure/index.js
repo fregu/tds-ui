@@ -34,7 +34,8 @@ export default function Figure({
   caption,
   dimension,
   dimensions = {},
-  onClick
+  onClick,
+  ...attributes
 }: Props) {
   return (
     <figure
@@ -61,7 +62,12 @@ export default function Figure({
           )
         )}
       >
-        <img src={url} srcSet={srcSet} className={cx('Figure-image')} />
+        <img
+          {...attributes}
+          src={url}
+          srcSet={srcSet}
+          className={cx('Figure-image')}
+        />
       </div>
       {caption ? (
         <figcaption className={cx('Figure-caption')}>{caption}</figcaption>
