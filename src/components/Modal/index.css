@@ -18,7 +18,6 @@
   z-index: var(--z-modal);
   background: rgba(0, 0, 0, 0.6);
 }
-
 .Modalbox {
   position: fixed;
   top: 50%;
@@ -37,6 +36,12 @@
   transform-origin: 50% 0;
   animation: appear 0.2s ease-out;
   box-shadow: 0 0 24px 4px rgba(33, 33, 33, 0.08);
+}
+.Modalbox--large {
+  width: 1025px;
+}
+.Modalbox--small {
+  width: 400px;
 }
 .Modalbox--block {
   position: relative;
@@ -66,4 +71,5 @@
   position: absolute;
   right: 0;
   top: 0;
+  z-index: 2;
 }

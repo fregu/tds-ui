@@ -20,7 +20,7 @@ type State = {
   activeIndex: number
 }
 let scrollingTimeout
-let isScrolling
+let isAnimating
 export default class Carousel extends Component<Props, State> {
   el: HTMLElement
   wrapper: HTMLElement
@@ -31,10 +31,10 @@ export default class Carousel extends Component<Props, State> {
   stepLeft = () => {
     const { activeIndex } = this.state
     const newIndex = activeIndex > 0 ? activeIndex - 1 : 0
+    this.scrollToItem(newIndex)
     this.setState({
       activeIndex: newIndex
     })
-    this.scrollToItem(newIndex)
   }
   stepRight = () => {
     const { activeIndex } = this.state
@@ -42,47 +42,56 @@ export default class Carousel extends Component<Props, State> {
     const newIndex =
       activeIndex < items.length - 1 ? activeIndex + 1 : items.length - 1
 
+    this.scrollToItem(newIndex)
     this.setState({
       activeIndex: newIndex
     })
-    this.scrollToItem(newIndex)
+  }
+  onResize = () => {
+    if (typeof requestAnimationFrame !== 'undefined') {
+      requestAnimationFrame(() => this.scrollToItem(this.state.activeIndex, 0))
+    }
   }
   onScroll = () => {
     const { activeIndex } = this.state
-
-    if (!isScrolling) {
+    if (!isAnimating) {
       clearTimeout(scrollingTimeout)
       scrollingTimeout = setTimeout(() => this.scrollStop(true), 250)
-      const bounds = this.wrapper.getBoundingClientRect()
-      const currentIndex = Math.round(this.wrapper.scrollLeft / bounds.width)
+      const wrapperWidth = this.wrapper.clientWidth
+      const currentIndex = Math.round(this.wrapper.scrollLeft / wrapperWidth)
       if (activeIndex !== currentIndex) {
         this.setState({ activeIndex: currentIndex })
       }
     }
-
-    //isScrolling = true
   }
   scrollStop = (snapToActive?: boolean) => {
-    const { activeIndex } = this.state
-    isScrolling = false
+    clearTimeout(scrollingTimeout)
 
+    const { activeIndex } = this.state
+    if (isAnimating) {
+      isAnimating = false
+    }
     if (snapToActive) {
       this.scrollToItem(activeIndex, 250)
     }
   }
   scrollToItem = (index: number, duration: number = 500) => {
-    const bounds = this.wrapper.getBoundingClientRect()
-    isScrolling = true
-    scrollTo(
-      this.wrapper,
-      bounds.width * index,
-      duration,
-      'scrollLeft',
-      this.scrollStop
+    const wrapperWidth = this.wrapper.clientWidth
+    clearTimeout(scrollingTimeout)
+    isAnimating = true
+    scrollTo(this.wrapper, wrapperWidth * index, duration, 'scrollLeft', () =>
+      this.scrollStop()
     )
   }
   componentDidMount = () => {
+    if (this.props.activeIndex) {
+      setTimeout(() => this.scrollToItem(this.props.activeIndex, 0), 0)
+    }
+
     this.wrapper.addEventListener('scroll', this.onScroll)
+    if (typeof window !== 'undefined') {
+      window.addEventListener('resize', this.onResize)
+    }
   }
   render() {
     const { items = [], className } = this.props
@@ -120,7 +129,11 @@ export default class Carousel extends Component<Props, State> {
             className={cx('Carousel-items')}
           >
             {items.map(({ image, content, isActive }, index) => (
-              <div className={cx('Carousel-item')}>
+              <div
+                className={cx('Carousel-item', {
+                  'Carousel-item--image': image
+                })}
+              >
                 {image ? (
                   <Figure
                     {...image}

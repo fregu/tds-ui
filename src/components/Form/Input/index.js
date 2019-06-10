@@ -47,8 +47,10 @@ export type Props = {
   errorMessage?: string,
   defaultValue?: string | number,
   /** TODO: handle help texts */
-  description?: string,
-  hiddenLabel?: boolean
+  // description?: string,
+  hiddenLabel?: boolean,
+  floatingLabel?: boolean,
+  discreet?: boolean
 }
 type State = {
   value?: string,
@@ -62,10 +64,12 @@ class Input extends Component<Props, State> {
   componentDidMount = () => {
     this.triggerInitEvent()
   }
-
+  onFocus = (event: Event) => {
+    this.setState({ hasFocus: true })
+  }
   onBlur = (event: Event) => {
     this.validate(true)
-
+    this.setState({ hasFocus: false })
     if (this.props.onBlur) {
       this.props.onBlur(event)
     }
@@ -201,10 +205,12 @@ class Input extends Component<Props, State> {
       hashed,
       rounded,
       hiddenLabel,
+      floatingLabel,
+      discreet,
       ...props
     } = this.props
 
-    const { isValid = true, errors = [] } = this.state
+    const { isValid = true, hasFocus, errors = [], value } = this.state
 
     return (
       <div
@@ -213,6 +219,11 @@ class Input extends Component<Props, State> {
           'Input--fill': fill,
           'Input--rounded': rounded,
           'Input--withIcon': !!icon,
+          'Input--discreet': discreet,
+          'Input--floatingLabel': floatingLabel,
+          'Input--hasValue': !!value,
+          'Input--isEmpty': !value,
+          'Input--hasFocus': hasFocus,
           [`Input--${type}`]: type
         })}
       >
@@ -238,6 +249,7 @@ class Input extends Component<Props, State> {
           <input
             id={id}
             onInput={this.onInput}
+            onFocus={this.onFocus}
             onBlur={this.onBlur}
             ref={el => el && (this.input = el)}
             type={type}

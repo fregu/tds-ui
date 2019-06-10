@@ -1,9 +1,10 @@
 export const OPEN_MODAL = 'OPEN_MODAL'
 export const CLOSE_MODAL = 'CLOSE_MODAL'
 
-export const openModal = ({ title, content, images, ...props }) => ({
+export const openModal = ({ title, content, size, images, ...props }) => ({
   type: OPEN_MODAL,
   images,
+  size: size || (images.length && 'large') || null,
   title,
   content,
   ...props

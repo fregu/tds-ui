@@ -18,7 +18,7 @@ export type Props = {
   image?: FigureProps,
   imagePosition?: 'left' | 'top' | 'right' | 'bottom',
   icon?: IconProps,
-  title?: TitleProps,
+  title?: string | TitleProps,
   theme?: string,
   bordered?: boolean
 }
@@ -68,7 +68,7 @@ export default function Section({
           <header className={cx('Section-header')}>
             {title ? (
               <Title
-                {...title}
+                {...(typeof title === 'string' ? { text: title } : title)}
                 className={cx('Section-title', title.className)}
               />
             ) : null}

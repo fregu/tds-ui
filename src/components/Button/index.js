@@ -17,7 +17,7 @@ export type Props = {
   size?: 'tiny' | 'small' | 'large' | 'normal',
   theme?: string,
   onClick?: Function,
-  icon?: IconProps,
+  icon?: string | IconProps,
   iconAfter?: boolean,
   to?: string,
   href?: string,
@@ -59,6 +59,7 @@ export default function Button({
     <Connect mapDispatchToProps={{ confirmAction }}>
       {({ confirmAction }) => (
         <ButtonTag
+          {...clickProps}
           className={cx(
             'Button',
             {
@@ -100,7 +101,10 @@ export default function Button({
         >
           <div className={cx('Button-wrapper')}>
             {icon ? (
-              <Icon {...icon} className={cx('Button--icon', icon.className)} />
+              <Icon
+                {...(typeof icon === 'string' ? { type: icon } : icon)}
+                className={cx('Button--icon', icon.className)}
+              />
             ) : null}
             <span
               className={cx('Button-text', { 'hidden-text': hiddenText })}
