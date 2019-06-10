@@ -47,6 +47,11 @@ export default class Carousel extends Component<Props, State> {
       activeIndex: newIndex
     })
   }
+  onResize = () => {
+    if (typeof requestAnimationFrame !== 'undefined') {
+      requestAnimationFrame(() => this.scrollToItem(this.state.activeIndex, 0))
+    }
+  }
   onScroll = () => {
     const { activeIndex } = this.state
     if (!isAnimating) {
@@ -84,6 +89,9 @@ export default class Carousel extends Component<Props, State> {
     }
 
     this.wrapper.addEventListener('scroll', this.onScroll)
+    if (typeof window !== 'undefined') {
+      window.addEventListener('resize', this.onResize)
+    }
   }
   render() {
     const { items = [], className } = this.props
