@@ -32,6 +32,13 @@
   padding: calc(var(--grid-gap) / 2);
 }
 
+.Grid--tightGap {
+  margin: calc(var(--grid-gap) / -4);
+}
+.Grid--tightGap > .Grid-cell {
+  padding: calc(var(--grid-gap) / 4);
+}
+
 @media (--min-small) {
   .Grid--wideGap {
     margin: calc(var(--grid-wide-gap) / -2);

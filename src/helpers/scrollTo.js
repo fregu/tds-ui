@@ -47,6 +47,7 @@ export default function scrollTo(
     animateScroll()
   } else {
     el[prop] = destination
+    callback()
   }
   return {
     stop() {

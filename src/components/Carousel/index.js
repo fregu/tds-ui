@@ -52,35 +52,37 @@ export default class Carousel extends Component<Props, State> {
     if (!isAnimating) {
       clearTimeout(scrollingTimeout)
       scrollingTimeout = setTimeout(() => this.scrollStop(true), 250)
-      const bounds = this.wrapper.getBoundingClientRect()
-      const currentIndex = Math.round(this.wrapper.scrollLeft / bounds.width)
+      const wrapperWidth = this.wrapper.clientWidth
+      const currentIndex = Math.round(this.wrapper.scrollLeft / wrapperWidth)
       if (activeIndex !== currentIndex) {
         this.setState({ activeIndex: currentIndex })
       }
     }
   }
   scrollStop = (snapToActive?: boolean) => {
-    if (isAnimating) {
-      isAnimating = false
-    }
     clearTimeout(scrollingTimeout)
 
     const { activeIndex } = this.state
-
+    if (isAnimating) {
+      isAnimating = false
+    }
     if (snapToActive) {
       this.scrollToItem(activeIndex, 250)
     }
   }
   scrollToItem = (index: number, duration: number = 500) => {
-    const bounds = this.wrapper.getBoundingClientRect()
-
+    const wrapperWidth = this.wrapper.clientWidth
     clearTimeout(scrollingTimeout)
     isAnimating = true
-    scrollTo(this.wrapper, bounds.width * index, duration, 'scrollLeft', () =>
+    scrollTo(this.wrapper, wrapperWidth * index, duration, 'scrollLeft', () =>
       this.scrollStop()
     )
   }
   componentDidMount = () => {
+    if (this.props.activeIndex) {
+      setTimeout(() => this.scrollToItem(this.props.activeIndex, 0), 0)
+    }
+
     this.wrapper.addEventListener('scroll', this.onScroll)
   }
   render() {

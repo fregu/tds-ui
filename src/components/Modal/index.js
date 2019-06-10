@@ -104,6 +104,12 @@ export default class Modal extends Component<Props> {
                   <Carousel
                     className={cx('Modalbox-images')}
                     items={images.map(image => ({ image }))}
+                    activeIndex={images.reduce(
+                      (selectedIndex, image, index) =>
+                        (!selectedIndex && image.selected && index) ||
+                        selectedIndex,
+                      0
+                    )}
                   />
                 ) : null}
                 {content || children ? (
