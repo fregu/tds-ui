@@ -5,6 +5,7 @@
 .Section-wrapper {
   display: flex;
   flex-direction: column;
+  margin: calc(var(--layout-gutter) / -2);
 }
 .Section--bordered {
   box-shadow: var(--shadow-default);
@@ -12,11 +13,14 @@
 }
 
 .Section-contentWrapper {
-  flex: 2 1 66.66%;
+  flex: 2 0 auto;
+  padding: calc(var(--layout-gutter) / 2);
 }
 
 .Section-figure {
-  flex: 1 1 33.33%;
+  flex: 1 0 33.33%;
+  min-width: 25vw;
+  padding: calc(var(--layout-gutter) / 2);
 }
 .Section-header {
 }
@@ -52,16 +56,4 @@
 }
 .Section--bordered.Section--imageRight .Section-figure {
   margin-left: 0;
-}
-.Section--imageTop .Section-figure {
-  padding: 0 0 var(--layout-gutter);
-}
-.Section--imageLeft .Section-figure {
-  padding: 0 var(--layout-gutter) 0 0;
-}
-.Section--imageRight .Section-figure {
-  padding: 0 0 0 var(--layout-gutter);
-}
-.Section--imageBottom .Section-figure {
-  padding: var(--layout-gutter) 0 0;
 }
