@@ -22,6 +22,7 @@ export type Props = {
   name?: string,
   fill?: boolean,
   id?: string,
+  placeholder?: string,
   /** TODO: handle help texts */
   description?: string
 }
@@ -59,7 +60,7 @@ export default class Select extends Component<Props> {
           {this.renderOptions(options)}
         </optgroup>
       ) : (
-        <option key={'option' + value + '-' + index} value={value || text}>
+        <option key={'option' + value + '-' + index} value={value}>
           {text + blankChars}
         </option>
       )
@@ -75,6 +76,7 @@ export default class Select extends Component<Props> {
       disabled,
       prefix = '',
       name = '',
+      placeholder,
       ...attributes
     } = this.props
     return (
@@ -90,16 +92,40 @@ export default class Select extends Component<Props> {
           </Label>
         ) : null}
         <div className={cx('Select-inputWrapper')}>
-          <select
-            {...attributes}
-            id={id}
-            name={prefix + name}
-            disabled={disabled}
-            ref={el => el && (this.input = el)}
-            className={cx('Select-input')}
-          >
-            {this.renderOptions(options)}
-          </select>
+          {disabled ? (
+            <select
+              key=""
+              {...attributes}
+              key={id + 'disabled'}
+              id={id}
+              name={prefix + name}
+              disabled={disabled}
+              className={cx('Select-input', 'Select-input--disabled')}
+            >
+              {placeholder ? (
+                <option value={''} className={cx('Select-placeholder')}>
+                  {placeholder}
+                </option>
+              ) : null}
+              {this.renderOptions(options)}
+            </select>
+          ) : (
+            <select
+              {...attributes}
+              id={id}
+              name={prefix + name}
+              disabled={disabled}
+              ref={el => el && (this.input = el)}
+              className={cx('Select-input')}
+            >
+              {placeholder ? (
+                <option value={''} className={cx('Select-placeholder')}>
+                  {placeholder}
+                </option>
+              ) : null}
+              {this.renderOptions(options)}
+            </select>
+          )}
           <span className={cx('Select-pickerIcon')}>
             <Icon type="chevronDown" />
           </span>

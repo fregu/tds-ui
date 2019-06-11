@@ -13,14 +13,16 @@
 }
 
 .Section-contentWrapper {
-  flex: 2 0 auto;
+  flex: 1 0 66.66%;
   padding: calc(var(--layout-gutter) / 2);
+  box-sizing: border-box;
 }
 
-.Section-figure {
+.Section-figureWrapper {
   flex: 1 0 33.33%;
-  min-width: 25vw;
+  min-width: 200px;
   padding: calc(var(--layout-gutter) / 2);
+  box-sizing: border-box;
 }
 .Section-header {
 }
@@ -35,9 +37,11 @@
 
 .Section--imageLeft .Section-wrapper {
   flex-direction: row;
+  flex-wrap: wrap;
 }
 .Section--imageRight .Section-wrapper {
   flex-direction: row-reverse;
+  flex-wrap: wrap;
 }
 .Section--imageBottom .Section-wrapper {
   flex-direction: column-reverse;
