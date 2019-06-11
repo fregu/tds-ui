@@ -6,11 +6,15 @@ import Icon from 'ui/components/Icon'
 import styles from './index.css'
 const cx = classNames.bind(styles)
 
+type OptionProps = {
+  value?: string,
+  text: string
+}
 export type Props = {
   type?: string,
   id: string,
   className?: string,
-  options: any,
+  options: Array<OptionProps>,
   label?: string,
   disabled?: boolean,
   required?: boolean,
@@ -48,15 +52,15 @@ export default class Select extends Component<Props> {
       this.input.dispatchEvent(changeEvent)
     }
   }
-  renderOptions = (options: any) =>
-    Object.keys(options).map((key, index) =>
-      typeof options[key] === 'object' ? (
-        <optgroup key={'optgroup' + index} label={key}>
-          {this.renderOptions(options[key])}
+  renderOptions = (options: Array<OptionProps>) =>
+    options.map(({ value, text, options }, index) =>
+      options ? (
+        <optgroup key={'optgroup' + index} label={text}>
+          {this.renderOptions(options)}
         </optgroup>
       ) : (
-        <option key={'option' + key + '-' + index} value={key}>
-          {options[key] + blankChars}
+        <option key={'option' + value + '-' + index} value={value || text}>
+          {text + blankChars}
         </option>
       )
     )

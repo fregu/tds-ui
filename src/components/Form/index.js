@@ -18,7 +18,10 @@ type Props = {
   className?: string,
   children?: any,
   method?: string,
+  // Prevent default submit behaviour
   preventDefault?: boolean,
+  // Trigger change on mount
+  initialChange?: boolean,
   onSubmit?: Function,
   onChange?: Function,
   fields?: Array<Node>
@@ -43,6 +46,9 @@ export default class Form extends Component<Props, State> {
     })
     this.el.addEventListener('initField', this.onChange)
 
+    if (this.props.initialChange) {
+      this.triggerChange()
+    }
     // check initial validation
     this.validateFields()
   }
