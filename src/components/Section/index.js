@@ -15,6 +15,7 @@ export type Props = {
   to?: string,
   content?: Node,
   children?: Node,
+  figureContent?: Node,
   image?: FigureProps,
   imagePosition?: 'left' | 'top' | 'right' | 'bottom',
   icon?: IconProps,
@@ -28,6 +29,7 @@ export default function Section({
   children,
   to,
   image,
+  figureContent,
   icon,
   imagePosition = 'left',
   title,
@@ -38,9 +40,9 @@ export default function Section({
   return (
     <section
       className={cx('Section', className, {
-        'Section--withImage': image,
+        'Section--withImage': image || figureContent,
         [`Section--image${imagePosition.charAt(0).toUpperCase() +
-          imagePosition.slice(1)}`]: image && imagePosition,
+          imagePosition.slice(1)}`]: (image || figureContent) && imagePosition,
         'Section--withIcon': icon,
         'Section--withTitle': title,
         'Section--bordered': bordered,
@@ -58,11 +60,17 @@ export default function Section({
           <div className={cx('Section-wrapper')}>{children}</div>
         )}
       >
-        {image ? (
-          <Figure
-            {...image}
-            className={cx('Section-figure', image.className)}
-          />
+        {figureContent || image ? (
+          <div className={cx('Section-figureWrapper')}>
+            {image ? (
+              <Figure
+                {...image}
+                className={cx('Section-image', image.className)}
+              />
+            ) : (
+              figureContent
+            )}
+          </div>
         ) : null}
         <div className={cx('Section-contentWrapper')}>
           <header className={cx('Section-header')}>
