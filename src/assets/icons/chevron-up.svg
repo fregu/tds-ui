@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <g stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
-        <g transform="translate(3.000000, 3.000000)" stroke-width="1.2">
-            <path d="M0.5,0.5 L18.7482876,18.7482876"></path>
-            <path d="M18.5,0.5 L0.251712409,18.7482876 L18.5,0.5 Z"></path>
+        <g transform="translate(1.000000, 6.000000)" stroke-width="1.2">
+            <polyline transform="translate(11.550084, 5.951301) rotate(180.000000) translate(-11.550084, -5.951301) " points="0.598783 0.401217 11.550084 11.501385 22.501385 0.401217"></polyline>
         </g>
     </g>
 </svg>
