@@ -53,6 +53,7 @@
   background: #fff;
   pointer-events: none;
   display: flex;
+  align-items: center;
 }
 .Select-input[disabled],
 .Select-input[disabled] + .Select-pickerIcon {
