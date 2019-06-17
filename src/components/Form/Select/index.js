@@ -54,8 +54,8 @@ export default class Select extends Component<Props> {
     }
   }
   renderOptions = (options: Array<OptionProps>) =>
-    options.map(({ value, text, options }, index) =>
-      options ? (
+    options.map(({ value, text, options = [] }, index) =>
+      options.length ? (
         <optgroup key={'optgroup' + index} label={text}>
           {this.renderOptions(options)}
         </optgroup>
