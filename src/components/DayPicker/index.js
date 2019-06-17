@@ -17,6 +17,7 @@ export default ({
   onChange = () => {},
   min,
   max,
+  disabledDays = [],
   ...attributes
 }) => (
   <DayPicker
@@ -28,10 +29,10 @@ export default ({
       firstDayOfWeek: 1
     }}
     {...attributes}
-    disabledDays={{
+    disabledDays={[...disabledDays, {
       ...(max ? { after: dateHandler(max).get() } : {}),
       ...(min ? { before: dateHandler(min).get() } : {})
-    }}
+    }]}
     onDayClick={attributes.onDayClick || onChange}
     className={cx('DayPicker', className)}
   />
