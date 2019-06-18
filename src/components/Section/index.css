@@ -14,6 +14,7 @@
 
 .Section-contentWrapper {
   flex: 1 0 66.66%;
+  width: 100%;
   padding: calc(var(--layout-gutter) / 2);
   box-sizing: border-box;
 }
@@ -21,9 +22,17 @@
 .Section-figureWrapper {
   flex: 1 0 33.33%;
   min-width: 200px;
+  width: 100%;
   padding: calc(var(--layout-gutter) / 2);
   box-sizing: border-box;
 }
+@media (--max-medium) {
+  .Section-contentWrapper,
+  .Section-figureWrapper {
+    flex: 1 0 50%;
+  }
+}
+
 .Section-header {
 }
 .Section-title {
