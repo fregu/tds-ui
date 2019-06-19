@@ -150,6 +150,7 @@ export default class Form extends Component<Props, State> {
       children,
       fields = [],
       method = 'get',
+      initialChange,
       ...attributes
     } = this.props
 
