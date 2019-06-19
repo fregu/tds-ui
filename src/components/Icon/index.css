@@ -1,4 +1,5 @@
 .Icon {
+  display: inline-block;
   border-radius: 50%;
   width: auto;
   height: auto;
