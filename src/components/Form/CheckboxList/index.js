@@ -30,45 +30,57 @@ export default function CheckboxList({
   label,
   defaultValue = [],
   className,
+  onChange,
   options = [],
   modifiers = [],
   disabled: listDisabled,
   required: listRequired
 }: Props) {
   return (
-    <fieldset
-      className={cx(
-        'CheckboxList',
-        className,
+    <State>
+      {({values = [], setState}) => (
+        <fieldset
+          className={cx(
+            'CheckboxList',
+            className,
 
-        modifiers.map(mod => 'CheckboxList--' + mod)
+            modifiers.map(mod => 'CheckboxList--' + mod)
+          )}
+        >
+          {label ? (
+            <legend className={cx('text-weight-bold ui-text-label')}>
+              {label}
+            </legend>
+          ) : null}
+          <List
+            className={cx('CheckboxList-list')}
+            items={options.map(
+              (
+                { id, value, text, disabled, required, defaultChecked, ...props },
+                index
+              ) => (
+                <Checkbox
+                  key={value}
+                  id={id || `${listId}-${index}`}
+                  name={name ? name + '[]' : ''}
+                  value={value}
+                  label={text}
+                  onChange={(e, isChecked) => {
+                    const newValues = isChecked ? [...values, value] : values.filter(val => val !== value)
+                    if (typeof onChange === 'function') {
+                      setState({value: newValues})
+                      onChange(e, newValues)
+                    }
+                  }}
+                  defaultChecked={defaultValue.includes(value) || defaultChecked}
+                  disabled={disabled || listDisabled}
+                  required={required}
+                />
+              )
+            )}
+          />
+        </fieldset>
       )}
-    >
-      {label ? (
-        <legend className={cx('text-weight-bold ui-text-label')}>
-          {label}
-        </legend>
-      ) : null}
-      <List
-        className={cx('CheckboxList-list')}
-        items={options.map(
-          (
-            { id, value, text, disabled, required, defaultChecked, ...props },
-            index
-          ) => (
-            <Checkbox
-              key={value}
-              id={id || `${listId}-${index}`}
-              name={name ? name + '[]' : ''}
-              value={value}
-              label={text}
-              defaultChecked={defaultValue.includes(value) || defaultChecked}
-              disabled={disabled || listDisabled}
-              required={required}
-            />
-          )
-        )}
-      />
-    </fieldset>
+    </State>
   )
 }

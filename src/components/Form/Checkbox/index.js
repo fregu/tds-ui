@@ -23,14 +23,15 @@ export default function Checkbox({
   id,
   name,
   value = true,
-  attributes = {},
   required,
   disabled,
   label,
   className,
   checked,
   defaultChecked,
-  modifiers = []
+  modifiers = [],
+  onChange,
+  ...attributes
 }: Props) {
   return (
     <div
@@ -46,7 +47,9 @@ export default function Checkbox({
       <input
         id={id}
         type="checkbox"
+        {...attributes}
         className={cx('FormCheckbox-input')}
+        onChange={e => typeof onChange === 'function' ? onChange(e, e.target.checked) : null}
         value={value}
         name={name}
         checked={checked}

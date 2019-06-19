@@ -24,7 +24,6 @@ export default function Radio({
   id,
   name,
   value,
-  attributes = {},
   required,
   disabled,
   label,
@@ -33,7 +32,8 @@ export default function Radio({
   onChange,
   checked,
   defaultChecked,
-  modifiers = []
+  modifiers = [],
+  ...attributes
 }: Props) {
   return (
     <div
@@ -49,11 +49,12 @@ export default function Radio({
       <input
         id={id}
         type="radio"
+        {...attributes}
         className={cx('Radio-input')}
         value={value}
         name={name}
         onChange={e =>
-          typeof onChange === 'function' ? onChange(e, value) : {}
+          typeof onChange === 'function' ? onChange(e, e.target.checked) : {}
         }
         checked={checked}
         defaultChecked={defaultChecked}
