@@ -1,6 +1,11 @@
 :root {
-  --color-tab-background: #fff;
-  --color-tab-border-color: var(--color-grey);
+  --tab-inactive-background-color: transparent;
+  --tab-inactive-text-color: var(--color-text, #333);
+  --tab-inactive-border-color: transparent;
+  --tab-active-background-color: #fff;
+  --tab-active-text-color: var(--color-text, #333);
+  --tab-active-border-color: var(--color-grey);
+  --tab-panel-background-color: var(--tab-active-background-color);
 }
 .Tabs {
   padding-bottom: 1px;
@@ -18,25 +23,62 @@
 .Tabs--wrap .Tabs-list {
   flex-wrap: wrap;
 }
-
+ .Tabs-item--selected::after{
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  height: 1px;
+  background: var(--tab-active-background-color);
+  left: 1px;
+  right: 1px;
+}
 .Tabs-item {
+  position: relative;
   margin: 0;
   padding: 0;
   list-style: none;
 }
+
 .Tabs-tab {
+  position: relative;
   padding: 0.5em 1em;
-  background: var(--color-tab-background);
-  border: 1px solid var(--color-tab-border-color);
+  background: var(--tab-inactive-background-color);
+  border: 1px solid var(--tab-inactive-border-color);
+  color: var(--tab-inactive-text-color);
   border-bottom: none;
   outline: none;
 }
 .Tabs-tab--selected {
-  background: var(--color-primary-action);
-  color: var(--color-primary-action-contrast, #fff)
+  background: var(--tab-active-background-color);
+  color: var(--tab-active-text-color);
+  border-color: var(--tab-active-border-color);
 }
 .Tabs-content {
-  border-top: 1px solid var(--color-tab-border-color);
+  border-top: 1px solid var(--tab-border-color);
+}
+.Tabs--bordered .Tabs-content {
+  border-top: 1px solid var(--tab-border-color);
+  padding: var(--layout-gutter);
+  background: var(--tab-panel-background-color);
+  border: 1px solid var(--tab-active-border-color);
+}
+
+.Tabs--fill .Tabs-content {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.Tabs-panel {
+  border-top: 1px solid var(--tab-active-border-color);
+}
+
+.Tabs--bordered .Tabs-content {
+  padding: var(--layout-gutter);
+  background: var(--tab-panel-background-color);
+  border: 1px solid var(--tab-active-border-color);
 }
 .Tabs-panel {
+  width:
 }

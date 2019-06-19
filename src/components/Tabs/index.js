@@ -19,7 +19,10 @@ export type TabProps = {
 export type Props = {
   className?: string,
   selectedTabIndex?: number,
-  items: Array<TabProps>
+  items: Array<TabProps>,
+  bordered?: boolean,
+  fill?: boolean,
+  theme?: string
 }
 
 type StateType = {
@@ -46,6 +49,9 @@ export default class Tabs extends Component<Props, StateType> {
     const {
       className,
       items,
+      bordered,
+      fill,
+      theme,
       selectedTabIndex: selectedTabIndexProp = 0
     } = this.props
 
@@ -53,10 +59,15 @@ export default class Tabs extends Component<Props, StateType> {
     const selectedTab = items[selectedTabIndex]
 
     return (
-      <div ref={el => el && (this.el = el)} className={cx('Tabs', className)} style={{ minHeight: minHeight ? +minHeight + 'px' : 0 }}>
+      <div ref={el => el && (this.el = el)} className={cx('Tabs', {
+          'Tabs--bordered': bordered,
+          'Tabs--fill': fill,
+        }, className)} style={{ minHeight: minHeight ? +minHeight + 'px' : 0 }}>
         <ul className={cx('Tabs-list')} role="tablist">
           {items.map(({ title, disabled, className }, index) => (
-            <li className={cx('Tabs-item')}>
+            <li className={cx('Tabs-item', {
+                'Tabs-item--selected': index === selectedTabIndex
+              })}>
               <Button
                 className={cx('Tabs-tab', className, {
                   'Tabs-tab--selected': index === selectedTabIndex
@@ -73,11 +84,11 @@ export default class Tabs extends Component<Props, StateType> {
             </li>
           ))}
         </ul>
-        <div className={cx('Tabs-content')}>
+        <div className={cx('Tabs-content', { [`theme-${theme}`]: theme })}>
           {selectedTab.to ? (
             <Redirect to={selectedTab.to} />
           ) : (
-            <section className={cx('Tabs-panel')} role="tabpanel">
+            <section className={cx('Tabs-panel', { 'layout-container': fill })} role="tabpanel">
               {selectedTab.content}
             </section>
           )}
