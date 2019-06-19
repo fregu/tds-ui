@@ -6,6 +6,6 @@
   flex-wrap: wrap;
   margin: 0;
 }
-.Label-wrapper {
-  flex: 1;
+.Label-requiredLabel {
+  margin-left: 0.5em;
 }
