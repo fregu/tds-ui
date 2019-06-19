@@ -59,7 +59,7 @@
   display: block;
 }
 .Input--fill {
-  width: auto;
+  width: 100%;
 }
 .Input-label {
   margin-bottom: 0.25em;
@@ -110,6 +110,9 @@
 .Input--invalid .Input-input {
   border-color: var(--color-error);
   background-color: rgba(194, 64, 23, 0.12);
+}
+.Input--invalid.Input--discreet .Input-input {
+  background-color: transparent;
 }
 .Input-error {
   display: block;

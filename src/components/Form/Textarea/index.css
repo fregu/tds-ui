@@ -12,6 +12,7 @@
 
 .Textarea--fill {
   max-width: none;
+  width: 100%;
 }
 .Textarea--fill .Textarea-wrapper {
   width: 100%;
