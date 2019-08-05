@@ -6,6 +6,7 @@ import Figure, { type Props as FigureProps } from 'ui/components/Figure'
 import Icon, { type Props as IconProps } from 'ui/components/Icon'
 import Link from 'ui/components/Link'
 import ConditionalWrapper from 'ui/helpers/ConditionalWrapper'
+import { type WidthProps } from 'ui/components/Grid'
 import styles from './index.css'
 
 const cx = classNames.bind(styles)
@@ -18,6 +19,7 @@ export type Props = {
   figureContent?: Node,
   image?: FigureProps,
   imagePosition?: 'left' | 'top' | 'right' | 'bottom',
+  imageWidths?: WidthProps,
   icon?: IconProps,
   title?: string | TitleProps,
   theme?: string,
@@ -32,10 +34,12 @@ export default function Section({
   figureContent,
   icon,
   imagePosition = 'left',
+  imageWidths = {},
   title,
   className,
   theme,
-  bordered
+  bordered,
+  valign
 }: Props) {
   return (
     <section
@@ -61,7 +65,22 @@ export default function Section({
         )}
       >
         {figureContent || image ? (
-          <div className={cx('Section-figureWrapper')}>
+          <div
+            className={cx(
+              'Section-figureWrapper',
+              Object.keys(imageWidths).map(
+                breakpoint =>
+                  `${breakpoint && `${breakpoint}-`}width-${imageWidths[
+                    breakpoint
+                  ] || ''}`
+              ),
+              {
+                [`flex-row flex-center flex-${
+                  valign === 'center' ? 'middle' : valign
+                }`]: valign
+              }
+            )}
+          >
             {image ? (
               <Figure
                 {...image}

@@ -24,7 +24,6 @@
 .Figure-wrapper {
   position: relative;
   overflow: hidden;
-  background: var(--color-black);
 }
 
 .Figure--withDimension .Figure-image,
