@@ -13,13 +13,13 @@
   cursor: pointer;
   border: none;
   background: var(--color-white);
-  color: var(--color-action);
+  color: var(--color-primary-action);
 }
 .Button--withIcon.Button--hiddenText {
   padding: 0.5em;
 }
 .Button--primary {
-  background: var(--color-action);
+  background: var(--color-primary-action);
   color: var(--color-white);
 }
 .Button--plain {
@@ -48,6 +48,7 @@
 }
 .Button-icon {
   flex: 0;
+  padding: 1em 0;
 }
 .Button-text {
   flex: 1 0 auto;

@@ -1,9 +1,9 @@
 /* DayPicker styles */
 :root {
   --daypicker-today-color: #00a0ba;
-  --daypicker-todayButton-color: #d51c29;
-  --daypicker-selected-color: #d51c29;
-  --daypicker-selected-hover-color: #eb1e2c;
+  --daypicker-todayButton-color: var(--color-primary-secondary);
+  --daypicker-selected-color: var(--color-primary-action);
+  --daypicker-selected-hover-color: var(--color-hover);
   --daypicker-highlighted-color: pink;
   --daypicker-navbutton-color: #8b9898;
   --daypicker-weeknumber-color: #8b9898;

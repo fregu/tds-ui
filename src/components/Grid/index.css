@@ -13,6 +13,7 @@
 }
 .Grid--center {
   align-items: center;
+  justify-content: center;
 }
 .Grid--bottom {
   align-items: flex-end;
