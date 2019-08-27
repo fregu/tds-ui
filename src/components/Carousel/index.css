@@ -5,10 +5,16 @@
   overflow: auto;
   position: relative;
 }
+.Carousel-innerWrapper {
+  display: inline-block;
+}
 .Carousel-items {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
+}
+.Carousel--multiple .Carousel-item {
+  width: auto;
 }
 .Carousel-item {
   width: 100%;
