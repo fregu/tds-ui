@@ -15,9 +15,16 @@
   background: var(--color-white);
   color: var(--color-primary-action);
 }
+.Button--large {
+  padding: 0.75em 1.5em;
+}
 .Button--withIcon.Button--hiddenText {
   padding: 0.5em;
 }
+.Button--large.Button--withIcon.Button--hiddenText {
+  padding: 1.25em;
+}
+
 .Button--primary {
   background: var(--color-primary-action);
   color: var(--color-white);
@@ -27,7 +34,8 @@
   background: transparent;
   box-shadow: none;
   padding: 0;
-  line-height: auto;
+  line-height: inherit;
+  text-transform: inherit;
 }
 .Button--disabled {
   cursor: normal;

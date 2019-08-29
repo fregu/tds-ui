@@ -60,24 +60,28 @@ export default function Link({
   return (
     <ConditionalWrapper
       if={url.match(/^\//)}
-      wrap={children => <NavLink to={url} {...linkProps} children={children} />}
-      else={children => <a href={url} {...linkProps} children={children} />}
-    >
-      {plain ? (
-        children
-      ) : (
-        <div className={cx('Link-wrapper')}>
-          {icon ? (
-            <Icon {...icon} className={cx('Link-icon', icon.className)} />
-          ) : null}
-          <span
-            className={cx('Link-text')}
-            dangerouslySetInnerHTML={text ? { __html: text } : null}
-          >
-            {children}
-          </span>
-        </div>
+      wrap={children => (
+        <NavLink to={url} {...linkProps}>
+          {children}
+        </NavLink>
       )}
+      else={children => (
+        <a href={url} {...linkProps}>
+          {children}
+        </a>
+      )}
+    >
+      <div className={cx('Link-wrapper')}>
+        {icon ? (
+          <Icon {...icon} className={cx('Link-icon', icon.className)} />
+        ) : null}
+        <span
+          className={cx('Link-text')}
+          dangerouslySetInnerHTML={text ? { __html: text } : null}
+        >
+          {text ? null : children}
+        </span>
+      </div>
     </ConditionalWrapper>
   )
 }

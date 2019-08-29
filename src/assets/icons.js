@@ -1,5 +1,6 @@
 export { default as anchor } from './icons/anchor.svg'
 export { default as close } from './icons/close.svg'
+export { default as check } from './icons/check.svg'
 export { default as arrowDown } from './icons/arrow-down.svg'
 export { default as arrowUp } from './icons/arrow-up.svg'
 export { default as arrowLeft } from './icons/arrow-left.svg'

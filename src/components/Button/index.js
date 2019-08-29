@@ -50,6 +50,7 @@ export default function Button({
   noPadding,
   confirm,
   primary,
+  size,
   ...attributes
 }: Props) {
   const isLink = to || href
@@ -71,6 +72,7 @@ export default function Button({
               'Button--withIcon': icon,
               'Button--iconAfter': iconAfter,
               'Button--primary': primary,
+              [`Button--${size}`]: size,
               [`theme-${theme || ''}`]: theme
             },
             className

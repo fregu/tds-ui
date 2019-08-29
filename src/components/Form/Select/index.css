@@ -1,5 +1,5 @@
 .Select {
-  font-family: var(--font-family-unicomp);
+  font-family: var(--font-family-form, inherit);
   width: 280px;
 }
 .Select-inputWrapper {
@@ -39,6 +39,11 @@
   font-weight: normal;
 }
 
+.Select--plain .Select-input,
+.Select--plain .Select-pickerIcon {
+  background: none;
+  border: none;
+}
 .Select-label {
   margin-bottom: 0.25em;
 }

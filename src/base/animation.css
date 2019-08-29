@@ -1,5 +1,5 @@
 :root {
-  --aniation-transition: 0.25s ease-in;
+  --animation-transition: 0.25s ease-in;
 }
 @keyframes fadeIn {
   0% {
@@ -19,9 +19,9 @@
 }
 
 :root .animation-appear {
-  animation: var(--aniation-transition) fadeIn ease-in;
+  animation: var(--animation-transition) fadeIn ease-in;
 }
 :root .animation-disappear {
-  animation: var(--aniation-transition) fadeOut ease-in;
+  animation: var(--animation-transition) fadeOut ease-in;
   opacity: 0;
 }

@@ -15,6 +15,7 @@ export type Props = {
   id: string,
   className?: string,
   options: Array<OptionProps>,
+  plain?: boolean,
   label?: string,
   disabled?: boolean,
   required?: boolean,
@@ -30,6 +31,7 @@ export type Props = {
 const blankChars = '         '
 export default class Select extends Component<Props> {
   input: HTMLSelectElement
+  state = {}
   componentDidMount = () => {
     this.triggerInitEvent()
   }
@@ -66,6 +68,7 @@ export default class Select extends Component<Props> {
       )
     )
   render() {
+    const { inputValue } = this.state
     const {
       id,
       className,
@@ -77,10 +80,19 @@ export default class Select extends Component<Props> {
       prefix = '',
       name = '',
       placeholder,
+      floatingLabel,
+      plain,
       ...attributes
     } = this.props
     return (
-      <div className={cx('Select', { 'Select--fill': fill }, className)}>
+      <div
+        className={cx('Select', {
+          'Select--fill': fill,
+          'Select--plain': plain,
+          'Select--floatingLabel': floatingLabel,
+          'Select--hasValue': inputValue
+        })}
+      >
         {label ? (
           <Label
             htmlFor={id}
@@ -91,7 +103,7 @@ export default class Select extends Component<Props> {
             {label}
           </Label>
         ) : null}
-        <div className={cx('Select-inputWrapper')}>
+        <div className={cx('Select-inputWrapper', className)}>
           {disabled ? (
             <select
               key=""
@@ -100,6 +112,9 @@ export default class Select extends Component<Props> {
               id={id}
               name={prefix + name}
               disabled={disabled}
+              onChange={event =>
+                this.setState({ inputValue: event.target.value })
+              }
               className={cx('Select-input', 'Select-input--disabled')}
             >
               {placeholder ? (

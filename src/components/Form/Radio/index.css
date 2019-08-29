@@ -42,6 +42,7 @@
 }
 .Radio-input:checked + .Radio-label::before {
   color: var(--color-white);
-  background: var(--color-red);
-  box-shadow: 0 0 0 1px var(--color-red), inset 0 0 0 3px var(--color-white);
+  background: var(--color-dark-grey);
+  box-shadow: 0 0 0 1px var(--color-dark-grey),
+    inset 0 0 0 3px var(--color-white);
 }

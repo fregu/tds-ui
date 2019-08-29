@@ -19,20 +19,24 @@
   box-shadow: none;
   width: 100%;
   outline: none;
+  appearance: none;
 }
 .Input--floatingLabel .Input-label {
-  transition: var(--transition, 0.25 ease in);
+  transition: all var(--animation-transition, 0.25s ease-in);
   transform: scale(0.75) translateY(0.5em);
   transform-origin: 0;
   position: relative;
   z-index: 1;
+  pointer-events: none;
+}
+.Input--floatingLabel.Input--withIcon .Input-label {
+  left: 2em;
 }
 .Input--floatingLabel.Input--hasFocus .Input-label {
   font-weight: var(--font-weight-bold);
 }
 .Input--floatingLabel:not(.Input--hasValue):not(.Input--hasFocus) .Input-label {
   transform: translateY(2.15em) translateX(0.75em) scale(1);
-  color: var(--color-dark-grey);
 }
 .Input--floatingLabel.Input--discreet:not(.Input--hasValue):not(.Input--hasFocus)
   .Input-label {
@@ -44,14 +48,37 @@
   border-bottom: 2px solid var(--color-dark-grey);
   padding: 0;
 }
-.Input--floatingLabel.Input--hasFocus .Input-label {
+.Input--discreet.Input--floatingLabel.Input--hasFocus .Input-label {
   color: var(--color-primary-action);
 }
 .Input--discreet.Input--hasFocus .Input-input {
   border-bottom-color: var(--color-primary-action);
 }
-.Input:not(.Input--discreet) .Input-input:hover {
+.Input:not(.Input--discreet):not(.Input--withTheme) .Input-input:hover {
   border: 1px solid var(--color-medium-grey);
+}
+.Input--hideCaret .Input-inputWrapper {
+  position: relative;
+}
+.Input--hideCaret .Input-inputWrapper::before {
+  content: attr(data-value);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0.5em;
+  pointer-events: none;
+  width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.Input--hideCaret .Input-input {
+  color: transparent;
+}
+.Input--withTheme .Input-input {
+  background: none;
+  border: none;
 }
 
 .Input--fill .Input-inputWrapper {
@@ -136,8 +163,7 @@
   box-shadow: none;
 }
 
-.Input--search .Input-input {
+.Input--rounded .Input-input {
   border-radius: 2em;
-  border: 1px solid var(--color-light-grey);
   padding-right: 0.75em;
 }

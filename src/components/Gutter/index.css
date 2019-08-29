@@ -1,17 +1,27 @@
 :root {
   --gutter-gap: var(--layout-gutter);
+  --gutter-gap-vertical: var(--layout-vertical-gutter, var(--layout-gutter));
   --gutter-wide-gap: calc(var(--layout-gutter) * 1.5);
+  --gutter-wide-gap-vertical: calc(
+    var(--layout-vertical-gutter, var(--layout-gutter)) * 1.5
+  );
 }
 .Gutter-wrapper {
   /* overflow: hidden; */
 }
 .Gutter {
-  margin: calc(var(--gutter-gap) / -2);
+  margin: calc(var(--gutter-gap-vertical) / -2) calc(var(--gutter-gap) / -2);
   display: flex;
   flex-flow: row wrap;
   align-items: flex-start;
   box-sizing: border-box;
   padding-bottom: 1px;
+}
+.Gutter--noWrap {
+  flex-wrap: nowrap;
+}
+.Gutter--noWrap .Gutter-item {
+  flex-shrink: 1;
 }
 .Gutter-item {
   box-sizing: border-box;
@@ -26,19 +36,21 @@
   width: 100%;
 }
 .Gutter > .Gutter-item {
-  padding: calc(var(--gutter-gap) / 2);
+  padding: calc(var(--gutter-gap-vertical) / 2) calc(var(--gutter-gap) / 2);
 }
 .Gutter--tightGap {
-  margin: calc(var(--gutter-gap) / -4);
+  margin: calc(var(--gutter-gap-vertical) / -4) calc(var(--gutter-gap) / -4);
 }
 .Gutter--tightGap > .Gutter-item {
-  padding: calc(var(--gutter-gap) / 4);
+  padding: calc(var(--gutter-gap-vertical) / 4) calc(var(--gutter-gap) / 4);
 }
 .Gutter--wideGap {
-  margin: calc(var(--gutter-wide-gap) / -2);
+  margin: calc(var(--gutter-wide-gap-vertical) / -2)
+    calc(var(--gutter-wide-gap) / -2);
 }
 .Gutter--wideGap > .Gutter-item {
-  padding: calc(var(--gutter-wide-gap) / 2);
+  padding: calc(var(--gutter-wide-gap-vertical) / 2)
+    calc(var(--gutter-wide-gap) / 2);
 }
 .Gutter--vertical {
   flex-direction: column;

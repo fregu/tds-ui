@@ -1,8 +1,11 @@
 // @flow
 import React from 'react'
-import cx from 'classnames/bind'
+import classnames from 'classnames/bind'
 import List from 'ui/components/List'
 import Checkbox from '../Checkbox'
+import State from 'ui/helpers/State'
+import styles from './index.css'
+const cx = classnames.bind(styles)
 
 type CheckBoxItemProps = {
   id?: string,
@@ -21,7 +24,9 @@ type Props = {
   options: Array<CheckBoxItemProps>,
   disabled?: boolean,
   /** TODO: handle required and valitidy as a group */
-  required?: boolean
+  required?: boolean,
+  theme?: string,
+  striped?: boolean
 }
 
 export default function CheckboxList({
@@ -34,16 +39,18 @@ export default function CheckboxList({
   options = [],
   modifiers = [],
   disabled: listDisabled,
-  required: listRequired
+  required: listRequired,
+  theme,
+  striped
 }: Props) {
   return (
     <State>
-      {({values = [], setState}) => (
+      {({ values = defaultValue || [], setState }) => (
         <fieldset
           className={cx(
             'CheckboxList',
             className,
-
+            { [`CheckboxList--withTheme theme-${theme}`]: theme },
             modifiers.map(mod => 'CheckboxList--' + mod)
           )}
         >
@@ -54,29 +61,45 @@ export default function CheckboxList({
           ) : null}
           <List
             className={cx('CheckboxList-list')}
+            striped={striped}
             items={options.map(
               (
-                { id, value, text, disabled, required, defaultChecked, ...props },
+                {
+                  id,
+                  value,
+                  text,
+                  disabled,
+                  required,
+                  defaultChecked,
+                  ...props
+                },
                 index
-              ) => (
-                <Checkbox
-                  key={value}
-                  id={id || `${listId}-${index}`}
-                  name={name ? name + '[]' : ''}
-                  value={value}
-                  label={text}
-                  onChange={(e, isChecked) => {
-                    const newValues = isChecked ? [...values, value] : values.filter(val => val !== value)
-                    if (typeof onChange === 'function') {
-                      setState({value: newValues})
-                      onChange(e, newValues)
+              ) => ({
+                content: (
+                  <Checkbox
+                    key={value}
+                    id={id || `${listId || name}-${value || index}`}
+                    name={name ? name + '[]' : ''}
+                    value={value}
+                    label={text}
+                    onChange={(e, isChecked) => {
+                      const newValues = isChecked
+                        ? [...values, value]
+                        : values.filter(val => val !== value)
+
+                      if (typeof onChange === 'function') {
+                        setState({ values: newValues })
+                        onChange(e, newValues)
+                      }
+                    }}
+                    defaultChecked={
+                      defaultValue.includes(value) || defaultChecked
                     }
-                  }}
-                  defaultChecked={defaultValue.includes(value) || defaultChecked}
-                  disabled={disabled || listDisabled}
-                  required={required}
-                />
-              )
+                    disabled={disabled || listDisabled}
+                    required={required}
+                  />
+                )
+              })
             )}
           />
         </fieldset>

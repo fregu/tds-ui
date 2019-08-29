@@ -17,6 +17,9 @@
 .Icon--normal {
   font-size: 1em;
 }
+.Icon--big {
+  font-size: 2.75em;
+}
 .Icon--large {
   font-size: 4em;
 }
