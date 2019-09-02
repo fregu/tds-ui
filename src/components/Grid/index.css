@@ -1,6 +1,9 @@
+@import 'base/breakpoints.css';
 :root {
   --grid-gap: var(--layout-gutter, 20px);
+  --grid-gap-vertical: var(--layout-vertical-gap, var(--grid-gap));
   --grid-wide-gap: calc(var(--grid-gap) * 1.5);
+  --grid-wide-gap-vertical: calc(var(--grid-gap-vertical) * 1.5);
 }
 .Grid {
   display: flex;
@@ -28,25 +31,27 @@
 }
 .Grid--wideGap,
 .Grid--withGap {
-  margin: calc(var(--grid-gap) / -2);
+  margin: calc(var(--grid-gap-vertical) / -2) calc(var(--grid-gap) / -2);
 }
 .Grid--wideGap > .Grid-cell,
 .Grid--withGap > .Grid-cell {
-  padding: calc(var(--grid-gap) / 2);
+  padding: calc(var(--grid-gap-vertical) / 2) calc(var(--grid-gap) / 2);
 }
 
 .Grid--tightGap {
-  margin: calc(var(--grid-gap) / -4);
+  margin: calc(var(--grid-gap-vertical) / -4) calc(var(--grid-gap) / -4);
 }
 .Grid--tightGap > .Grid-cell {
-  padding: calc(var(--grid-gap) / 4);
+  padding: calc(var(--grid-gap-vertical) / 4) calc(var(--grid-gap) / 4);
 }
 
 @media (--min-small) {
   .Grid--wideGap {
-    margin: calc(var(--grid-wide-gap) / -2);
+    margin: calc(var(--grid-wide-gap-vertical) / -2)
+      calc(var(--grid-wide-gap) / -2);
   }
   .Grid--wideGap > .Grid-cell {
-    padding: calc(var(--grid-wide-gap) / 2);
+    padding: calc(var(--grid-wide-gap-vertical) / 2)
+      calc(var(--grid-wide-gap) / 2);
   }
 }

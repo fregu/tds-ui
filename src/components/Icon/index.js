@@ -8,13 +8,14 @@ const cx = classNames.bind(styles)
 
 export type Props = {
   type?: string,
-  size?: 'small' | 'normal' | 'large' | 'huge',
+  size?: 'small' | 'normal' | 'big' | 'large' | 'huge',
   className?: string,
   theme?: string
 }
 
 export default function Icon({ type, size, className, theme }: Props) {
-  return iconset[type] ? (
+  const icon = iconset[type.replace(/[ -]/g, '_')]
+  return icon ? (
     <span
       className={cx('Icon', className, {
         [`Icon--themed theme-${theme || ''}`]: theme,
@@ -23,7 +24,7 @@ export default function Icon({ type, size, className, theme }: Props) {
     >
       <span
         className="Icon-wrapper"
-        dangerouslySetInnerHTML={{ __html: iconset[type] }}
+        dangerouslySetInnerHTML={{ __html: icon }}
       />
     </span>
   ) : null

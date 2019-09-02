@@ -1,8 +1,10 @@
 // @flow
 import React from 'react'
-import cx from 'classnames/bind'
+import classnames from 'classnames/bind'
 import List from 'ui/components/List'
 import Radio from '../Radio'
+import styles from './index.css'
+const cx = classnames.bind(styles)
 
 type RadioItemProps = {
   id?: string,
@@ -16,12 +18,15 @@ type Props = {
   label?: string,
   className?: string,
   modifiers?: Array<string>,
-  defaultValue?: string,
+  defaultValue?: string | number,
   name?: string,
   options: Array<RadioItemProps>,
   disabled?: boolean,
   /** TODO: handle required and valitidy as a group */
-  required?: boolean
+  required?: boolean,
+  theme?: string,
+  onChange?: Function,
+  striped?: boolean
 }
 
 export default function RadioList({
@@ -33,14 +38,17 @@ export default function RadioList({
   options = [],
   modifiers = [],
   disabled: listDisabled,
-  required: listRequired
+  required: listRequired,
+  theme,
+  onChange,
+  striped
 }: Props) {
   return (
     <fieldset
       className={cx(
         'RadioList',
         className,
-
+        { [`RadioList--withTheme theme-${theme}`]: theme },
         modifiers.map(mod => 'RadioList--' + mod)
       )}
     >
@@ -50,19 +58,27 @@ export default function RadioList({
         </legend>
       ) : null}
       <List
+        striped={striped}
         items={options.map(
-          ({ id, value, text, disabled, required, ...props }, index) => (
-            <Radio
-              key={value}
-              id={id || `${listId}-${index}`}
-              name={name}
-              value={value}
-              label={text}
-              defaultChecked={defaultValue === value}
-              disabled={disabled || listDisabled}
-              required={required || listRequired}
-            />
-          )
+          ({ id, value, text, disabled, required, ...props }, index) => ({
+            content: (
+              <Radio
+                key={value}
+                id={id || `${listId}-${index}`}
+                name={name}
+                value={value}
+                label={text}
+                onChange={(e, isChecked) => {
+                  if (isChecked && typeof onChange === 'function') {
+                    onChange(e, value)
+                  }
+                }}
+                defaultChecked={defaultValue === value}
+                disabled={disabled || listDisabled}
+                required={required || listRequired}
+              />
+            )
+          })
         )}
       />
     </fieldset>

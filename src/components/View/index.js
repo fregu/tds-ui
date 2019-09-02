@@ -57,7 +57,6 @@ export default function View({
         <div
           className={cx(
             'View-content',
-            'layout-gutter',
             'layout-bottom-gutter',
             small ? 'layout-small-container' : 'layout-container'
           )}

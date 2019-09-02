@@ -8,8 +8,7 @@
   --color-error: darkred;
   --color-warning: orange;
   --color-information: lightblue;
-  --color-hover: turquoise;
-  --color-focus: turquoise;
+
   --color-disabled: var(--color-light-grey);
 
   --color-lighter-grey: #efefef;

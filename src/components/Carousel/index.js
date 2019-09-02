@@ -35,6 +35,7 @@ export default class Carousel extends Component<Props, State> {
   stepLeft = () => {
     const { activeIndex } = this.state
     const newIndex = activeIndex > 0 ? activeIndex - 1 : 0
+
     this.scrollToItem(newIndex)
     this.setState({
       activeIndex: newIndex
@@ -62,6 +63,7 @@ export default class Carousel extends Component<Props, State> {
     if (!isAnimating && !touching) {
       scrollingTimeout = setTimeout(() => this.scrollStop(true), 50)
     }
+
     const wrapperWidth = this.wrapper.clientWidth
     const childEls = this.items.children
     const scrollLeft = this.wrapper.scrollLeft
@@ -95,24 +97,25 @@ export default class Carousel extends Component<Props, State> {
   }
   scrollStop = (snapToActive?: boolean) => {
     clearTimeout(scrollingTimeout)
-
     const { activeIndex } = this.state
 
     // Do not snap to closes if carousel is scrolled to the end of start
+
     if (
+      this.props.multiple &&
       this.wrapper.scrollLeft >=
-      this.items.clientWidth - this.wrapper.clientWidth
+        this.items.clientWidth - this.wrapper.clientWidth
     ) {
       isReversedDirection = true
       this.setState({ activeIndex: this.items.children.length - 1 })
-    } else if (this.wrapper.scrollLeft <= 0) {
+    } else if (this.props.multiple && this.wrapper.scrollLeft <= 0) {
       isReversedDirection = false
       this.setState({ activeIndex: 0 })
     } else if (snapToActive) {
       this.scrollToItem(activeIndex, 250).then(() => {
         isAnimating = false
       })
-    } else if (isAnimating) {
+    } else {
       isAnimating = false
     }
   }
@@ -132,7 +135,9 @@ export default class Carousel extends Component<Props, State> {
         this.wrapper.clientWidth
       : this.items.children[index].offsetLeft
 
-    return this.scrollTo(leftPos, duration)
+    return this.scrollTo(leftPos, duration).then(() => {
+      isAnimating = false
+    })
   }
   onMouseDown = e => {
     touching = {
@@ -155,28 +160,56 @@ export default class Carousel extends Component<Props, State> {
     document.removeEventListener('mouseleave', this.onMouseUp)
     document.removeEventListener('mouseup', this.onMouseUp)
   }
-  componentDidMount = () => {
-    if (this.props.activeIndex) {
-      setTimeout(() => this.scrollToItem(this.props.activeIndex, 0), 0)
+  onKeyPress = e => {
+    if (typeof requestAnimationFrame !== 'undefined') {
+      requestAnimationFrame(() => {
+        switch (e.code) {
+          case 'ArrowLeft':
+            this.stepLeft()
+            break
+          case 'ArrowRight':
+            this.stepRight()
+            break
+        }
+      })
     }
-
+  }
+  bindInitEvents = () => {
     this.wrapper.addEventListener('scroll', this.onScroll)
     this.wrapper.addEventListener('mousedown', this.onMouseDown)
     if (typeof window !== 'undefined') {
+      document.addEventListener('keydown', this.onKeyPress)
       window.addEventListener('resize', this.onResize)
     }
   }
-  componentWillUnmount = () => {
+  unBindInitEvents = () => {
     this.wrapper.removeEventListener('scroll', this.onScroll)
     this.wrapper.removeEventListener('mousedown', this.mouseDown)
     document.removeEventListener('mousemove', this.onMouseMove)
     document.removeEventListener('mouseleave', this.onMouseUp)
     document.removeEventListener('mouseup', this.onMouseUp)
+    document.removeEventListener('keydown', this.onKeyPress)
   }
+  componentDidMount = () => {
+    if (this.props.activeIndex) {
+      setTimeout(
+        () =>
+          this.scrollToItem(this.props.activeIndex, 0).then(() =>
+            this.bindInitEvents()
+          ),
+        0
+      )
+    } else {
+      this.bindInitEvents()
+    }
+  }
+  componentWillUnmount = () => {
+    this.unBindInitEvents()
+  }
+
   render() {
     const { items = [], className, multiple, controls } = this.props
     const { activeIndex } = this.state
-
     return (
       <div
         ref={el => el && (this.el = el)}
@@ -188,6 +221,9 @@ export default class Carousel extends Component<Props, State> {
           <div className={cx('Carousel-actions')}>
             {activeIndex > 0 ? (
               <Button
+                size="large"
+                hiddenText
+                round
                 className={cx('Carousel-stepLeft')}
                 icon={{ type: 'chevronLeft' }}
                 onClick={this.stepLeft}
@@ -196,6 +232,10 @@ export default class Carousel extends Component<Props, State> {
             ) : null}
             {activeIndex < items.length - 1 ? (
               <Button
+                size="large"
+                round
+                iconAfter
+                hiddenText
                 className={cx('Carousel-stepRight')}
                 icon={{ type: 'chevronRight' }}
                 onClick={this.stepRight}

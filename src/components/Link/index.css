@@ -12,6 +12,7 @@
 }
 .Link--plain {
   color: inherit;
+  display: contents;
 }
 .Link--block {
   display: block;
@@ -27,6 +28,11 @@
 }
 
 .Link-wrapper {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: row;
+}
+.Link--withIcon .Link-wrapper {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -37,4 +43,11 @@
 }
 .Link-text {
   flex: 1;
+  display: flex;
+}
+
+.Link--plain,
+.Link--plain .Link-wrapper,
+.Link--plain .Link-text {
+  display: contents;
 }

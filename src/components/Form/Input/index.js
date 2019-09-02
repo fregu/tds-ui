@@ -45,12 +45,15 @@ export type Props = {
   hashed?: boolean,
   validate?: Function,
   errorMessage?: string,
-  defaultValue?: string | number,
+  defaultValue?: string | number | Array<string | number>,
   /** TODO: handle help texts */
   // description?: string,
   hiddenLabel?: boolean,
   floatingLabel?: boolean,
-  discreet?: boolean
+  discreet?: boolean,
+  plain?: boolean,
+  hideCaret?: boolean,
+  theme?: string
 }
 type State = {
   value?: string,
@@ -77,10 +80,15 @@ class Input extends Component<Props, State> {
   onInput = (event: Event) => {
     if (this.input.value !== this.state.value) {
       if (this.props.onInput) {
-        this.props.onInput(event)
+        this.props.onInput(event, this.input.value)
       }
       this.validate()
       this.setState({ value: this.input.value })
+    }
+  }
+  onChange = (event: Event) => {
+    if (this.props.onChange) {
+      this.props.onChange(event, this.input.value)
     }
   }
 
@@ -158,6 +166,12 @@ class Input extends Component<Props, State> {
       this.props.value !== prevProps.value ||
       this.props.defaultValue !== prevProps.defaultValue
     ) {
+      if (this.props.value !== prevProps.value) {
+        this.setState({ value: this.props.value })
+      } else if (this.props.defaultValue !== prevProps.defaultValue) {
+        this.setState({ value: this.props.defaultValue })
+      }
+
       this.validate()
       this.triggerInitEvent()
     }
@@ -206,7 +220,11 @@ class Input extends Component<Props, State> {
       rounded,
       hiddenLabel,
       floatingLabel,
+      plain,
+      theme,
       discreet,
+      style,
+      hideCaret,
       ...props
     } = this.props
 
@@ -214,16 +232,19 @@ class Input extends Component<Props, State> {
 
     return (
       <div
+        style={style}
         className={cx('Input', className, {
           'Input--invalid': !isValid && errors.length,
           'Input--fill': fill,
           'Input--rounded': rounded,
           'Input--withIcon': !!icon,
-          'Input--discreet': discreet,
+          'Input--discreet': discreet || plain,
           'Input--floatingLabel': floatingLabel,
           'Input--hasValue': !!value,
           'Input--isEmpty': !value,
           'Input--hasFocus': hasFocus,
+          'Input--withTheme': theme,
+          'Input--hideCaret': hideCaret,
           [`Input--${type}`]: type
         })}
       >
@@ -238,7 +259,12 @@ class Input extends Component<Props, State> {
             content={label}
           />
         ) : null}
-        <span className={cx('Input-inputWrapper')}>
+        <span
+          className={cx('Input-inputWrapper', {
+            [`theme-${theme || 'white'}`]: theme
+          })}
+          data-value={value}
+        >
           {icon ? (
             <Icon
               {...(typeof icon === 'object' ? icon : {})}
@@ -247,10 +273,12 @@ class Input extends Component<Props, State> {
             />
           ) : null}
           <input
+            {...props}
             id={id}
             onInput={this.onInput}
             onFocus={this.onFocus}
             onBlur={this.onBlur}
+            onChange={this.onChange}
             ref={el => el && (this.input = el)}
             type={type}
             size={size}
@@ -259,7 +287,6 @@ class Input extends Component<Props, State> {
             autoComplete={autoComplete}
             className={cx('Input-input', inputClassName)}
             name={hashed ? this.hashName(prefix + name) : name}
-            {...props}
           />
         </span>
         {errors.length ? (
