@@ -12,6 +12,7 @@
 }
 .Link--plain {
   color: inherit;
+  display: contents;
 }
 .Link--block {
   display: block;
@@ -43,4 +44,10 @@
 .Link-text {
   flex: 1;
   display: flex;
+}
+
+.Link--plain,
+.Link--plain .Link-wrapper,
+.Link--plain .Link-text {
+  display: contents;
 }

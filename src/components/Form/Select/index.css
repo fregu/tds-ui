@@ -59,6 +59,7 @@
   pointer-events: none;
   display: flex;
   align-items: center;
+  color: var(--color-black);
 }
 .Select-input[disabled],
 .Select-input[disabled] + .Select-pickerIcon {

@@ -29,7 +29,8 @@ export type Props = {
   disabled?: boolean,
   attributes?: any,
   primary?: boolean,
-  confirm?: string | DialogProps
+  confirm?: string | DialogProps,
+  round?: boolean
 }
 
 export default function Button({
@@ -51,6 +52,7 @@ export default function Button({
   confirm,
   primary,
   size,
+  round,
   ...attributes
 }: Props) {
   const isLink = to || href
@@ -72,8 +74,9 @@ export default function Button({
               'Button--withIcon': icon,
               'Button--iconAfter': iconAfter,
               'Button--primary': primary,
+              'Button--round': round,
               [`Button--${size}`]: size,
-              [`theme-${theme || ''}`]: theme
+              [`Button--withTheme theme-${theme || ''}`]: theme
             },
             className
           )}

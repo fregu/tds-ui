@@ -18,11 +18,15 @@
 .Button--large {
   padding: 0.75em 1.5em;
 }
+.Button--round {
+  border-radius: 2em;
+}
 .Button--withIcon.Button--hiddenText {
   padding: 0.5em;
 }
 .Button--large.Button--withIcon.Button--hiddenText {
-  padding: 1.25em;
+  padding: 0.5em;
+  font-size: 1.25em;
 }
 
 .Button--primary {
@@ -40,6 +44,9 @@
 .Button--disabled {
   cursor: normal;
   color: var(--color-disabled);
+}
+.Button--withTheme.Button--disabled {
+  opacity: 0.6;
 }
 .Button--noPadding {
   padding: 0;

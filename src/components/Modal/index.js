@@ -7,6 +7,7 @@ import Connect from 'ui/helpers/Connect'
 import Figure, { Props as FigureProps } from 'ui/components/Figure'
 import Carousel from 'ui/components/Carousel'
 import { closeModal } from 'ui/store/actions/modal'
+import { useDispatch } from 'react-redux'
 import { strings } from 'ui/lang'
 import styles from './index.css'
 const cx = classNames.bind(styles)
@@ -25,6 +26,7 @@ type Props = {
 
 export default class Modal extends Component<Props> {
   box: HTMLElement
+
   componentDidMount = () => {
     this.setFocus()
   }
@@ -44,6 +46,7 @@ export default class Modal extends Component<Props> {
       size,
       modifiers = []
     } = this.props
+    let keyEventListener
     return (
       <Connect mapDispatchToProps={{ closeModal }}>
         {({ closeModal: dispatchCloseModal }) => {
@@ -56,11 +59,23 @@ export default class Modal extends Component<Props> {
             }
             dispatchCloseModal()
           }
+          // close on Escape
+          if (!keyEventListener && typeof window !== 'undefined') {
+            keyEventListener = window.addEventListener(
+              'keydown',
+              ({ code }) => {
+                if (code === 'Escape') {
+                  closeModal()
+                }
+              }
+            )
+          }
+
           return (
             <Fragment>
               <div
                 className={cx('Modalbox-overlay')}
-                onClick={closeModal}
+                onClick={this.closeModal}
                 tabIndex="0"
                 role="button"
               />
@@ -90,7 +105,8 @@ export default class Modal extends Component<Props> {
                 ) : null}
                 {!persistent ? (
                   <Button
-                    plain
+                    plain={!images}
+                    round
                     hiddenText
                     className={cx('Modalbox-closebutton')}
                     onClick={closeModal}
@@ -102,6 +118,7 @@ export default class Modal extends Component<Props> {
 
                 {images ? (
                   <Carousel
+                    controls
                     className={cx('Modalbox-images')}
                     items={images.map(image => ({ image }))}
                     activeIndex={images.reduce(
