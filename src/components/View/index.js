@@ -35,7 +35,6 @@ export default class View extends Component<Props> {
       } else {
         window.scrollTo(0, 0)
       }
-      console.log('scrolled to top')
     }
   }
 
