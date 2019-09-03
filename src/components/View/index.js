@@ -1,5 +1,5 @@
 // @flow
-import React, { type Node } from 'react'
+import React, { type Node, Component } from 'react'
 import Helmet from 'react-helmet'
 import Button from 'ui/components/Button'
 import { strings } from 'ui/lang'
