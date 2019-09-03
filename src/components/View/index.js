@@ -1,9 +1,9 @@
 // @flow
 import React, { type Node } from 'react'
-import classNames from 'classnames/bind'
 import Helmet from 'react-helmet'
 import Button from 'ui/components/Button'
 import { strings } from 'ui/lang'
+import classNames from 'classnames/bind'
 import styles from './index.css'
 const cx = classNames.bind(styles)
 
@@ -15,19 +15,42 @@ type Props = {
   fullView?: boolean,
   small?: boolean,
   backTo?: string,
-  closeClick?: Function
+  closeClick?: Function,
+  scrollToTop?: boolean | 'smooth'
 }
 
-export default function View({
-  fullView,
-  backTo,
-  closeClick,
-  title,
-  children,
-  className,
-  small,
-  modifiers = []
-}: Props) {
+export default class View extends Component<Props> {
+  componentDidMount = () => {
+    const supportsNativeSmoothScroll =
+      'scrollBehavior' in document.documentElement.style
+    const scrollToTop = this.props.scrollToTop
+
+    if (scrollToTop && typeof window !== 'undefined') {
+      if (supportsNativeSmoothScroll) {
+        window.scrollTo({
+          behavior: scrollToTop === 'smooth' ? 'smooth' : 'auto',
+          top: 0,
+          left: 0
+        })
+      } else {
+        window.scrollTo(0, 0)
+      }
+    }
+  }
+
+  render() {
+    const {
+      fullView,
+      backTo,
+      closeClick,
+      title,
+      children,
+      className,
+      small,
+      modifiers = [],
+      scrollToTop
+    } = this.props
+
   return (
     <div
       className={cx('View-wrapper', {
