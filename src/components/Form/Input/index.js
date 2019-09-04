@@ -62,7 +62,9 @@ type State = {
 }
 class Input extends Component<Props, State> {
   input: HTMLInputElement
-  state = {}
+  state = {
+    value: this.props.value
+  }
   hasEventListener: boolean
   componentDidMount = () => {
     this.triggerInitEvent()

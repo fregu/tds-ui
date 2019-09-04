@@ -16,7 +16,7 @@ export type Props = {
   disabled?: boolean,
   plain?: boolean,
   block?: boolean,
-  icon?: IconProps,
+  icon?: string | IconProps,
   onClick?: Function,
   attributes?: any
 }
@@ -73,7 +73,11 @@ export default function Link({
     >
       <div className={cx('Link-wrapper')}>
         {icon ? (
-          <Icon {...icon} className={cx('Link-icon', icon.className)} />
+          <Icon
+            {...icon}
+            type={icon.type || icon}
+            className={cx('Link-icon', icon.className)}
+          />
         ) : null}
         <span
           className={cx('Link-text')}

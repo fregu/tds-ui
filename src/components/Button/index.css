@@ -77,4 +77,12 @@
 }
 .Button--withIcon.Button--iconAfter .Button-text {
   padding-right: 0.5em;
+  padding-left: 0;
+}
+.Button--withIcon.Button--plain .Button-text {
+  padding-left: 0.15em;
+}
+.Button--withIcon.Button--plain.Button--iconAfter .Button-text {
+  padding-right: 0.15em;
+  padding-left: 0;
 }

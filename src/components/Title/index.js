@@ -10,7 +10,7 @@ export type Props = {
   className?: string,
   level?: number,
   asLevel?: number | string,
-  icon?: IconProps,
+  icon?: string | IconProps,
   text?: string,
   to?: string,
   children?: Node

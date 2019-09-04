@@ -10,8 +10,9 @@
   font-size: var(--font-size-small);
 }
 .DefinitionList-pair {
-  display: block;
+  display: inline-block;
   margin: 0 0 1em;
+  width: 100%;
 }
 .DefinitionList-pair:last-child {
   margin-bottom: 0;
