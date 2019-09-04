@@ -3,10 +3,20 @@ import React, { Fragment, type Node } from 'react'
 
 type Props = {
   tag?: string,
-  content: Array<string | Node> | string
+  content: Array<string | Node> | string,
+  html?: string,
+  markdown?: string
 }
 
-export default function Content({ content, tag: Tag = 'p' }: Props) {
+export default function Content({
+  content,
+  html,
+  markdown,
+  tag: Tag = 'p'
+}: Props) {
+  if (html) {
+    return <div dangerouslySetInnerHTML={{ __html: html }} />
+  }
   const paragraphs = Array.isArray(content)
     ? content
     : typeof content === 'string'

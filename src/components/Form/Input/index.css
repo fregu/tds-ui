@@ -107,31 +107,31 @@
   width: 3em;
 }
 .Input-input[size='2'] {
-  width: 5em;
+  width: 4em;
 }
 .Input-input[size='3'] {
-  width: 7em;
+  width: 5em;
 }
 .Input-input[size='4'] {
-  width: 9em;
+  width: 6em;
 }
 .Input-input[size='5'] {
-  width: 11em;
+  width: 7em;
 }
 .Input-input[size='6'] {
-  width: 13em;
+  width: 8em;
 }
 .Input-input[size='7'] {
-  width: 15em;
+  width: 9em;
 }
 .Input-input[size='8'] {
-  width: 17em;
+  width: 10em;
 }
 .Input-input[size='9'] {
-  width: 19em;
+  width: 11em;
 }
 .Input-input[size='10'] {
-  width: 21em;
+  width: 12em;
 }
 
 .Input--invalid .Input-input {

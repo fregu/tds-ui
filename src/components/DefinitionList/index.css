@@ -1,4 +1,5 @@
 .DefinitionList {
+  column-gap: var(--layout-gutter);
 }
 .DefinitionList--block {
 }

@@ -57,11 +57,24 @@ export default function Gutter({
         )}
       >
         {Array.isArray(children) ? (
-          children.filter(Boolean).map((child, index) => (
-            <div key={index} className={cx('Gutter-item')}>
-              {child}
-            </div>
-          ))
+          children
+            .filter(Boolean)
+            .map(({ gutterWidths = {}, ...child }, index) => (
+              <div
+                key={index}
+                className={cx(
+                  'Gutter-item',
+                  Object.keys(gutterWidths).map(
+                    prefix =>
+                      `${prefix ? `${prefix}-` : ''}width-${
+                        gutterWidths[prefix]
+                      }`
+                  )
+                )}
+              >
+                {child}
+              </div>
+            ))
         ) : (
           <div className={cx('Gutter-item')}>{children}</div>
         )}

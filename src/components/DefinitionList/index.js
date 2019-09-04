@@ -13,14 +13,21 @@ type DefinitionPairProps = {
   titleClass?: string,
   definitionClass?: string
 }
-
+type ColumnProps = {
+  ''?: number,
+  s?: number,
+  m?: number,
+  l?: number,
+  xl?: number
+}
 type Props = {
   className?: string,
   inline?: boolean,
   hiddenTitle?: boolean,
   noMargin?: boolean,
   items: Array<DefinitionPairProps>,
-  widths?: WidthProps
+  widths?: WidthProps,
+  columns?: number | ColumnProps
 }
 
 export default function DefinitionList({
@@ -29,15 +36,26 @@ export default function DefinitionList({
   hiddenTitle,
   noMargin,
   items = [],
-  widths
+  widths,
+  columns
 }: Props) {
   return (
     <div
-      className={cx('DefinitionList', className, {
-        'DefinitionList--inline': inline,
-        'DefinitionList--hiddenTitle': hiddenTitle,
-        'DefinitionList--noMargin': noMargin
-      })}
+      className={cx(
+        'DefinitionList',
+        className,
+        {
+          'DefinitionList--inline': inline,
+          'DefinitionList--hiddenTitle': hiddenTitle,
+          'DefinitionList--noMargin': noMargin
+        },
+        columns && typeof columns === 'object'
+          ? Object.keys(columns).map(
+              prefix =>
+                `${prefix ? `${prefix}-` : ''}columns-${columns[prefix]}`
+            )
+          : null
+      )}
     >
       <ConditionalWrapper
         if={!!widths}

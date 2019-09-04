@@ -41,7 +41,8 @@ type GridProps = {
   withGap?: boolean,
   wideGap?: boolean,
   tightGap?: boolean,
-  align?: 'top' | 'bottom' | 'center'
+  align?: 'top' | 'bottom' | 'center',
+  divided?: boolean
 }
 export default function Grid({
   className,

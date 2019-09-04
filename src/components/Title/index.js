@@ -3,7 +3,8 @@ import React, { type Node } from 'react'
 import Icon, { type Props as IconProps } from 'ui/components/Icon'
 import Link, { type Props as LinkProps } from 'ui/components/Link'
 import classNames from 'classnames/bind'
-const cx = classNames.bind({})
+import styles from './index.css'
+const cx = classNames.bind(styles)
 
 export type Props = {
   className?: string,
@@ -22,7 +23,8 @@ export default function Title({
   icon,
   text,
   to,
-  children
+  children,
+  align
 }: Props) {
   const Hx = !isNaN(level) ? `h${level}` : 'strong'
   return (
@@ -31,13 +33,18 @@ export default function Title({
         'Title',
         `text-heading${asLevel || level}`,
         {
-          'Title--withIcon': icon
+          'Title--withIcon': icon,
+          [`Title--${align}`]: align
         },
         className
       )}
     >
       {icon ? (
-        <Icon {...icon} className={cx('Title-icon', icon.className)} />
+        <Icon
+          {...icon}
+          type={icon.type || icon}
+          className={cx('Title-icon', icon.className)}
+        />
       ) : null}
       <span
         className={cx('Title-text')}
