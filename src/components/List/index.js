@@ -26,12 +26,13 @@ type Props = {
 
 export default function List({
   items = [],
-  type = 'plain',
+  type,
   columns = {},
   className,
   horizontal,
   modifiers = [],
   striped,
+  plain,
   theme,
   divided
 }: Props) {
@@ -40,7 +41,6 @@ export default function List({
     <div
       className={cx(
         'List',
-        `List--${type}`,
         className,
         Object.keys(columns).map(
           breakpoint =>
@@ -48,6 +48,8 @@ export default function List({
               ''}`
         ),
         {
+          [`List--${type}`]: type,
+          'List--plain': plain,
           'List--striped': striped && items.length > 2,
           'List--divided': divided,
           'List--horizontal': horizontal,

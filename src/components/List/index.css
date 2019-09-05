@@ -13,6 +13,9 @@
   flex-direction: row;
   align-items: flex-start;
 }
+.List--horizontal > .List-list > .List-item {
+  padding: 0 0.5em;
+}
 .List--ordered .List-item::before {
   content: counter(list-item-count);
   position: absolute;
@@ -38,7 +41,7 @@
   position: relative;
   counter-increment: list-item-count;
   position: relative;
-  padding: 0.5em;
+  padding: 0.5em 1em;
 }
 .List--divided .List-item {
   border-bottom: 1px solid var(--color-light-grey);
@@ -53,6 +56,9 @@
   margin-bottom: 0;
 }
 .List-link {
+  display: block;
+  margin: -0.5em -1em;
+  padding: 0.5em 1em;
 }
 
 .List--striped .List-item:nth-child(2n) {
@@ -60,4 +66,13 @@
 }
 .List-item--linked:hover {
   background: rgba(0, 0, 0, 0.1);
+}
+.List--plain .List-item--linked:hover,
+.List--plain.List--striped .List-item:nth-child(2n) {
+  background: none;
+}
+.List--plain .List-item,
+.List--plain .List-link {
+  padding: 0;
+  margin: 0;
 }

@@ -17,7 +17,7 @@ type Props = {
   children: Node
 }
 
-export default function Layout({ className, children }: Props) {
+export default function Layout({ className, analyticsKey, children }: Props) {
   return (
     <div className={cx('Layout', className)}>
       <Connect
@@ -48,7 +48,9 @@ export default function Layout({ className, children }: Props) {
         }) => {
           if (typeof window !== 'undefined') {
             if (!init) {
-              initApp()
+              initApp({
+                ...(analyticsKey ? { analyticsKey } : {})
+              })
             }
             const root = window?.rootPath || ''
             const currentUrl = window.location.pathname.replace(root, '')
