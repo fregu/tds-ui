@@ -30,11 +30,11 @@ function resize(dispatch) {
 }
 
 export const screen = ({ dispatch, getState }) => next => action => {
-  // if (action.type === INIT_APP) {
-  //   if (typeof window !== 'undefined') {
-  //     window.addEventListener('resize', () => resize(dispatch))
-  //     resize(dispatch)
-  //   }
-  // }
+  if (action.type === INIT_APP) {
+    if (typeof window !== 'undefined') {
+      window.addEventListener('resize', () => resize(dispatch))
+      resize(dispatch)
+    }
+  }
   next(action)
 }

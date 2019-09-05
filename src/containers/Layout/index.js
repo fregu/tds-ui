@@ -14,10 +14,16 @@ const cx = classNames.bind({})
 
 type Props = {
   className?: string,
-  children: Node
+  children: Node,
+  offlineMessage?: string
 }
 
-export default function Layout({ className, analyticsKey, children }: Props) {
+export default function Layout({
+  className,
+  analyticsKey,
+  children,
+  offlineMessage = 'You seem to be offline'
+}: Props) {
   return (
     <div className={cx('Layout', className)}>
       <Connect
@@ -27,13 +33,15 @@ export default function Layout({ className, analyticsKey, children }: Props) {
           navigation,
           modal,
           dialog,
-          toasters = []
+          toasters = [],
+          offline
         }) => ({
           init,
           navigation,
           modal,
           dialog,
-          toasters
+          toasters,
+          offline
         })}
       >
         {({
@@ -44,7 +52,8 @@ export default function Layout({ className, analyticsKey, children }: Props) {
           dialog,
           initApp,
           setUrl,
-          dispatch
+          dispatch,
+          offline: isOffline
         }) => {
           if (typeof window !== 'undefined') {
             if (!init) {
@@ -63,6 +72,13 @@ export default function Layout({ className, analyticsKey, children }: Props) {
           }
           return (
             <div className={cx('Layout-wrapper')}>
+              {isOffline ? (
+                <div className={cx('Layout-offline', 'layout-vertical-gutter')}>
+                  <div className={cx('layout-container', 'layout-gutter')}>
+                    {offlineMessage}
+                  </div>
+                </div>
+              ) : null}
               <div className={cx('Layout-content')}>{children}</div>
               {modal ? (
                 <Modal
