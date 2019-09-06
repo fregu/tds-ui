@@ -4,15 +4,18 @@
 .Carousel-wrapper {
   overflow: auto;
   position: relative;
+  max-height: 100%;
 }
 .Carousel-innerWrapper {
   display: inline-block;
+  max-height: 100%;
 }
 .Carousel-items {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   user-select: none;
+  max-height: 100%;
 }
 .Carousel--multiple .Carousel-item {
   width: auto;
@@ -21,6 +24,7 @@
   width: 100%;
   flex: 0 0 auto;
   display: flex;
+  max-height: 100%;
 }
 .Carousel-item img {
   pointer-events: none;

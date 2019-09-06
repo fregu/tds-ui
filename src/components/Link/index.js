@@ -32,7 +32,7 @@ export default function Link({
   block,
   disabled,
   onClick,
-  attributes
+  ...attributes
 }: Props) {
   const url = to || href || ''
   const linkProps = {
