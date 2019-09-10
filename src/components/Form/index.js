@@ -2,6 +2,8 @@
 import React, { type Node, Component } from 'react'
 import classNames from 'classnames/bind'
 import serialize from 'form-serialize'
+import Connect from 'ui/helpers/Connect'
+import { trackEvent } from 'ui/store/actions/analytics'
 import styles from './index.css'
 const cx = classNames.bind(styles)
 
@@ -24,7 +26,9 @@ type Props = {
   initialChange?: boolean,
   onSubmit?: Function,
   onChange?: Function,
-  fields?: Array<Node>
+  fields?: Array<Node>,
+  trackChange?: string,
+  trackSubmit?: string
 }
 type State = {
   isChanged?: boolean,
@@ -55,7 +59,7 @@ export default class Form extends Component<Props, State> {
   componentWillUnmount = () => {
     this.el.removeEventListener('initField', this.onChange)
   }
-  onSubmit = (event: Event) => {
+  onSubmit = (event: Event, callback: Function) => {
     const { onSubmit, preventDefault } = this.props
 
     // If submit handler is defined, prevent default behaviour
@@ -68,18 +72,22 @@ export default class Form extends Component<Props, State> {
     )
     const isValid = this.validateFields()
 
+    if (callback) {
+      callback(values)
+    }
+
     if (onSubmit) {
       onSubmit(event, values, isValid)
     }
   }
 
-  onChange = (event?: Event) => {
+  onChange = (event?: Event, callback: Function) => {
     // serialize state of formelements in object
     const values = this.decodeSerialized(
       serialize(this.el, { hash: true, empty: false })
     )
     const valueString = JSON.stringify(values)
-
+    console.log('change', values)
     if (valueString !== this.state.valueString) {
       this.setState({
         valueString,
@@ -87,6 +95,10 @@ export default class Form extends Component<Props, State> {
       })
     }
     const isValid = this.validateFields()
+
+    if (callback) {
+      callback(values)
+    }
     // Pass change event to callback if available
     if (this.props.onChange) {
       this.props.onChange(event, values, isValid)
@@ -151,27 +163,55 @@ export default class Form extends Component<Props, State> {
       fields = [],
       method = 'get',
       initialChange,
+      trackSubmit,
+      trackChange,
       ...attributes
     } = this.props
 
     return (
-      <form
-        {...attributes}
-        className={cx('Form', className)}
-        method={method}
-        onSubmit={this.onSubmit}
-        onChange={this.onChange}
-        onPaste={this.onChange}
-        autoComplete="off"
-        ref={el => el && (this.el = el)}
-      >
-        {fields.map((field, index) => (
-          <div key={index} className={cx('Form-field')}>
-            {field}
-          </div>
-        ))}
-        {children}
-      </form>
+      <Connect mapDispatchToProps={{ trackEvent }}>
+        {({ trackEvent }) => (
+          <form
+            {...attributes}
+            className={cx('Form', className)}
+            method={method}
+            onSubmit={e =>
+              this.onSubmit(e, formData => {
+                if (trackChange) {
+                  trackEvent({
+                    action: 'submit',
+                    category: 'Form',
+                    label: trackChange,
+                    value: formData
+                  })
+                }
+              })
+            }
+            onChange={e =>
+              this.onChange(e, formData => {
+                if (trackSubmit) {
+                  trackEvent({
+                    action: 'change',
+                    category: 'Form',
+                    label: trackSubmit,
+                    value: formData
+                  })
+                }
+              })
+            }
+            onPaste={this.onChange}
+            autoComplete="off"
+            ref={el => el && (this.el = el)}
+          >
+            {fields.map((field, index) => (
+              <div key={index} className={cx('Form-field')}>
+                {field}
+              </div>
+            ))}
+            {children}
+          </form>
+        )}
+      </Connect>
     )
   }
 }

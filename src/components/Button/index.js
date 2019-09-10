@@ -7,6 +7,7 @@ import styles from './index.css'
 import Connect from 'ui/helpers/Connect'
 import { type Props as DialogProps } from 'ui/components/Dialog'
 import { confirmAction } from 'ui/store/actions/dialog'
+import { trackEvent } from 'ui/store/actions/analytics'
 import { redirectTo } from 'ui/store/actions/navigation'
 const cx = classNames.bind(styles)
 
@@ -30,7 +31,8 @@ export type Props = {
   attributes?: any,
   primary?: boolean,
   confirm?: string | DialogProps,
-  round?: boolean
+  round?: boolean,
+  trackClick?: string
 }
 
 export default function Button({
@@ -53,13 +55,14 @@ export default function Button({
   primary,
   size,
   round,
+  trackClick,
   ...attributes
 }: Props) {
   const isLink = to || href
   const ButtonTag = tag || (isLink ? Link : 'button')
   const clickProps = isLink ? { to, href } : {}
   return (
-    <Connect mapDispatchToProps={{ confirmAction }}>
+    <Connect mapDispatchToProps={{ confirmAction, trackEvent }}>
       {({ confirmAction }) => (
         <ButtonTag
           {...clickProps}
@@ -83,8 +86,15 @@ export default function Button({
           title={(hiddenText && text) || null}
           disabled={disabled}
           onClick={
-            confirm || onClick
+            confirm || onClick || trackClick
               ? event => {
+                  if (trackClick) {
+                    trackEvent({
+                      action: 'click',
+                      category: 'Button',
+                      label: trackClick
+                    })
+                  }
                   if (disabled) {
                     event.stopPropagation()
                     return

@@ -15,7 +15,12 @@ export default function Content({
   tag: Tag = 'p'
 }: Props) {
   if (html) {
-    return <div dangerouslySetInnerHTML={{ __html: html }} />
+    return (
+      <div
+        className={'htmlContent'}
+        dangerouslySetInnerHTML={{ __html: html }}
+      />
+    )
   }
   const paragraphs = Array.isArray(content)
     ? content

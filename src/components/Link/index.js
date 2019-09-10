@@ -4,6 +4,8 @@ import classNames from 'classnames/bind'
 import { NavLink } from 'react-router-dom'
 import Icon, { type Props as IconProps } from 'ui/components/Icon'
 import ConditionalWrapper from 'ui/helpers/ConditionalWrapper'
+import Connect from 'ui/helpers/Connect'
+import { trackEvent } from 'ui/store/actions/analytics'
 import styles from './index.css'
 const cx = classNames.bind(styles)
 
@@ -18,7 +20,8 @@ export type Props = {
   block?: boolean,
   icon?: string | IconProps,
   onClick?: Function,
-  attributes?: any
+  attributes?: any,
+  trackClick?: string
 }
 
 export default function Link({
@@ -32,6 +35,7 @@ export default function Link({
   block,
   disabled,
   onClick,
+  trackClick,
   ...attributes
 }: Props) {
   const url = to || href || ''
@@ -46,46 +50,78 @@ export default function Link({
       },
       className
     ),
-    onClick: event => {
-      if (disabled || onClick) {
-        event.stopPropagation()
-      }
-      if (typeof onClick === 'function') {
-        onClick(event)
-      }
-    },
     disabled,
     ...attributes
   }
   return (
-    <ConditionalWrapper
-      if={url.match(/^\//)}
-      wrap={children => (
-        <NavLink to={url} {...linkProps}>
-          {children}
-        </NavLink>
-      )}
-      else={children => (
-        <a href={url} {...linkProps}>
-          {children}
-        </a>
-      )}
-    >
-      <div className={cx('Link-wrapper')}>
-        {icon ? (
-          <Icon
-            {...icon}
-            type={icon.type || icon}
-            className={cx('Link-icon', icon.className)}
-          />
-        ) : null}
-        <span
-          className={cx('Link-text')}
-          dangerouslySetInnerHTML={text ? { __html: text } : null}
+    <Connect mapDispatchToProps={{ trackEvent }}>
+      {({ trackEvent }) => (
+        <ConditionalWrapper
+          if={url.match(/^\//)}
+          wrap={children => (
+            <NavLink
+              to={url}
+              {...linkProps}
+              onClick={event => {
+                if (trackClick) {
+                  trackEvent({
+                    action: 'click',
+                    category: 'Link',
+                    label: trackClick
+                  })
+                }
+                if (disabled || onClick) {
+                  event.stopPropagation()
+                }
+                if (typeof onClick === 'function') {
+                  onClick(event)
+                }
+              }}
+            >
+              {children}
+            </NavLink>
+          )}
+          else={children => (
+            <a
+              href={url}
+              {...linkProps}
+              onClick={event => {
+                if (trackClick) {
+                  trackEvent({
+                    action: 'click',
+                    category: 'Link',
+                    label: trackClick
+                  })
+                }
+                if (disabled || onClick) {
+                  event.stopPropagation()
+                }
+                if (typeof onClick === 'function') {
+                  onClick(event)
+                }
+              }}
+            >
+              {children}
+            </a>
+          )}
         >
-          {text ? null : children}
-        </span>
-      </div>
-    </ConditionalWrapper>
+          <div className={cx('Link-wrapper')}>
+            {icon ? (
+              <Icon
+                {...icon}
+                type={icon.type || icon}
+                className={cx('Link-icon', icon.className)}
+              />
+            ) : null}
+            <span
+              className={cx('Link-text')}
+              dangerouslySetInnerHTML={text ? { __html: text } : null}
+            >
+              {text ? null : children}
+            </span>
+          </div>
+        </ConditionalWrapper>
+      )}
+    </Connect>
   )
 }

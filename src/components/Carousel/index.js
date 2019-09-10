@@ -208,7 +208,7 @@ export default class Carousel extends Component<Props, State> {
   }
 
   render() {
-    const { items = [], className, multiple, controls } = this.props
+    const { items = [], className, multiple, controls, style } = this.props
     const { activeIndex } = this.state
     return (
       <div
@@ -216,6 +216,7 @@ export default class Carousel extends Component<Props, State> {
         className={cx('Carousel', className, {
           'Carousel--multiple': multiple
         })}
+        style={style}
       >
         {controls ? (
           <div className={cx('Carousel-actions')}>

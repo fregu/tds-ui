@@ -59,26 +59,36 @@ export default function List({
       )}
     >
       <ListTag className={cx('List-list')}>
-        {items.map(({ content, to, className, children, ...item }, index) => (
-          <li
-            key={index}
-            {...item}
-            className={cx('List-item', className, {
-              'List-item--linked': to
-            })}
-          >
-            <ConditionalWrapper
-              if={to}
-              wrap={children => (
-                <Link to={to} plain className={cx('List-link')}>
-                  {children}
-                </Link>
-              )}
+        {items.map(
+          (
+            { content, to, className, linkClassName, children, ...item },
+            index
+          ) => (
+            <li
+              key={index}
+              {...item}
+              className={cx('List-item', className, {
+                'List-item--linked': to
+              })}
             >
-              {content || children || item}
-            </ConditionalWrapper>
-          </li>
-        ))}
+              <ConditionalWrapper
+                if={to}
+                wrap={children => (
+                  <Link
+                    to={to}
+                    plain
+                    block
+                    className={cx('List-link', linkClassName)}
+                  >
+                    {children}
+                  </Link>
+                )}
+              >
+                {content || children || item}
+              </ConditionalWrapper>
+            </li>
+          )
+        )}
       </ListTag>
     </div>
   )

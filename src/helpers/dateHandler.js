@@ -162,6 +162,9 @@ export default function dateHandler(startDate) {
           case 'date':
             format = 'yyyy-mm-dd'
             break
+          case 'eu':
+            format = 'dd/mm/yyyy'
+            break
           case 'mediumDate':
             format = 'd mmm, yyyy'
             break

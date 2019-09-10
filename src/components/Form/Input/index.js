@@ -293,7 +293,7 @@ class Input extends Component<Props, State> {
         </span>
         {errors.length ? (
           <span className={cx('Input-error')}>
-            <Icon className={cx('Input-errorIcon" type="warning')} />
+            <Icon className={cx('Input-errorIcon')} type="warning" />
             {errors[0]}
           </span>
         ) : null}

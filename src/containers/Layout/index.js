@@ -2,6 +2,7 @@
 import React, { type Node } from 'react'
 import classNames from 'classnames/bind'
 import { Redirect } from 'react-router-dom'
+import Helmet from 'react-helmet'
 import Connect from 'ui/helpers/Connect'
 import Modal from 'ui/components/Modal'
 import Dialog from 'ui/components/Dialog'
@@ -22,10 +23,12 @@ export default function Layout({
   className,
   analyticsKey,
   children,
-  offlineMessage = 'You seem to be offline'
+  offlineMessage = 'You seem to be offline',
+  helmet
 }: Props) {
   return (
     <div className={cx('Layout', className)}>
+      <Helmet>{helmet}</Helmet>
       <Connect
         mapDispatchToProps={{ initApp, setUrl }}
         mapStateToProps={({
