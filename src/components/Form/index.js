@@ -87,7 +87,7 @@ export default class Form extends Component<Props, State> {
       serialize(this.el, { hash: true, empty: false })
     )
     const valueString = JSON.stringify(values)
-    console.log('change', values)
+
     if (valueString !== this.state.valueString) {
       this.setState({
         valueString,
@@ -177,7 +177,7 @@ export default class Form extends Component<Props, State> {
             method={method}
             onSubmit={e =>
               this.onSubmit(e, formData => {
-                if (trackChange) {
+                if (trackSubmit) {
                   trackEvent({
                     action: 'submit',
                     category: 'Form',
@@ -189,7 +189,7 @@ export default class Form extends Component<Props, State> {
             }
             onChange={e =>
               this.onChange(e, formData => {
-                if (trackSubmit) {
+                if (trackChange) {
                   trackEvent({
                     action: 'change',
                     category: 'Form',

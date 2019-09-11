@@ -4,6 +4,8 @@ import Helmet from 'react-helmet'
 import Button from 'ui/components/Button'
 import { strings } from 'ui/lang'
 import classNames from 'classnames/bind'
+import Connect from 'ui/helpers/Connect'
+import { trackPage } from 'ui/store/actions/analytics'
 import styles from './index.css'
 const cx = classNames.bind(styles)
 
@@ -20,6 +22,9 @@ type Props = {
 }
 
 export default class View extends Component<Props> {
+  state = {
+    isTracked: false
+  }
   componentDidMount = () => {
     const supportsNativeSmoothScroll =
       'scrollBehavior' in document.documentElement.style
@@ -51,43 +56,54 @@ export default class View extends Component<Props> {
       scrollToTop
     } = this.props
 
+    const { isTracked } = this.state
     return (
-      <div
-        className={cx('View-wrapper', {
-          'View-wrapper--overlay': fullView
-        })}
-      >
-        <article
-          className={cx(
-            'View',
-            className,
-            { 'View--fullView': fullView },
-            modifiers.map(mod => 'View--' + mod)
-          )}
-        >
-          <Helmet>{title ? <title>{title}</title> : null}</Helmet>
-          {fullView && (backTo || closeClick) ? (
-            <Button
-              className={cx('View-closeButton')}
-              modifiers={['plain', 'hiddenText']}
-              size="large"
-              icon={{ type: 'close' }}
-              text={strings.general.close}
-              onClick={closeClick}
-              to={backTo}
-            />
-          ) : null}
-          <div
-            className={cx(
-              'View-content',
-              'layout-bottom-gutter',
-              small ? 'layout-small-container' : 'layout-container'
-            )}
-          >
-            {children}
-          </div>
-        </article>
-      </div>
+      <Connect mapDispatchToProps={{ trackPage }}>
+        {({ trackPage }) => {
+          if (isTracked && typeof window !== 'undefined') {
+            trackPage({ title })
+            this.setState({ isTracked: true })
+          }
+          return (
+            <div
+              className={cx('View-wrapper', {
+                'View-wrapper--overlay': fullView
+              })}
+            >
+              <article
+                className={cx(
+                  'View',
+                  className,
+                  { 'View--fullView': fullView },
+                  modifiers.map(mod => 'View--' + mod)
+                )}
+              >
+                <Helmet>{title ? <title>{title}</title> : null}</Helmet>
+                {fullView && (backTo || closeClick) ? (
+                  <Button
+                    className={cx('View-closeButton')}
+                    modifiers={['plain', 'hiddenText']}
+                    size="large"
+                    icon={{ type: 'close' }}
+                    text={strings.general.close}
+                    onClick={closeClick}
+                    to={backTo}
+                  />
+                ) : null}
+                <div
+                  className={cx(
+                    'View-content',
+                    'layout-bottom-gutter',
+                    small ? 'layout-small-container' : 'layout-container'
+                  )}
+                >
+                  {children}
+                </div>
+              </article>
+            </div>
+          )
+        }}
+      </Connect>
     )
   }
 }

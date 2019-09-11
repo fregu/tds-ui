@@ -63,7 +63,7 @@ export default function Button({
   const clickProps = isLink ? { to, href } : {}
   return (
     <Connect mapDispatchToProps={{ confirmAction, trackEvent }}>
-      {({ confirmAction }) => (
+      {({ confirmAction, trackEvent }) => (
         <ButtonTag
           {...clickProps}
           className={cx(
@@ -89,6 +89,11 @@ export default function Button({
             confirm || onClick || trackClick
               ? event => {
                   if (trackClick) {
+                    console.log('trackevent', {
+                      action: 'click',
+                      category: 'Button',
+                      label: trackClick
+                    })
                     trackEvent({
                       action: 'click',
                       category: 'Button',
