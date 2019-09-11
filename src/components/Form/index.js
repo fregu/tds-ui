@@ -181,7 +181,7 @@ export default class Form extends Component<Props, State> {
                   trackEvent({
                     action: 'submit',
                     category: 'Form',
-                    label: trackChange,
+                    label: trackSubmit,
                     value: formData
                   })
                 }
@@ -193,7 +193,7 @@ export default class Form extends Component<Props, State> {
                   trackEvent({
                     action: 'change',
                     category: 'Form',
-                    label: trackSubmit,
+                    label: trackChange,
                     value: formData
                   })
                 }
