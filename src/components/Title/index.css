@@ -2,4 +2,9 @@
 }
 .Title-icon {
   vertical-align: middle;
+  padding-right: 0.25em;
+}
+.Title--withIcon .Title-wrapper {
+  display: inline-flex;
+  align-items: center;
 }

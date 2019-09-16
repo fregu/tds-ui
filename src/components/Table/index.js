@@ -99,7 +99,7 @@ export default class Table extends Component<Props, StateTypes> {
         cells: row.cells.map((cell, cellIndex) => ({
           ...(!Array.isArray(cell) && typeof cell === 'object' ? cell : {}),
           index: cellIndex,
-          content: cell.content || cell,
+          content: cell?.content || cell,
           to: (typeof cell === 'object' && cell.to) || row.to
         }))
       }))
@@ -138,7 +138,7 @@ export default class Table extends Component<Props, StateTypes> {
                       )}
                       style={inlinePadding ? { padding: '0.25em 0.5em' } : null}
                     >
-                      {cell.content || cell || ''}
+                      {cell?.content || cell || ''}
                       {sortOn === index ? (
                         <Icon
                           className={cx('Table-headSortIcon')}
@@ -167,7 +167,7 @@ export default class Table extends Component<Props, StateTypes> {
                         'Table-row--linked': row.to
                       })}
                     >
-                      {row.cells.map((c, i) => {
+                      {(row.cells || row).map((c, i) => {
                         const CellTag = c.tag === 'th' ? 'th' : 'td'
                         const cell = typeof c === 'string' ? { content: c } : c
                         const link = cell.to && (
@@ -176,7 +176,7 @@ export default class Table extends Component<Props, StateTypes> {
                             plain
                             linkclassName={cx('Table-cellLink')}
                           >
-                            {cell.content}
+                            {cell?.content}
                           </Link>
                         )
                         return (
@@ -200,7 +200,7 @@ export default class Table extends Component<Props, StateTypes> {
                               inlinePadding ? { padding: '0.25em 0.5em' } : null
                             }
                             onClick={
-                              row.content
+                              row?.content
                                 ? () => setState({ expanded: !expanded })
                                 : null
                             }
@@ -231,7 +231,7 @@ export default class Table extends Component<Props, StateTypes> {
                         <td className={cx('Table-cell Table-cell--empty')} />
                       )}
                     </tr>
-                    {row.content && expanded ? (
+                    {row && row.content && expanded ? (
                       <tr className={cx('Table-row Table-row--toggleRow')}>
                         <td
                           className={cx('Table-cell')}

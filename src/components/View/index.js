@@ -18,6 +18,7 @@ type Props = {
   small?: boolean,
   backTo?: string,
   closeClick?: Function,
+  trackPage?: string,
   scrollToTop?: boolean | 'smooth'
 }
 
@@ -53,7 +54,8 @@ export default class View extends Component<Props> {
       className,
       small,
       modifiers = [],
-      scrollToTop
+      scrollToTop,
+      trackPage: trackPageAs
     } = this.props
 
     const { isTracked } = this.state
@@ -61,7 +63,7 @@ export default class View extends Component<Props> {
       <Connect mapDispatchToProps={{ trackPage }}>
         {({ trackPage }) => {
           if (isTracked && typeof window !== 'undefined') {
-            trackPage({ title })
+            trackPage({ title: trackPageAs || title })
             this.setState({ isTracked: true })
           }
           return (

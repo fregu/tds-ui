@@ -39,24 +39,26 @@ export default function Title({
         className
       )}
     >
-      {icon ? (
-        <Icon
-          {...icon}
-          type={icon.type || icon}
-          className={cx('Title-icon', icon.className)}
-        />
-      ) : null}
-      <span
-        className={cx('Title-text')}
-        dangerouslySetInnerHTML={{ __html: text }}
-      >
-        {to ? (
-          <Link to={to} className={cx('Title-link')} cover plain>
-            {children}
-          </Link>
-        ) : (
-          children
-        )}
+      <span className={cx('Title-wrapper')}>
+        {icon ? (
+          <Icon
+            {...icon}
+            type={icon.type || icon}
+            className={cx('Title-icon', icon.className)}
+          />
+        ) : null}
+        <span
+          className={cx('Title-text')}
+          dangerouslySetInnerHTML={{ __html: text }}
+        >
+          {to ? (
+            <Link to={to} className={cx('Title-link')} cover plain>
+              {children}
+            </Link>
+          ) : (
+            children
+          )}
+        </span>
       </span>
     </Hx>
   )

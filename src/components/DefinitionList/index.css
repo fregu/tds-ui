@@ -29,7 +29,7 @@
 }
 .DefinitionList--inline .DefinitionList-pair,
 .DefinitionList--spread .DefinitionList-pair {
-  display: flex;
+  display: inline-flex;
   flex-direction: row;
   flex-wrap: wrap;
 }

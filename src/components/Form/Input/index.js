@@ -71,6 +71,10 @@ class Input extends Component<Props, State> {
   }
   onFocus = (event: Event) => {
     this.setState({ hasFocus: true })
+
+    if (this.props.onFocus) {
+      this.props.onFocus(event)
+    }
   }
   onBlur = (event: Event) => {
     this.validate(true)

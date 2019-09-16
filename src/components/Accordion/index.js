@@ -12,7 +12,8 @@ type Props = {
   className?: string,
   fill?: boolean,
   noPadding?: boolean,
-  theme?: string
+  theme?: string,
+  isOpen?: boolean
 }
 type State = {
   isOpen?: boolean,
@@ -24,7 +25,7 @@ export default class Accordion extends Component<Props, State> {
   content: HTMLElement
   wrapper: HTMLElement
   preventTransition: boolean
-  state = {}
+  state = { isOpen: this.props.isOpen }
   resizing: boolean = false
   componentDidMount = () => {
     this.wrapper.addEventListener('transitionend', this.onTransitionEnd)
