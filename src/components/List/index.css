@@ -12,9 +12,11 @@
   display: flex;
   flex-direction: row;
   align-items: flex-start;
+  margin: -0.5em;
+  flex-wrap: wrap;
 }
 .List--horizontal > .List-list > .List-item {
-  padding: 0 0.5em;
+  padding: 0.5em;
 }
 .List--ordered .List-item::before {
   content: counter(list-item-count);
@@ -67,6 +69,7 @@
 .List-item--linked:hover {
   background: rgba(0, 0, 0, 0.1);
 }
+
 .List--plain .List-item--linked:hover,
 .List--plain.List--striped .List-item:nth-child(2n) {
   background: none;

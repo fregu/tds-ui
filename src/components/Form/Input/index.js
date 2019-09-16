@@ -172,9 +172,15 @@ class Input extends Component<Props, State> {
       this.props.value !== prevProps.value ||
       this.props.defaultValue !== prevProps.defaultValue
     ) {
-      if (this.props.value !== prevProps.value) {
+      if (
+        typeof this.props.value !== 'undefined' &&
+        this.props.value !== prevProps.value
+      ) {
         this.setState({ value: this.props.value })
-      } else if (this.props.defaultValue !== prevProps.defaultValue) {
+      } else if (
+        typeof this.props.defaultValue !== 'undefined' &&
+        this.props.defaultValue !== prevProps.defaultValue
+      ) {
         this.setState({ value: this.props.defaultValue })
       }
 
