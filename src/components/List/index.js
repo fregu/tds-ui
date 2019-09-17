@@ -53,6 +53,7 @@ export default function List({
           'List--striped': striped && items.length > 2,
           'List--divided': divided,
           'List--horizontal': horizontal,
+          'List--vertical': !horizontal,
           [`List--withTheme theme-${theme}`]: theme
         },
         modifiers.map(mod => 'List--' + mod)

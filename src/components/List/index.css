@@ -66,7 +66,7 @@
 .List--striped .List-item:nth-child(2n) {
   background: rgba(0, 0, 0, 0.1);
 }
-.List-item--linked:hover {
+.List--vertical:not(.List--plain) .List-item--linked:hover {
   background: rgba(0, 0, 0, 0.1);
 }
 
@@ -74,8 +74,8 @@
 .List--plain.List--striped .List-item:nth-child(2n) {
   background: none;
 }
-.List--plain .List-item,
-.List--plain .List-link {
+.List--plain.List--vertical .List-item,
+.List--plain.List--vertical .List-link {
   padding: 0;
   margin: 0;
 }
