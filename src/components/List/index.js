@@ -23,12 +23,47 @@ type Props = {
   theme?: string,
   divided?: boolean
 }
-
+export const ListItem = ({
+  attributes,
+  className,
+  to,
+  children,
+  icon,
+  linkClassName,
+  text,
+  content
+}) => (
+  <li
+    {...attributes}
+    className={cx('List-item', className, {
+      'List-item--linked': to
+    })}
+  >
+    <ConditionalWrapper
+      if={to}
+      wrap={children => (
+        <Link
+          to={to}
+          plain
+          block
+          icon={icon}
+          className={cx('List-link', linkClassName)}
+        >
+          {children}
+        </Link>
+      )}
+    >
+      {content || text || children}
+    </ConditionalWrapper>
+  </li>
+)
 export default function List({
   items = [],
   type,
   columns = {},
   className,
+  itemClassName,
+  linkClassName,
   horizontal,
   modifiers = [],
   striped,
@@ -62,32 +97,31 @@ export default function List({
       <ListTag className={cx('List-list')}>
         {items.map(
           (
-            { content, to, className, linkClassName, children, ...item },
+            {
+              content,
+              text,
+              children,
+              to,
+              icon,
+              className,
+              attributes,
+              ...item
+            },
             index
           ) => (
-            <li
+            <ListItem
               key={index}
-              {...item}
-              className={cx('List-item', className, {
-                'List-item--linked': to
-              })}
-            >
-              <ConditionalWrapper
-                if={to}
-                wrap={children => (
-                  <Link
-                    to={to}
-                    plain
-                    block
-                    className={cx('List-link', linkClassName)}
-                  >
-                    {children}
-                  </Link>
-                )}
-              >
-                {content || children || item}
-              </ConditionalWrapper>
-            </li>
+              className={cx('List-item', itemClassName, className)}
+              {...{
+                content,
+                text: typeof item === 'string' ? item : text,
+                children: item,
+                to,
+                icon,
+                linkClassName: cx(linkClassName, item.linkClassName),
+                attributes
+              }}
+            />
           )
         )}
       </ListTag>

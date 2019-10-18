@@ -14,6 +14,7 @@ export default function Hero({
   theme,
   dimensions,
   dimension,
+  fill,
   background: { url, color, position, size = 'cover', repeat } = {}
 }: Props) {
   return (
@@ -22,6 +23,7 @@ export default function Hero({
         'Hero',
         {
           'Hero--dimensions': dimensions || dimension,
+          'Hero--fill': fill,
           [`dimension-${dimensions}`]: dimension,
           'Hero--theme': theme,
           [`theme-${theme}`]: theme,

@@ -5,6 +5,7 @@
   border-top: 1px solid;
   margin: calc(var(--layout-gutter) * 3) 0;
   display: block;
+  clear: both;
 }
 .Divider--blank {
   border: none;

@@ -12,6 +12,8 @@ export default function Content({
   content,
   html,
   markdown,
+  className,
+  partials = {},
   tag: Tag = 'p'
 }: Props) {
   if (html) {
@@ -22,17 +24,26 @@ export default function Content({
       />
     )
   }
-  const paragraphs = Array.isArray(content)
+  const paragraphs = (Array.isArray(content)
     ? content
     : typeof content === 'string'
     ? content.split('\n')
     : []
+  ).filter(Boolean)
   return (
     <Fragment>
       {paragraphs.length
         ? paragraphs.map((p, index) =>
             typeof p === 'string' ? (
-              <Tag key={index} dangerouslySetInnerHTML={{ __html: p }} />
+              partials && partials[p] ? (
+                partials[p]
+              ) : (
+                <Tag
+                  key={index}
+                  className={className}
+                  dangerouslySetInnerHTML={{ __html: p }}
+                />
+              )
             ) : (
               p
             )

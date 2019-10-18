@@ -14,5 +14,9 @@ export default function ConditionalWrapper({
   else: elseWrap,
   children
 }: Props) {
-  return ifTrue ? wrap(children) : elseWrap ? elseWrap(children) : children
+  return ifTrue
+    ? wrap(children)
+    : elseWrap
+    ? elseWrap(children)
+    : children || null
 }

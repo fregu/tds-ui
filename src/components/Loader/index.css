@@ -1,245 +1,131 @@
-:root {
-  --degreeSpread: 6;
-}
-@keyframes spin {
+@keyframes appearAndScale {
   0% {
-    transform: rotateZ(-180deg) translate(-50%, -50%);
-  }
-  100% {
-    transform: rotateZ(180deg) translate(-50%, -50%);
-  }
-}
-@keyframes appear {
-  0% {
-    transform: translateY(2em);
     opacity: 0;
+    transform: scale(0.75);
   }
   100% {
-    transform: translateY(0);
     opacity: 1;
+    transform: scale(1);
   }
 }
 
+:root {
+  --spin-duration: 1s;
+}
 .Loader {
-  overflow: hidden;
-  text-align: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin: 2em;
 }
-
+.Loader-content {
+  padding-left: 1em;
+}
 .Loader-wrapper {
-  height: 3em;
-  width: 3em;
-  margin: 2em auto;
-  display: inline-block;
   position: relative;
+  width: 2em;
+  height: 2em;
 }
 
-.Loader-spinner {
-  animation: spin 1s linear;
-  animation-iteration-count: infinite;
-  transform-origin: 0 0;
-  height: 3em;
-  transform-origin: 0 0;
-  width: 3em;
+.Loader-dotWrapper {
   position: absolute;
-  left: 50%;
-  top: 50%;
-  color: var(--color-red);
-}
-.Loader--spinner .Loader-spinner {
-  animation: spin 1.25s cubic-bezier(0.57, 0.36, 0.42, 0.62);
-}
-.Loader-icon {
-  transform: translate(-50%, -50%);
-  position: absolute;
-  top: 50%;
-  left: 50%;
-}
-
-.Loader--overlay {
-  position: relative;
-  z-index: var(--z-loader);
-}
-.Loader--overlay .Loader-wrapper {
-  background: var(--color-white);
-  border-radius: 50%;
-  box-shadow: 0 0.3em 1em rgba(0, 0, 0, 0.2);
-  padding: 0.5em;
-}
-.Loader--overlay::before {
-  content: '';
-  position: fixed;
+  top: 0;
   left: 0;
-  bottom: 0;
   right: 0;
-  top: 0;
-  background: rgba(0, 0, 0, 0.3);
-  z-index: -1;
+  bottom: 0;
 }
-.Loader--fixed {
-  z-index: var(--z-loader);
-  position: fixed;
-}
-.Loader--fixed .Loader-wrapper {
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  height: 4em;
-  width: 4em;
-  background: var(--color-white);
-  border-radius: 50%;
-  box-shadow: 0 0.3em 1em rgba(0, 0, 0, 0.2);
-  animation: appear 0.15s cubic-bezier(0.57, 0.36, 0.42, 0.62);
-}
-
-.Loader--spinner span {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-/* .Loader span:before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-
-  border-top: 0.25em solid rgba(255, 20, 20, 0.4);
-  border-radius: 50%;
-  border-radius: 50%;
-} */
-
-.Loader--spinner span:before {
-  content: '';
+.Loader-dot {
   position: absolute;
   top: 0;
   left: 50%;
-  width: 0.35em;
-  height: 0.35em;
-  background: rgba(255, 0, 0, 0.3);
-  border-radius: 50%;
-}
-
-.Loader--spinner span:nth-child(1) {
-  transform: rotateZ(calc(1deg * var(--degreeSpread)));
-  opacity: 0.05;
-}
-.Loader--spinner span:nth-child(2) {
-  transform: rotateZ(calc(2deg * var(--degreeSpread)));
-  opacity: 0.1;
-}
-.Loader--spinner span:nth-child(3) {
-  transform: rotateZ(calc(3deg * var(--degreeSpread)));
-  opacity: 0.15;
-}
-.Loader--spinner span:nth-child(4) {
-  transform: rotateZ(calc(4deg * var(--degreeSpread)));
-  opacity: 0.2;
-}
-.Loader--spinner span:nth-child(5) {
-  transform: rotateZ(calc(5deg * var(--degreeSpread)));
-  opacity: 0.25;
-}
-.Loader--spinner span:nth-child(6) {
-  transform: rotateZ(calc(6deg * var(--degreeSpread)));
-  opacity: 0.3;
-}
-.Loader--spinner span:nth-child(7) {
-  transform: rotateZ(calc(7deg * var(--degreeSpread)));
-  opacity: 0.35;
-}
-.Loader--spinner span:nth-child(8) {
-  transform: rotateZ(calc(8deg * var(--degreeSpread)));
-  opacity: 0.4;
-}
-.Loader--spinner span:nth-child(9) {
-  transform: rotateZ(calc(9deg * var(--degreeSpread)));
-  opacity: 0.45;
-}
-.Loader--spinner span:nth-child(10) {
-  transform: rotateZ(calc(10deg * var(--degreeSpread)));
+  width: 0.3em;
+  height: 0.3em;
   opacity: 0.5;
+  transform: scale(0.75);
+  animation-name: appearAndScale;
+  animation-duration: var(--spin-duration);
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: reverse;
 }
-.Loader--spinner span:nth-child(11) {
-  transform: rotateZ(calc(11deg * var(--degreeSpread)));
-  opacity: 0.55;
+.Loader-dot::before {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: currentColor;
+  transform: translateX(-50%);
 }
-.Loader--spinner span:nth-child(12) {
-  transform: rotateZ(calc(12deg * var(--degreeSpread)));
-  opacity: 0.6;
+.Loader-dotWrapper:nth-child(1) {
+  transform: rotate(calc(360deg / 10 * 1));
 }
-.Loader--spinner span:nth-child(13) {
-  transform: rotateZ(calc(13deg * var(--degreeSpread)));
-  opacity: 0.65;
+.Loader-dotWrapper:nth-child(2) {
+  transform: rotate(calc(360deg / 10 * 2));
 }
-.Loader--spinner span:nth-child(14) {
-  transform: rotateZ(calc(14deg * var(--degreeSpread)));
-  opacity: 0.7;
+.Loader-dotWrapper:nth-child(3) {
+  transform: rotate(calc(360deg / 10 * 3));
 }
-.Loader--spinner span:nth-child(15) {
-  transform: rotateZ(calc(15deg * var(--degreeSpread)));
-  opacity: 0.75;
+.Loader-dotWrapper:nth-child(4) {
+  transform: rotate(calc(360deg / 10 * 4));
 }
-.Loader--spinner span:nth-child(16) {
-  transform: rotateZ(calc(16deg * var(--degreeSpread)));
-  opacity: 0.8;
+.Loader-dotWrapper:nth-child(5) {
+  transform: rotate(calc(360deg / 10 * 5));
 }
-.Loader--spinner span:nth-child(17) {
-  transform: rotateZ(calc(17deg * var(--degreeSpread)));
-  opacity: 0.85;
+.Loader-dotWrapper:nth-child(6) {
+  transform: rotate(calc(360deg / 10 * 6));
 }
-.Loader--spinner span:nth-child(18) {
-  transform: rotateZ(calc(18deg * var(--degreeSpread)));
-  opacity: 0.9;
+.Loader-dotWrapper:nth-child(7) {
+  transform: rotate(calc(360deg / 10 * 7));
 }
-.Loader--spinner span:nth-child(19) {
-  transform: rotateZ(calc(19deg * var(--degreeSpread)));
-  opacity: 0.95;
+.Loader-dotWrapper:nth-child(8) {
+  transform: rotate(calc(360deg / 10 * 8));
 }
-.Loader--spinner span:nth-child(20) {
-  transform: rotateZ(calc(20deg * var(--degreeSpread)));
-  opacity: 1;
+.Loader-dotWrapper:nth-child(9) {
+  transform: rotate(calc(360deg / 10 * 9));
 }
-.Loader--spinner span:nth-child(21) {
-  transform: rotateZ(calc(21deg * var(--degreeSpread)));
-  opacity: 1;
+.Loader-dotWrapper:nth-child(10) {
+  transform: rotate(calc(360deg / 10 * 10));
 }
-.Loader--spinner span:nth-child(22) {
-  transform: rotateZ(calc(22deg * var(--degreeSpread)));
-  opacity: 1;
+
+.Loader-dotWrapper:nth-child(1) .Loader-dot,
+.Loader-dotWrapper:nth-child(1) {
+  animation-delay: calc(var(--spin-duration) / 10 * 1);
 }
-.Loader--spinner span:nth-child(23) {
-  transform: rotateZ(calc(23deg * var(--degreeSpread)));
-  opacity: 1;
+.Loader-dotWrapper:nth-child(2) .Loader-dot,
+.Loader-dotWrapper:nth-child(2) {
+  animation-delay: calc(var(--spin-duration) / 10 * 2);
 }
-.Loader--spinner span:nth-child(24) {
-  transform: rotateZ(calc(24deg * var(--degreeSpread)));
-  opacity: 1;
+.Loader-dotWrapper:nth-child(3) .Loader-dot,
+.Loader-dotWrapper:nth-child(3) {
+  animation-delay: calc(var(--spin-duration) / 10 * 3);
 }
-.Loader--spinner span:nth-child(25) {
-  transform: rotateZ(calc(25deg * var(--degreeSpread)));
-  opacity: 1;
+.Loader-dotWrapper:nth-child(4) .Loader-dot,
+.Loader-dotWrapper:nth-child(4) {
+  animation-delay: calc(var(--spin-duration) / 10 * 4);
 }
-.Loader--spinner span:nth-child(26) {
-  transform: rotateZ(calc(26deg * var(--degreeSpread)));
-  opacity: 1;
+.Loader-dotWrapper:nth-child(5) .Loader-dot,
+.Loader-dotWrapper:nth-child(5) {
+  animation-delay: calc(var(--spin-duration) / 10 * 5);
 }
-.Loader--spinner span:nth-child(27) {
-  transform: rotateZ(calc(27deg * var(--degreeSpread)));
-  opacity: 1;
+.Loader-dotWrapper:nth-child(6) .Loader-dot,
+.Loader-dotWrapper:nth-child(6) {
+  animation-delay: calc(var(--spin-duration) / 10 * 6);
 }
-.Loader--spinner span:nth-child(28) {
-  transform: rotateZ(calc(28deg * var(--degreeSpread)));
-  opacity: 1;
+.Loader-dotWrapper:nth-child(7) .Loader-dot,
+.Loader-dotWrapper:nth-child(7) {
+  animation-delay: calc(var(--spin-duration) / 10 * 7);
 }
-.Loader--spinner span:nth-child(29) {
-  transform: rotateZ(calc(29deg * var(--degreeSpread)));
-  opacity: 1;
+.Loader-dotWrapper:nth-child(8) .Loader-dot,
+.Loader-dotWrapper:nth-child(8) {
+  animation-delay: calc(var(--spin-duration) / 10 * 8);
 }
-.Loader--spinner span:nth-child(30) {
-  transform: rotateZ(calc(30deg * var(--degreeSpread)));
-  opacity: 1;
+.Loader-dotWrapper:nth-child(9) .Loader-dot,
+.Loader-dotWrapper:nth-child(9) {
+  animation-delay: calc(var(--spin-duration) / 10 * 9);
+}
+.Loader-dot:nth-child(10),
+.Loader-dotWrapper:nth-child(10) {
+  animation-delay: calc(var(--spin-duration) / 10 * 10);
 }

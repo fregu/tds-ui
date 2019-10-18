@@ -25,7 +25,11 @@ export type Props = {
   theme?: string,
   plain?: boolean,
   tabClassName?: string,
-  selectedTabClassName?: string
+  listClassName?: string,
+  contentClassName?: string,
+  panelClassName?: string,
+  selectedTabClassName?: string,
+  sticky?: boolean
 }
 
 type StateType = {
@@ -57,12 +61,16 @@ export default class Tabs extends Component<Props, StateType> {
       theme,
       plain,
       tabClassName,
+      listClassName,
+      contentClassName,
+      panelClassName,
       selectedTabClassName,
-      selectedTabIndex: selectedTabIndexProp = 0
+      selectedTabIndex: selectedTabIndexProp = 0,
+      sticky
     } = this.props
 
     const { selectedTabIndex = selectedTabIndexProp, minHeight } = this.state
-    const selectedTab = items[selectedTabIndex]
+    const selectedTab = items[selectedTabIndex || 0]
 
     return (
       <div
@@ -72,13 +80,14 @@ export default class Tabs extends Component<Props, StateType> {
           {
             'Tabs--bordered': bordered,
             'Tabs--fill': fill,
-            'Tabs--plain': plain
+            'Tabs--plain': plain,
+            'Tabs--sticky': sticky
           },
           className
         )}
-        style={{ minHeight: minHeight ? +minHeight + 'px' : 0 }}
+        style={{ minHeight: minHeight && !sticky ? minHeight + 'px' : 0 }}
       >
-        <ul className={cx('Tabs-list')} role="tablist">
+        <ul className={cx('Tabs-list', listClassName)} role="tablist">
           {items.map(({ title, disabled, className }, index) => (
             <li
               key={index}
@@ -101,18 +110,26 @@ export default class Tabs extends Component<Props, StateType> {
             </li>
           ))}
         </ul>
-        <div className={cx('Tabs-content', { [`theme-${theme}`]: theme })}>
-          {selectedTab.to ? (
-            <Redirect to={selectedTab.to} />
-          ) : (
-            <section
-              className={cx('Tabs-panel', { 'layout-container': fill })}
-              role="tabpanel"
-            >
-              {selectedTab.content}
-            </section>
-          )}
-        </div>
+        {selectedTab ? (
+          <div
+            className={cx('Tabs-content', contentClassName, {
+              [`theme-${theme}`]: theme
+            })}
+          >
+            {selectedTab.to ? (
+              <Redirect to={selectedTab.to} />
+            ) : (
+              <section
+                className={cx('Tabs-panel', panelClassName, {
+                  'layout-container': fill
+                })}
+                role="tabpanel"
+              >
+                {selectedTab?.content}
+              </section>
+            )}
+          </div>
+        ) : null}
       </div>
     )
   }

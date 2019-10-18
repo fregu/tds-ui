@@ -3,7 +3,9 @@ import React, { type Node } from 'react'
 import Icon, { type Props as IconProps } from 'ui/components/Icon'
 import Link, { type Props as LinkProps } from 'ui/components/Link'
 import classNames from 'classnames/bind'
+import ConditionalWrapper from 'ui/helpers/ConditionalWrapper'
 import styles from './index.css'
+
 const cx = classNames.bind(styles)
 
 export type Props = {
@@ -47,18 +49,21 @@ export default function Title({
             className={cx('Title-icon', icon.className)}
           />
         ) : null}
-        <span
-          className={cx('Title-text')}
-          dangerouslySetInnerHTML={{ __html: text }}
-        >
-          {to ? (
+        <ConditionalWrapper
+          if={to}
+          wrap={children => (
             <Link to={to} className={cx('Title-link')} cover plain>
               {children}
             </Link>
-          ) : (
-            children
           )}
-        </span>
+        >
+          <span
+            className={cx('Title-text')}
+            dangerouslySetInnerHTML={{ __html: text }}
+          >
+            {text ? null : children}
+          </span>
+        </ConditionalWrapper>
       </span>
     </Hx>
   )

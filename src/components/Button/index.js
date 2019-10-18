@@ -61,6 +61,7 @@ export default function Button({
   const isLink = to || href
   const ButtonTag = tag || (isLink ? Link : 'button')
   const clickProps = isLink ? { to, href } : {}
+
   return (
     <Connect mapDispatchToProps={{ confirmAction, trackEvent }}>
       {({ confirmAction, trackEvent }) => (
@@ -78,11 +79,13 @@ export default function Button({
               'Button--iconAfter': iconAfter,
               'Button--primary': primary,
               'Button--round': round,
+              'Button--linked': isLink,
               [`Button--${size}`]: size,
               [`Button--withTheme theme-${theme || ''}`]: theme
             },
             className
           )}
+          plain={isLink || null}
           title={(hiddenText && text) || null}
           disabled={disabled}
           onClick={
@@ -126,11 +129,8 @@ export default function Button({
                 className={cx('Button--icon', icon.className)}
               />
             ) : null}
-            <span
-              className={cx('Button-text', { 'hidden-text': hiddenText })}
-              dangerouslySetInnerHTML={text ? { __html: text } : null}
-            >
-              {children}
+            <span className={cx('Button-text', { 'hidden-text': hiddenText })}>
+              {text || children}
             </span>
           </div>
         </ButtonTag>

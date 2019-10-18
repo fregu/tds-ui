@@ -10,12 +10,18 @@
 .Tabs {
   padding-bottom: 1px;
   box-sizing: border-box;
+  position: relative;
 }
 .Tabs-list {
   display: flex;
   flex-direction: row;
   margin: 0;
   padding: 0;
+}
+.Tabs--sticky .Tabs-list {
+  position: sticky;
+  top: 0;
+  z-index: 3;
 }
 .Tabs--spread .Tabs-list {
   justify-content: stretch;
@@ -91,11 +97,6 @@
   border-top: 1px solid var(--tab-active-border-color);
 }
 
-.Tabs--bordered .Tabs-content {
-  padding: var(--layout-gutter);
-  background: var(--tab-panel-background-color);
-  border: 1px solid var(--tab-active-border-color);
-}
 .Tabs-panel {
   width: ;
 }

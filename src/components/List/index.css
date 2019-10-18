@@ -44,6 +44,8 @@
   counter-increment: list-item-count;
   position: relative;
   padding: 0.5em 1em;
+  margin: 0;
+  list-style: none;
 }
 .List--divided .List-item {
   border-bottom: 1px solid var(--color-light-grey);

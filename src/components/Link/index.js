@@ -21,7 +21,8 @@ export type Props = {
   icon?: string | IconProps,
   onClick?: Function,
   attributes?: any,
-  trackClick?: string
+  trackClick?: string,
+  textClass?: string
 }
 
 export default function Link({
@@ -36,6 +37,7 @@ export default function Link({
   disabled,
   onClick,
   trackClick,
+  textClass,
   ...attributes
 }: Props) {
   const url = to || href || ''
@@ -114,7 +116,7 @@ export default function Link({
               />
             ) : null}
             <span
-              className={cx('Link-text')}
+              className={cx('Link-text', textClass)}
               dangerouslySetInnerHTML={text ? { __html: text } : null}
             >
               {text ? null : children}

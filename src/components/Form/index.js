@@ -50,6 +50,9 @@ export default class Form extends Component<Props, State> {
     })
     this.el.addEventListener('initField', this.onChange)
 
+    this.el.addEventListener('change', this.onChange)
+    this.el.addEventListener('input', this.onChange)
+
     if (this.props.initialChange) {
       this.triggerChange()
     }

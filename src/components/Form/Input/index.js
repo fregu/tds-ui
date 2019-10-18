@@ -53,7 +53,8 @@ export type Props = {
   discreet?: boolean,
   plain?: boolean,
   hideCaret?: boolean,
-  theme?: string
+  theme?: string,
+  autoFocus?: boolean
 }
 type State = {
   value?: string,
@@ -68,6 +69,9 @@ class Input extends Component<Props, State> {
   hasEventListener: boolean
   componentDidMount = () => {
     this.triggerInitEvent()
+    if (this.props.autoFocus) {
+      this.focus()
+    }
   }
   onFocus = (event: Event) => {
     this.setState({ hasFocus: true })
