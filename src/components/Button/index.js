@@ -126,7 +126,7 @@ export default function Button({
             {icon ? (
               <Icon
                 {...(typeof icon === 'string' ? { type: icon } : icon)}
-                className={cx('Button--icon', icon.className)}
+                className={cx('Button-icon', icon.className)}
               />
             ) : null}
             <span className={cx('Button-text', { 'hidden-text': hiddenText })}>

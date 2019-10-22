@@ -11,8 +11,10 @@ export type Props = {
   className?: string,
   required?: boolean,
   disabled?: boolean,
+  minHeight?: string | number,
   label?: string,
   id: string,
+  inputClassName?: string,
   defaultValue?: string,
   fill?: boolean,
   prefix?: string,
@@ -36,6 +38,8 @@ export default class Textarea extends Component<Props, State> {
     const {
       id,
       className,
+      inputClassName,
+      minHeight,
       required,
       disabled,
       label,
@@ -61,14 +65,21 @@ export default class Textarea extends Component<Props, State> {
             {label}
           </Label>
         ) : null}
-        <div className={cx('Textarea-wrapper')}>
+        <div
+          className={cx('Textarea-wrapper')}
+          style={
+            minHeight
+              ? { minHeight: isNaN(minHeight) ? minHeight : `${minHeight}px` }
+              : null
+          }
+        >
           <textarea
             ref={el => el && (this.input = el)}
             id={id}
             name={name ? prefix + name : null}
             disabled={disabled}
             onInput={this.onInput}
-            className={cx('Textarea-input')}
+            className={cx('Textarea-input', inputClassName)}
             value={value || value === '' ? value : defaultValue}
             {...props}
           />

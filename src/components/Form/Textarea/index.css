@@ -1,5 +1,6 @@
 .Textarea {
   max-width: 300px;
+  box-sizing: border-box;
 }
 .Textarea-wrapper {
   position: relative;
@@ -8,6 +9,7 @@
   display: inline-block;
   min-width: 280px;
   max-width: 100%;
+  box-sizing: border-box;
 }
 
 .Textarea--fill {
@@ -40,12 +42,14 @@
   z-index: -1;
   position: relative;
   margin: 0;
-  padding: 0;
+  padding: 0.75em 1em;
   min-width: 0;
   width: 100%;
-  padding: 1em 1em 1.35em;
   box-sizing: border-box;
   white-space: pre-wrap;
+}
+.Textarea-pre::after {
+  content: ' ';
 }
 
 .Textarea-label {

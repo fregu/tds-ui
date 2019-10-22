@@ -116,7 +116,7 @@
 }
 .Button-icon {
   flex: 0;
-  padding: 1em 0;
+  padding: 0;
 }
 .Button-text {
   flex: 1 0 auto;
@@ -133,9 +133,9 @@
   padding-left: 0;
 }
 .Button--withIcon.Button--plain .Button-text {
-  padding-left: 0.15em;
+  padding-left: 0.5em;
 }
 .Button--withIcon.Button--plain.Button--iconAfter .Button-text {
-  padding-right: 0.15em;
+  padding-right: 0.5em;
   padding-left: 0;
 }
