@@ -45,14 +45,25 @@
 .Input--discreet .Input-input {
   background: none;
   border: none;
-  border-bottom: 2px solid var(--color-dark-grey);
+  color: inherit;
   padding: 0;
+}
+.Input--discreet .Input-inputWrapper::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-bottom: 2px solid;
+  opacity: 0.25;
+  pointer-events: none;
 }
 .Input--discreet.Input--floatingLabel.Input--hasFocus .Input-label {
   color: var(--color-primary-action);
 }
-.Input--discreet.Input--hasFocus .Input-input {
+.Input--discreet.Input--hasFocus .Input-inputWrapper::after {
   border-bottom-color: var(--color-primary-action);
+  opacity: 1;
 }
 .Input:not(.Input--discreet):not(.Input--withTheme) .Input-input:hover {
   border: 1px solid var(--color-medium-grey);
@@ -139,8 +150,9 @@
   background-color: rgba(194, 64, 23, 0.12);
 }
 .Input--invalid.Input--discreet .Input-input {
-  background-color: transparent;
+  background: transparent !important;
 }
+
 .Input-error {
   display: block;
   margin: 0.5em 0;
