@@ -1,5 +1,6 @@
 // @flow
 import React, { Fragment, type Node } from 'react'
+import marked from 'marked'
 
 type Props = {
   tag?: string,
@@ -16,11 +17,11 @@ export default function Content({
   partials = {},
   tag: Tag = 'p'
 }: Props) {
-  if (html) {
+  if (html || markdown) {
     return (
       <div
         className={'htmlContent'}
-        dangerouslySetInnerHTML={{ __html: html }}
+        dangerouslySetInnerHTML={{ __html: markdown ? marked(markdown) : html }}
       />
     )
   }
@@ -30,6 +31,7 @@ export default function Content({
     ? content.split('\n')
     : []
   ).filter(Boolean)
+
   return (
     <Fragment>
       {paragraphs.length
@@ -41,7 +43,11 @@ export default function Content({
                 <Tag
                   key={index}
                   className={className}
-                  dangerouslySetInnerHTML={{ __html: p }}
+                  dangerouslySetInnerHTML={{
+                    __html: marked(p)
+                      .replace(/^<p>/, '')
+                      .replace(/<\/p>$/, '')
+                  }}
                 />
               )
             ) : (
