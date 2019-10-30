@@ -15,6 +15,7 @@
 
   --button-primary-background: var(--color-primary-action);
   --button-primary-color: var(--color-white);
+  --button-primary-shadow: 0 0 0 2px var(--color-white);
 
   --button-primary-hover-background: var(--color-white);
   --button-primary-hover-color: var(--color-primary-action);
@@ -38,6 +39,8 @@
   background: var(--button-background);
   color: var(--button-color);
   box-shadow: var(--button-shadow);
+  box-sizing: border-box;
+  min-width: 8em;
 }
 .Button--large {
   padding: 0.75em 1.5em;
@@ -47,6 +50,7 @@
 }
 .Button--withIcon.Button--hiddenText {
   padding: 0.5em;
+  min-width: none;
 }
 .Button--large.Button--withIcon.Button--hiddenText {
   padding: 0.5em;
@@ -67,6 +71,7 @@
 .Button--primary {
   background: var(--button-primary-background);
   color: var(--button-primary-color);
+  box-shadow: var(--button-primary-shadow);
 }
 .Button--primary:not(.Button--plain):not(.Button--disabled):hover {
   background-color: var(
