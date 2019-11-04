@@ -3,6 +3,7 @@ import React, { type Node } from 'react'
 import classNames from 'classnames/bind'
 import ConditionalWrapper from 'ui/helpers/ConditionalWrapper'
 import Link from 'ui/components/Link'
+import Icon from 'ui/components/Icon'
 import styles from './index.css'
 const cx = classNames.bind(styles)
 
@@ -44,6 +45,7 @@ export const ListItem = ({
       wrap={children => (
         <Link
           to={to}
+          {...attributes}
           plain
           block
           icon={icon}
@@ -53,6 +55,13 @@ export const ListItem = ({
         </Link>
       )}
     >
+      {!to && icon ? (
+        <Icon
+          {...icon}
+          type={icon.type || icon}
+          className={cx('List-itemIcon', icon.className)}
+        />
+      ) : null}
       {content || text || children}
     </ConditionalWrapper>
   </li>
@@ -118,8 +127,11 @@ export default function List({
                 children: item,
                 to,
                 icon,
-                linkClassName: cx(linkClassName, item.linkClassName),
-                attributes
+                linkClassName: cx(linkClassName, item.linkClassName)
+              }}
+              attributes={{
+                ...(attributes || {}),
+                ...(text || to || content ? item : {})
               }}
             />
           )

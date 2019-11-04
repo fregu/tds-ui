@@ -40,7 +40,7 @@
   color: var(--button-color);
   box-shadow: var(--button-shadow);
   box-sizing: border-box;
-  min-width: 8em;
+  /* min-width: 8em; */
 }
 .Button--large {
   padding: 0.75em 1.5em;
@@ -50,7 +50,7 @@
 }
 .Button--withIcon.Button--hiddenText {
   padding: 0.5em;
-  min-width: none;
+  min-width: 0;
 }
 .Button--large.Button--withIcon.Button--hiddenText {
   padding: 0.5em;

@@ -62,7 +62,7 @@ export default function Link({
           if={url.match(/^\//)}
           wrap={children => (
             <NavLink
-              to={url}
+              to={!disabled && url}
               {...linkProps}
               onClick={event => {
                 if (trackClick) {
@@ -85,7 +85,7 @@ export default function Link({
           )}
           else={children => (
             <a
-              href={url}
+              href={!disabled && url}
               {...linkProps}
               onClick={event => {
                 if (trackClick) {
