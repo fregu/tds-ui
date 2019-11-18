@@ -1,3 +1,8 @@
+:root {
+  --color-checkbox-border: var(--color-light-grey, #eee);
+  --color-checkbox-background: var(--color-white, #fff);
+  --color-checkbox-check: var(--color-dark-grey, #666);
+}
 .FormCheckbox {
   padding: 1px 0;
 }
@@ -21,19 +26,19 @@
   margin-top: -0.5em;
   width: 1em;
   height: 1em;
-  box-shadow: 0 0 0 1px var(--color-light-grey);
-  background: var(--color-white, white);
+  box-shadow: 0 0 0 1px var(--color-checkbox-border);
+  background: var(--color-checkbox-background, white);
   transition: var(--transition);
 }
 .FormCheckbox-label:hover::before {
-  box-shadow: 0 0 0 1px var(--color-dark-grey);
+  box-shadow: 0 0 0 1px var(--color-checkbox-check);
 }
 .FormCheckbox-input:focus + .FormCheckbox-label::before {
-  box-shadow: 0 0 0 1px var(--color-dark-grey);
+  box-shadow: 0 0 0 1px var(--color-checkbox-check);
 }
 .FormCheckbox-input:checked + .FormCheckbox-label::before {
   color: var(--color-white);
-  background: var(--color-dark-grey);
+  background: var(--color-checkbox-check);
 }
 .FormCheckbox-checkIcon {
   text-align: center;
@@ -50,14 +55,51 @@
   opacity: 1;
 }
 .FormCheckbox--disabled .FormCheckbox-label {
-  color: var(--color-grey);
+  opacity: 0.7;
   pointer-events: none;
 }
 .FormCheckbox-input:disabled + .FormCheckbox-label::before,
 .FormCheckbox-input:disabled + .FormCheckbox-label:hover::before {
-  background: var(--color-light-grey);
   box-shadow: none;
+  opacity: 0.7;
 }
 .FormCheckbox-input:disabled + .FormCheckbox-label .FormCheckbox-checkIcon {
   color: inherit;
+}
+
+.FormCheckbox--toggle .FormCheckbox-label {
+  padding-left: 3.25em;
+}
+.FormCheckbox--toggle .FormCheckbox-label::before {
+  height: 1.5em;
+  width: 2.5em;
+  margin-top: -0.7em;
+  border-radius: 1em;
+}
+.FormCheckbox--toggle .FormCheckbox-checkIcon {
+  width: 1.1em;
+  height: 1.1em;
+  float: right;
+  border-radius: 1em;
+  text-align: center;
+  opacity: 0.5;
+  left: 0.5em;
+  transition: all var(--transition-quick);
+  background: var(--color-checkbox-check);
+  color: var(--color-checkbox-check);
+}
+.FormCheckbox--toggle
+  .FormCheckbox-input:checked
+  + .FormCheckbox-label::before {
+  background: var(--color-primary-action, var(--color-checkbox-check));
+}
+
+.FormCheckbox--toggle
+  .FormCheckbox-input:checked
+  + .FormCheckbox-label
+  .FormCheckbox-checkIcon {
+  opacity: 1;
+  left: 1.5em;
+  background: var(--color-white);
+  color: var(--color-primary-action, var(--color-checkbox-check));
 }

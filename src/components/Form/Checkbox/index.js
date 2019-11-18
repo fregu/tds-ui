@@ -16,7 +16,8 @@ type Props = {
   defaultChecked?: boolean,
   checked?: boolean,
   className?: string,
-  modifiers?: Array<string>
+  modifiers?: Array<string>,
+  toggle?: boolean
 }
 
 export default function Checkbox({
@@ -31,6 +32,7 @@ export default function Checkbox({
   defaultChecked,
   modifiers = [],
   onChange,
+  toggle,
   ...attributes
 }: Props) {
   return (
@@ -39,7 +41,8 @@ export default function Checkbox({
         'FormCheckbox',
         className,
         {
-          'FormCheckbox--disabled': disabled
+          'FormCheckbox--disabled': disabled,
+          'FormCheckbox--toggle': toggle
         },
         modifiers.map(mod => 'FormCheckbox--' + mod)
       )}
@@ -49,7 +52,9 @@ export default function Checkbox({
         type="checkbox"
         {...attributes}
         className={cx('FormCheckbox-input')}
-        onChange={e => typeof onChange === 'function' ? onChange(e, e.target.checked) : null}
+        onChange={e =>
+          typeof onChange === 'function' ? onChange(e, e.target.checked) : null
+        }
         value={value}
         name={name}
         checked={checked}

@@ -47,7 +47,9 @@ export default function formatString(
       let amountString = parts[0]
 
       let dec =
-        parts[1] && decimals
+        parts[1] &&
+        decimals &&
+        Math.abs(Number(parts[1]) - Math.round(parts[1])) > 0
           ? Math.round(parts[1] * Math.pow(10, decimals)) /
             Math.pow(10, decimals)
           : parts[1]
@@ -59,7 +61,10 @@ export default function formatString(
       break
     case 'number':
       resultString = (!isNaN(formatString) && Number(formatString)) || 0
-      if (decimals) {
+      if (
+        decimals &&
+        Math.abs(Number(resultString) - Math.round(Number(parts[1]))) > 0
+      ) {
         const factor = Math.pow(10, decimals)
         resultString = Math.round(resultString * factor) / factor
       }
