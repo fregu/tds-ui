@@ -21,6 +21,17 @@
 .Accordion--hover {
   z-index: 2;
 }
+.Accordion--rounded::before {
+  border-radius: var(--accordion-border-radius, var(--border-radius));
+}
+.Accordion--rounded .Accordion-header {
+  border-radius: var(--accordion-border-radius, var(--border-radius))
+    var(--accordion-border-radius, var(--border-radius)) 0 0;
+}
+.Accordion--rounded .Accordion-content {
+  border-radius: 0 0 var(--accordion-border-radius, var(--border-radius))
+    var(--accordion-border-radius, var(--border-radius));
+}
 .Accordion::before {
   content: '';
   position: absolute;
@@ -30,7 +41,7 @@
   width: 100%;
   transition: border var(--aniation-transition);
   box-sizing: border-box;
-  border: 1px solid var(--color-lighter-grey);
+  border: 1px solid var(--color-light-grey);
 }
 .Accordion:not(.Accordion--themed)::before {
   background: var(--color-white);
@@ -68,7 +79,7 @@
   font-size: 1.5em;
   margin: 0;
   font-weight: var(--font-weight-medium);
-  transition: all var(--aniation-transition);
+  transition: all var(--animation-transition, var(--transition));
   white-space: normal;
 }
 
@@ -127,7 +138,7 @@
 }
 .Accordion-headerIcon {
   position: absolute;
-  right: 0.5em;
+  right: 1em;
   top: 50%;
   transform: translateY(-50%);
 }

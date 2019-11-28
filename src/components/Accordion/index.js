@@ -13,7 +13,8 @@ type Props = {
   fill?: boolean,
   noPadding?: boolean,
   theme?: string,
-  isOpen?: boolean
+  isOpen?: boolean,
+  rounded?: boolean
 }
 type State = {
   isOpen?: boolean,
@@ -94,7 +95,15 @@ export default class Accordion extends Component<Props, State> {
     })
   }
   render() {
-    const { title, className, children, fill, noPadding, theme } = this.props
+    const {
+      title,
+      className,
+      children,
+      fill,
+      noPadding,
+      rounded,
+      theme
+    } = this.props
     const { isOpen, height, hover } = this.state
     return (
       <section
@@ -105,6 +114,7 @@ export default class Accordion extends Component<Props, State> {
             'Accordion--hover': hover,
             'Accordion--closed': !isOpen,
             'Accordion--fill': fill,
+            'Accordion--rounded': rounded,
             'Accordion--noPadding': noPadding,
             'Accordion--themed': theme,
             [`theme-${theme}`]: theme
@@ -125,8 +135,7 @@ export default class Accordion extends Component<Props, State> {
             text={title}
           />
           <Icon
-            size="big"
-            type={isOpen ? 'minus' : 'plus'}
+            type={isOpen ? 'chevronUp' : 'chevronDown'}
             className={cx('Accordion-headerIcon')}
           />
         </header>
