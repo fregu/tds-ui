@@ -52,7 +52,7 @@ export default function Title({
         <ConditionalWrapper
           if={to}
           wrap={children => (
-            <Link to={to} className={cx('Title-link')} cover plain>
+            <Link to={to} className={cx('Title-link')} plain>
               {children}
             </Link>
           )}

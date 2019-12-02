@@ -25,6 +25,7 @@
 
   font-weight: var(--font-weight-medium);
 }
+.List--withBulletIcon,
 .List--ordered,
 .List--unordered {
   padding-left: 1.5em;
@@ -33,11 +34,14 @@
   content: '';
   width: 0.5em;
   height: 0.5em;
-  position: absolute;
-  left: -1.25em;
-  top: 0.25em;
   background: currentColor;
   border-radius: 1em;
+}
+.List-bulletIcon,
+.List--unordered .List-item::before {
+  position: absolute;
+  left: -1.25em;
+  top: 0.75em;
 }
 .List-item {
   position: relative;
@@ -47,8 +51,15 @@
   margin: 0;
   list-style: none;
 }
-.List--divided .List-item {
-  border-bottom: 1px solid var(--color-light-grey);
+
+.List--withBulletIcon .List-item,
+.List--ordered .List-item,
+.List--unordered .List-item {
+  padding-left: 0.25em;
+}
+
+.List--divided > .List-list > .List-item {
+  border-bottom: 1px solid var(--list-divider-color, var(--color-light-grey));
 }
 .List--plain .List-item::before {
   content: none !important;

@@ -7,16 +7,23 @@ const cx = classNames.bind(styles)
 export type Props = {
   className?: string,
   type?: 'spinner',
-  children?: Node
+  children?: Node,
+  size?: 'small' | 'large'
 }
 
 export default function Loader({
   className,
   type = 'spinner',
-  children
+  children,
+  size
 }: Props) {
   return (
-    <div className={cx('Loader', className, { [`Loader--${type}`]: type })}>
+    <div
+      className={cx('Loader', className, {
+        [`Loader--${type}`]: type,
+        [`Loader--${size}`]: size
+      })}
+    >
       <div className={cx('Loader-wrapper')}>
         {Array(10)
           .fill(undefined)

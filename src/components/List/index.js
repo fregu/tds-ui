@@ -3,7 +3,7 @@ import React, { type Node } from 'react'
 import classNames from 'classnames/bind'
 import ConditionalWrapper from 'ui/helpers/ConditionalWrapper'
 import Link from 'ui/components/Link'
-import Icon from 'ui/components/Icon'
+import Icon, { type Props as IconProps } from 'ui/components/Icon'
 import styles from './index.css'
 const cx = classNames.bind(styles)
 
@@ -22,7 +22,8 @@ type Props = {
   },
   striped?: boolean,
   theme?: string,
-  divided?: boolean
+  divided?: boolean,
+  bulletIcon?: IconProps
 }
 export const ListItem = ({
   attributes,
@@ -32,7 +33,8 @@ export const ListItem = ({
   icon,
   linkClassName,
   text,
-  content
+  content,
+  bulletIcon
 }) => (
   <li
     {...attributes}
@@ -40,6 +42,13 @@ export const ListItem = ({
       'List-item--linked': to
     })}
   >
+    {bulletIcon ? (
+      <Icon
+        {...bulletIcon}
+        className={cx('List-bulletIcon', bulletIcon.className)}
+        type={bulletIcon.type || bulletIcon}
+      />
+    ) : null}
     <ConditionalWrapper
       if={to}
       wrap={children => (
@@ -78,7 +87,8 @@ export default function List({
   striped,
   plain,
   theme,
-  divided
+  divided,
+  bulletIcon
 }: Props) {
   const ListTag = type === 'ordered' ? 'ol' : 'ul'
   return (
@@ -98,6 +108,7 @@ export default function List({
           'List--divided': divided,
           'List--horizontal': horizontal,
           'List--vertical': !horizontal,
+          'List--withBulletIcon': bulletIcon,
           [`List--withTheme theme-${theme}`]: theme
         },
         modifiers.map(mod => 'List--' + mod)
@@ -119,6 +130,7 @@ export default function List({
             index
           ) => (
             <ListItem
+              bulletIcon={bulletIcon}
               key={index}
               className={cx('List-item', itemClassName, className)}
               {...{
