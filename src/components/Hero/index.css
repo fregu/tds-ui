@@ -4,9 +4,14 @@
   transform: translateX(-50%);
   left: 50%;
   display: flex;
-  min-height: 35vh;
+  min-height: 50vh;
   align-items: center;
   z-index: 0;
+}
+@media (min-height: 1280px) {
+  .Hero {
+    min-height: 600px;
+  }
 }
 
 .Hero--dimensions {

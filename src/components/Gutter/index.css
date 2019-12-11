@@ -20,9 +20,7 @@
 .Gutter--noWrap {
   flex-wrap: nowrap;
 }
-.Gutter--noWrap .Gutter-item {
-  flex-shrink: 1;
-}
+
 .Gutter-item {
   box-sizing: border-box;
 }
@@ -31,6 +29,15 @@
 }
 .Gutter--fill > .Gutter-item {
   flex-grow: 1;
+}
+.Gutter--noWrap > .Gutter-item {
+  flex-shrink: 1;
+}
+.Gutter--noShrink > .Gutter-item {
+  flex-shrink: 0;
+}
+.Gutter--noGrow > .Gutter-item {
+  flex-grow: 0;
 }
 .Gutter--vertical > .Gutter-item {
   width: 100%;

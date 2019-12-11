@@ -28,7 +28,7 @@ export default function Layout({
 }: Props) {
   return (
     <div className={cx('Layout', className)}>
-      <Helmet>{helmet}</Helmet>
+      {helmet ? <Helmet>{helmet}</Helmet> : null}
       <Connect
         mapDispatchToProps={{ initApp, setUrl }}
         mapStateToProps={({

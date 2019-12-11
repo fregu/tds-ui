@@ -23,7 +23,8 @@ export type Props = {
   icon?: IconProps,
   title?: string | TitleProps,
   theme?: string,
-  bordered?: boolean
+  bordered?: boolean,
+  wideGap?: boolean
 }
 
 export default function Section({
@@ -39,7 +40,8 @@ export default function Section({
   className,
   theme,
   bordered,
-  valign
+  valign,
+  wideGap
 }: Props) {
   return (
     <section
@@ -50,6 +52,7 @@ export default function Section({
         'Section--withIcon': icon,
         'Section--withTitle': title,
         'Section--bordered': bordered,
+        'Section--widegap': wideGap,
         [`Section--withTheme theme-${theme || ''}`]: theme
       })}
     >

@@ -15,5 +15,5 @@ module.exports = {
     jest: true,
     es6: true
   },
-  plugins: ['flowtype', 'jsx-a11y', 'react', 'prettier', 'standard']
+  plugins: ['flowtype', 'jsx-a11y', 'react', 'prettier']
 }

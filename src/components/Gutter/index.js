@@ -20,6 +20,7 @@ type Props = {
   children: any,
   className?: string,
   noWrap?: boolean,
+  noShrink?: boolean,
   modifiers?: Array<string>,
   attributes?: any
 }
@@ -35,6 +36,8 @@ export default function Gutter({
   children,
   className,
   noWrap,
+  noShrink,
+  noGrow,
   modifiers = [],
   attributes = {}
 }: Props) {
@@ -47,6 +50,8 @@ export default function Gutter({
           'Gutter--' + valign,
           {
             'Gutter--noWrap': noWrap,
+            'Gutter--noShrink': noShrink,
+            'Gutter--noGrow': noGrow,
             'Gutter--wideGap': wide,
             'Gutter--tightGap': tight,
             'Gutter--vertical': vertical,

@@ -1,3 +1,15 @@
+@import '../../base/breakpoints.css': root {
+  --section-gap: var(--layout-gutter);
+}
+.Section--wideGap {
+  --section-gap: calc(var(--layout-gutter) * 2);
+}
+@media (--min-large) {
+  .Section--wideGap {
+    --section-gap: calc(var(--layout-gutter) * 4);
+  }
+}
+
 .Section {
   display: flex;
   flex: 1 0 auto;
@@ -5,16 +17,16 @@
 .Section-wrapper {
   display: flex;
   flex-direction: column;
-  margin: calc(var(--layout-gutter) / -2);
+  margin: calc(var(--section-gap) / -2);
 }
 .Section--bordered {
   box-shadow: var(--shadow-default);
-  padding: var(--layout-gutter);
+  padding: var(--section-gap);
 }
 
 .Section-contentWrapper {
   flex: 1 1 50%;
-  padding: calc(var(--layout-gutter) / 2);
+  padding: calc(var(--section-gap) / 2);
   box-sizing: border-box;
 }
 
@@ -22,7 +34,7 @@
   flex: 1 0 auto;
   width: 33.33%;
   min-width: 200px;
-  padding: calc(var(--layout-gutter) / 2);
+  padding: calc(var(--section-gap) / 2);
   box-sizing: border-box;
 }
 @media (--max-medium) {
@@ -55,7 +67,7 @@
   flex-direction: column-reverse;
 }
 .Section--bordered .Section-figure {
-  margin: calc(-1 * var(--layout-gutter));
+  margin: calc(-1 * var(--section-gap));
 }
 .Section--bordered.Section--imageTop .Section-figure {
   margin-bottom: 0;

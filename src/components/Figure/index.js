@@ -64,6 +64,10 @@ export default function Figure({
       >
         <img
           {...attributes}
+          style={{
+            ...(attributes.height ? { height: `${attributes.height}px` } : {}),
+            ...(attributes.width ? { width: `${attributes.width}px` } : {})
+          }}
           src={url}
           srcSet={srcSet}
           className={cx('Figure-image')}

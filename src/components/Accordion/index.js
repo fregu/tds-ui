@@ -29,11 +29,15 @@ export default class Accordion extends Component<Props, State> {
   state = { isOpen: this.props.isOpen }
   resizing: boolean = false
   componentDidMount = () => {
-    this.wrapper.addEventListener('transitionend', this.onTransitionEnd)
+    if (typeof window !== 'undefined') {
+      this.wrapper.addEventListener('transitionend', this.onTransitionEnd)
+      this.wrapper.addEventListener('closeAccordion', this.onClose)
+    }
   }
   componentWillUnmount = () => {
     if (typeof window !== 'undefined') {
       window.removeEventListener('resize', this.onResize)
+      this.wrapper.removeEventListener('closeAccordion', this.onClose)
     }
   }
   onClick = () => {
@@ -94,6 +98,7 @@ export default class Accordion extends Component<Props, State> {
       height: null
     })
   }
+
   render() {
     const {
       title,
@@ -104,6 +109,7 @@ export default class Accordion extends Component<Props, State> {
       rounded,
       theme
     } = this.props
+
     const { isOpen, height, hover } = this.state
     return (
       <section
@@ -129,10 +135,11 @@ export default class Accordion extends Component<Props, State> {
           onMouseOut={this.onMouseOut}
         >
           <Title
-            className={cx('Accordion-title')}
+            {...title}
+            className={cx('Accordion-title', title.className)}
             level={2}
             asLevel={5}
-            text={title}
+            text={title.text || title}
           />
           <Icon
             type={isOpen ? 'chevronUp' : 'chevronDown'}

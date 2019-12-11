@@ -1,3 +1,7 @@
+.RadioList {
+  border: none;
+  margin: 0;
+}
 .RadioList--withTheme {
   border: none;
 }

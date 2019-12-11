@@ -8,3 +8,9 @@
   display: inline-flex;
   align-items: center;
 }
+.Title--themed {
+  padding: 0.25em 0.5em;
+}
+.Title--inline {
+  display: inline-block;
+}

@@ -26,7 +26,9 @@ export default function Title({
   text,
   to,
   children,
-  align
+  align,
+  theme,
+  inline
 }: Props) {
   const Hx = !isNaN(level) ? `h${level}` : 'strong'
   return (
@@ -36,7 +38,9 @@ export default function Title({
         `text-heading${asLevel || level}`,
         {
           'Title--withIcon': icon,
-          [`Title--${align}`]: align
+          [`Title--${align}`]: align,
+          [`Title--themed theme-${theme}`]: theme,
+          'Title--inline': inline
         },
         className
       )}
@@ -59,7 +63,7 @@ export default function Title({
         >
           <span
             className={cx('Title-text')}
-            dangerouslySetInnerHTML={{ __html: text }}
+            dangerouslySetInnerHTML={text ? { __html: text } : null}
           >
             {text ? null : children}
           </span>

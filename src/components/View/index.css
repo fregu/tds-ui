@@ -43,6 +43,14 @@
   padding-bottom: calc(var(--layout-gutter) * 2);
   z-index: var(--z-fullview);
 }
+.View--center .View-content,
+.View--middle .View-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .View-closeButton {
   position: fixed;
   right: 1em;

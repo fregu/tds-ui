@@ -19,7 +19,9 @@ type Props = {
   backTo?: string,
   closeClick?: Function,
   trackPage?: string,
-  scrollToTop?: boolean | 'smooth'
+  scrollToTop?: boolean | 'smooth',
+  center?: boolean,
+  middle?: boolean
 }
 
 export default class View extends Component<Props> {
@@ -55,7 +57,9 @@ export default class View extends Component<Props> {
       small,
       modifiers = [],
       scrollToTop,
-      trackPage: trackPageAs
+      trackPage: trackPageAs,
+      center,
+      middle
     } = this.props
 
     const { isTracked } = this.state
@@ -69,7 +73,9 @@ export default class View extends Component<Props> {
           return (
             <div
               className={cx('View-wrapper', {
-                'View-wrapper--overlay': fullView
+                'View-wrapper--overlay': fullView,
+                'View--center': center,
+                'View--middle': middle
               })}
             >
               <article
