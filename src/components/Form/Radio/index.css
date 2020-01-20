@@ -8,7 +8,6 @@
   left: -999em;
 }
 .Radio--disabled {
-  color: var(--color-disabled);
   pointer-events: none;
 }
 .Radio--disabled .Radio-label::before,

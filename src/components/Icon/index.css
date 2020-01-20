@@ -1,6 +1,5 @@
 .Icon {
   display: inline-block;
-  border-radius: 50%;
   width: auto;
   height: auto;
   color: inherit;
@@ -10,6 +9,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  border-radius: 50%;
 }
 .Icon--small {
   font-size: 0.875em;

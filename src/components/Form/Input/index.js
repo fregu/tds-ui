@@ -40,6 +40,7 @@ export type Props = {
   autoComplete?: string,
   onInput?: Function,
   onBlur?: Function,
+  details?: string,
   value?: string | number,
   /** Encodar name attributet för att undvika credit card autocomplete */
   hashed?: boolean,
@@ -66,6 +67,7 @@ class Input extends Component<Props, State> {
   state = {
     value: this.props.value
   }
+
   hasEventListener: boolean
   componentDidMount = () => {
     this.triggerInitEvent()
@@ -73,6 +75,7 @@ class Input extends Component<Props, State> {
       this.focus()
     }
   }
+
   onFocus = (event: Event) => {
     this.setState({ hasFocus: true })
 
@@ -80,6 +83,7 @@ class Input extends Component<Props, State> {
       this.props.onFocus(event)
     }
   }
+
   onBlur = (event: Event) => {
     this.validate(true)
     this.setState({ hasFocus: false })
@@ -87,6 +91,7 @@ class Input extends Component<Props, State> {
       this.props.onBlur(event)
     }
   }
+
   onInput = (event: Event) => {
     if (this.input.value !== this.state.value) {
       if (this.props.onInput) {
@@ -96,6 +101,7 @@ class Input extends Component<Props, State> {
       this.setState({ value: this.input.value })
     }
   }
+
   onChange = (event: Event) => {
     if (this.props.onChange) {
       this.props.onChange(event, this.input.value)
@@ -136,11 +142,13 @@ class Input extends Component<Props, State> {
       this.setState({ isValid, errors })
     }
   }
+
   onOtherChange = (event: Event) => {
     if (event.target !== this.input) {
       this.validate()
     }
   }
+
   hashString = (str: string) => {
     return (
       'b64:' +
@@ -154,6 +162,7 @@ class Input extends Component<Props, State> {
       )
     )
   }
+
   hashName = (name: string) => {
     return name.match(/\[/)
       ? name
@@ -206,6 +215,7 @@ class Input extends Component<Props, State> {
       this.input.dispatchEvent(changeEvent)
     }
   }
+
   focus = (select?: boolean) => {
     this.input.focus()
     if (select) {
@@ -240,6 +250,7 @@ class Input extends Component<Props, State> {
       theme,
       discreet,
       style,
+      details,
       hideCaret,
       ...props
     } = this.props
@@ -304,6 +315,7 @@ class Input extends Component<Props, State> {
             className={cx('Input-input', inputClassName)}
             name={hashed ? this.hashName(prefix + name) : name}
           />
+          {details ? <span className={'Input-details'}>{details}</span> : null}
         </span>
         {errors.length ? (
           <span className={cx('Input-error')}>

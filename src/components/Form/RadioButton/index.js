@@ -24,14 +24,16 @@ export default function RadioButton({
   className,
   hiddenInput,
   disabled,
+  icon,
+  fill,
   ...buttonProps
 }: Props) {
   return (
     <State>
       {({ isChecked = checked, setState }) => (
         <Button
+          fill={fill}
           noPadding
-          fill
           {...buttonProps}
           disabled={disabled}
           className={cx('RadioButton', className)}
@@ -39,7 +41,14 @@ export default function RadioButton({
         >
           <Radio
             className={cx('RadioButton-radio')}
-            {...{ name, value, id, checked: isChecked, disabled }}
+            {...{
+              name,
+              value,
+              id,
+              checked: isChecked,
+              disabled,
+              defaultChecked
+            }}
             onChange={(e, state) => {
               if (state !== checked) {
                 setState({ checked: state })
@@ -53,8 +62,18 @@ export default function RadioButton({
               fill: true,
               content: (
                 <div className="flex-row flex-spread flex-middle">
+                  {icon ? (
+                    <Icon
+                      {...icon}
+                      type={icon.type || icon}
+                      className={cx('RadioButton-icon', icon.className)}
+                    />
+                  ) : null}
                   <span className={cx('RadioButton-text')}>{label}</span>
-                  <Icon type={'check'} className={cx('RadioButton-icon')} />
+                  <Icon
+                    type={'check'}
+                    className={cx('RadioButton-checkIcon')}
+                  />
                 </div>
               )
             }}

@@ -18,12 +18,14 @@ export default function Icon({ type, size, className, theme }: Props) {
   return icon ? (
     <span
       className={cx('Icon', className, {
-        [`Icon--themed theme-${theme || ''}`]: theme,
+        'Icon--themed': theme,
         ['Icon--' + (size || '')]: size
       })}
     >
       <span
-        className="Icon-wrapper"
+        className={cx('Icon-wrapper', {
+          [`theme-${theme || ''}`]: theme
+        })}
         dangerouslySetInnerHTML={{ __html: icon }}
       />
     </span>

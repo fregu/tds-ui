@@ -17,6 +17,7 @@ export type Props = {
   text?: string,
   size?: 'tiny' | 'small' | 'large' | 'normal',
   theme?: string,
+  align?: 'left' | 'center' | 'right' | 'spread',
   onClick?: Function,
   icon?: string | IconProps,
   iconAfter?: boolean,
@@ -47,6 +48,7 @@ export default function Button({
   icon,
   iconAfter,
   theme,
+  align,
   to,
   href,
   tag,
@@ -80,6 +82,7 @@ export default function Button({
               'Button--primary': primary,
               'Button--round': round,
               'Button--linked': isLink,
+              [`Button--${align}`]: align,
               [`Button--${size}`]: size,
               [`Button--withTheme theme-${theme || ''}`]: theme
             },

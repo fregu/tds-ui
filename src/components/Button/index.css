@@ -1,29 +1,29 @@
 :root {
   --button-radius: 0;
-
+  --button-border: none;
   --button-background: var(--color-white);
   --button-color: var(--color-primary-action);
   --button-shadow: inset 0 0 0 2em rgba(0, 0, 0, 0);
 
-  --button-hover-background: var(--color-white);
-  --button-hover-color: var(--color-primary-action);
-  --button-hover-shadow: inset 0 0 0 2em rgba(0, 0, 0, 0.8);
+  --button-background-hover: var(--color-white);
+  --button-color-hover: var(--color-primary-action);
+  --button-shadow-hover: inset 0 0 0 2em rgba(0, 0, 0, 0.2);
 
-  --button-active-background: var(--color-white);
-  --button-active-color: var(--color-primary-action);
-  --button-active-shadow: inset 0 0 0 2em rgba(0, 0, 0, 0.3);
+  --button-background-active: var(--color-white);
+  --button-color-active: var(--color-primary-action);
+  --button-shadow-active: inset 0 0 0 2em rgba(0, 0, 0, 0.3);
 
   --button-primary-background: var(--color-primary-action);
   --button-primary-color: var(--color-white);
   --button-primary-shadow: 0 0 0 2px var(--color-white);
 
-  --button-primary-hover-background: var(--color-white);
-  --button-primary-hover-color: var(--color-primary-action);
-  --button-primary-hover-shadow: inset 0 0 0 2em rgba(0, 0, 0, 0.8);
+  --button-primary-background-hover: var(--color-white);
+  --button-primary-color-hover: var(--color-primary-action);
+  --button-primary-shadow-hover: inset 0 0 0 2em rgba(0, 0, 0, 0.8);
 
-  --button-primary-active-background: var(--color-white);
-  --button-primary-active-color: var(--color-primary-action);
-  --button-primary-active-shadow: inset 0 0 0 2em rgba(0, 0, 0, 0.3);
+  --button-primary-background-active: var(--color-white);
+  --button-primary-color-active: var(--color-primary-action);
+  --button-primary-shadow-active: inset 0 0 0 2em rgba(0, 0, 0, 0.3);
 }
 .Button {
   border-radius: var(--button-radius);
@@ -34,7 +34,7 @@
   text-decoration: none;
   display: inline-block;
   cursor: pointer;
-  border: none;
+  border: var(--button-border);
   transition: all var(--transition);
   background: var(--button-background);
   color: var(--button-color);
@@ -61,42 +61,44 @@
   font-size: 1.25em;
 }
 
-.Button:not(.Button--plain):not(.Button--disabled):hover {
-  background-color: var(--button-hover-background, var(--button-background));
-  color: var(--button-hover-color, var(--button-color));
-  box-shadow: var(--button-hover-shadow, var(--button-shadow));
+.Button:not(.Button--plain):not(.Button--disabled):not(.Button--withTheme):hover {
+  background-color: var(--button-background-hover, var(--button-background));
+  color: var(--button-color-hover, var(--button-color));
+  box-shadow: var(--button-shadow-hover, var(--button-shadow));
 }
 .Button:not(.Button--plain):not(.Button--disabled):active {
   transition: all var(--transition-quick, var(--transition));
-  background-color: var(--button-active-background, var(--button-background));
-  color: var(--button-active-color, var(--button-color));
-  box-shadow: var(--button-active-shadow, var(--button-shadow));
+  background-color: var(--button-background-active, var(--button-background));
+  color: var(--button-color-active, var(--button-color));
+  box-shadow: var(--button-shadow-active, var(--button-shadow));
 }
 .Button--primary {
+  border: none;
   background: var(--button-primary-background);
   color: var(--button-primary-color);
   box-shadow: var(--button-primary-shadow);
 }
 .Button--primary:not(.Button--plain):not(.Button--disabled):hover {
   background-color: var(
-    --button-primary-hover-background,
+    --button-primary-background-hover,
     var(--button-background)
   );
-  color: var(--button-primary-hover-color, var(--button-color));
-  box-shadow: var(--button-primary-hover-shadow, var(--button-shadow));
+  color: var(--button-primary-color-hover, var(--button-color));
+  box-shadow: var(--button-primary-shadow-hover, var(--button-shadow));
 }
 .Button--primary:not(.Button--plain):not(.Button--disabled):active {
   transition: all var(--transition-quick, var(--transition));
   background-color: var(
-    --button-primary-active-background,
+    --button-primary-background-active,
     var(--button-background)
   );
-  color: var(--button-primary-active-color, var(--button-color));
-  box-shadow: var(--button-primary-active-shadow, var(--button-shadow));
+  color: var(--button-primary-color-active, var(--button-color));
+  box-shadow: var(--button-primary-shadow-active, var(--button-shadow));
 }
 .Button--plain {
   color: inherit;
   background: transparent;
+  border: none;
   box-shadow: none;
   padding: 0;
   line-height: inherit;
@@ -105,6 +107,9 @@
 .Button--disabled {
   cursor: inherit;
   opacity: 0.5;
+}
+.Button--withTheme {
+  border: none;
 }
 .Button--withTheme.Button--disabled {
   opacity: 0.6;
@@ -122,6 +127,15 @@
   align-items: center;
   justify-content: center;
   width: 100%;
+}
+.Button--left .Button-wrapper {
+  justify-content: flex-start;
+}
+.Button--right .Button-wrapper {
+  justify-content: flex-end;
+}
+.Button--spread .Button-wrapper {
+  justify-content: space-between;
 }
 .Button-icon {
   flex: 0;

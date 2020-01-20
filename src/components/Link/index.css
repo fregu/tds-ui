@@ -18,8 +18,8 @@
   display: block;
 }
 
-.Link:hover:not(.Link--plain),
-.Link:focus:not(.Link--plain) {
+.Link:hover:not(.Link--plain):not(.Link--withColor),
+.Link:focus:not(.Link--plain):not(.Link--withColor) {
   color: var(--Link-color-hover);
 }
 .Link:hover:not(.Link--plain) .Link-text,

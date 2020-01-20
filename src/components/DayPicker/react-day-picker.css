@@ -146,6 +146,7 @@
   min-width: 2em;
   height: 2.5em;
   position: relative;
+  z-index: 0;
 }
 
 .DayPicker-WeekNumber {
@@ -213,7 +214,7 @@
   font-weight: bold;
 }
 .DayPicker-Day--highlighted::before,
-.DayPicker-Day--selected:not(.DayPicker-Day--disabled):not(.DayPicker-Day--outside)::before {
+.DayPicker-Day--selected:not(.DayPicker-Day--outside)::before {
   content: '';
   position: absolute;
   z-index: -1;
@@ -225,6 +226,9 @@
   height: 2em;
   width: 2em;
   border-radius: var(--daypicker-selected-radius);
+}
+.DayPicker-Day--selected.DayPicker-Day--disabled::before {
+  opacity: 0.5;
 }
 .DayPicker-Day--highlighted::before {
   background: var(--daypicker-highlighted-color);

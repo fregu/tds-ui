@@ -1,6 +1,13 @@
+:root {
+  --select-width: 280px;
+  --select-border-radius: 0;
+  --select-border-color: var(--color-grey);
+  --select-border-color-hover: var(--color-grey);
+  --select-border-color-focus: var(--color-grey);
+}
 .Select {
   font-family: var(--font-family-form, inherit);
-  width: 280px;
+  width: var(--select-width);
 }
 .Select-inputWrapper {
   position: relative;
@@ -17,7 +24,7 @@
   background: #fff;
   box-sizing: border-box;
   font: inherit;
-  border: 1px solid var(--color-black12);
+  border: 1px solid var(--select-border-color);
   display: inline-block;
   font-size: inherit;
   box-shadow: none;
@@ -25,11 +32,11 @@
   line-height: 2.25em;
   height: 2.5em;
   appearance: none;
-  border-radius: 0;
+  border-radius: var(--select-border-radius);
   padding: 0 1em;
 }
 .Select-input:hover {
-  border: 1px solid var(--color-black38);
+  border: 1px solid var(--select-border-color-hover);
 }
 
 .Select-input::-ms-expand {
@@ -59,7 +66,8 @@
   pointer-events: none;
   display: flex;
   align-items: center;
-  color: var(--color-black);
+  border-radius: var(--select-border-radius);
+  color: currentColor;
 }
 .Select-input[disabled],
 .Select-input[disabled] + .Select-pickerIcon {
@@ -72,7 +80,7 @@
 .Select--valid .Input-input:active,
 .Select--invalid .Input-input:focus,
 .Select--invalid .Input-input:active {
-  border: 1px solid var(--color-turquoise);
+  border-color: var(--select-border-color-focus);
   box-shadow: 0 1px 3px rgba(0, 160, 186, 0.25);
   outline: none;
 }

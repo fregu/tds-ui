@@ -25,8 +25,11 @@
   },
   "dependencies": {
     "@mdx-js/react": "^1.5.1",
+    "babel-eslint": "^10.0.3",
     "classnames": "^2.2.6",
     "dateformat": "^3.0.3",
+    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-standard": "^4.0.1",
     "form-serialize": "^0.7.2",
     "marked": "^0.7.0",
     "react": "^16.12.0",

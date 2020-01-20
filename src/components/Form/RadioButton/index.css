@@ -16,9 +16,12 @@
   color: var(--radiobutton-selected-text-color);
 }
 .RadioButton-icon {
+  margin-right: 0.5em;
+}
+.RadioButton-checkIcon {
   opacity: 0;
   margin-right: -0.5em;
 }
-:checked + .RadioButton-label .RadioButton-icon {
+:checked + .RadioButton-label .RadioButton-checkIcon {
   opacity: 1;
 }

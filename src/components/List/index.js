@@ -11,7 +11,7 @@ type Props = {
   className?: string,
   modifiers?: Array<string>,
   horizontal?: boolean,
-  items: Array<Node | { content: Node }>,
+  items: Array<Node | { content: Node } | string>,
   type?: 'ordered' | 'unordered' | 'plain',
   columns?: {
     ''?: number,
@@ -26,7 +26,6 @@ type Props = {
   bulletIcon?: IconProps
 }
 export const ListItem = ({
-  attributes,
   className,
   to,
   children,
@@ -34,7 +33,8 @@ export const ListItem = ({
   linkClassName,
   text,
   content,
-  bulletIcon
+  bulletIcon,
+  ...attributes
 }) => (
   <li
     {...attributes}
@@ -115,39 +115,20 @@ export default function List({
       )}
     >
       <ListTag className={cx('List-list')}>
-        {items.map(
-          (
-            {
-              content,
-              text,
-              children,
-              to,
-              icon,
-              className,
-              attributes,
-              ...item
-            },
-            index
-          ) => (
-            <ListItem
-              bulletIcon={bulletIcon}
-              key={index}
-              className={cx('List-item', itemClassName, className)}
-              {...{
-                content,
-                text: typeof item === 'string' ? item : text,
-                children: item,
-                to,
-                icon,
-                linkClassName: cx(linkClassName, item.linkClassName)
-              }}
-              attributes={{
-                ...(attributes || {}),
-                ...(text || to || content ? item : {})
-              }}
-            />
-          )
-        )}
+        {items.map((item, index) => (
+          <ListItem
+            bulletIcon={bulletIcon}
+            key={index}
+            {...item}
+            className={cx('List-item', itemClassName, item.className)}
+            {...{
+              ...(typeof item === 'object' ? item : {}),
+              text: typeof item === 'string' ? item : item.text,
+              children: item,
+              linkClassName: cx(linkClassName, item.linkClassName)
+            }}
+          />
+        ))}
       </ListTag>
     </div>
   )

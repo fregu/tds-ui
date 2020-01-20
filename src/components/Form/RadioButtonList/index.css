@@ -1,0 +1,4 @@
+.RadioButtonList {
+  max-width: var(--input-width);
+  border: none;
+}

@@ -15,6 +15,7 @@ export { default as CheckboxList } from './CheckboxList'
 export { default as RadioList } from './RadioList'
 export { default as Radio } from './Radio'
 export { default as RadioButton } from './RadioButton'
+export { default as RadioButtonList } from './RadioButtonList'
 
 type Props = {
   className?: string,
@@ -42,6 +43,7 @@ export default class Form extends Component<Props, State> {
     isValid: true,
     valueString: ''
   }
+
   componentDidMount = () => {
     // Set initial values to state
     const values = serialize(this.el, { hash: true, empty: true })
@@ -59,9 +61,11 @@ export default class Form extends Component<Props, State> {
     // check initial validation
     this.validateFields()
   }
+
   componentWillUnmount = () => {
     this.el.removeEventListener('initField', this.onChange)
   }
+
   onSubmit = (event: Event, callback: Function) => {
     const { onSubmit, preventDefault } = this.props
 
@@ -107,6 +111,7 @@ export default class Form extends Component<Props, State> {
       this.props.onChange(event, values, isValid)
     }
   }
+
   triggerChange = () => {
     this.onChange()
   }
@@ -143,6 +148,7 @@ export default class Form extends Component<Props, State> {
         )
       : str
   }
+
   validateFields = () => {
     if (this.el && this.el.elements) {
       // Loop through all form elements and run native checkValidity()

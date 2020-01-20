@@ -18,6 +18,7 @@ export type Props = {
   disabled?: boolean,
   plain?: boolean,
   block?: boolean,
+  color?: string,
   icon?: string | IconProps,
   onClick?: Function,
   attributes?: any,
@@ -35,6 +36,7 @@ export default function Link({
   plain,
   block,
   disabled,
+  color,
   onClick,
   trackClick,
   textClass,
@@ -48,7 +50,8 @@ export default function Link({
         'Link--withIcon': icon,
         'Link--plain': plain,
         'Link--block': block,
-        'Link--disabled': disabled
+        'Link--disabled': disabled,
+        [`Link--withColor color-${color}`]: color
       },
       className
     ),

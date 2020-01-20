@@ -28,6 +28,7 @@ export default class View extends Component<Props> {
   state = {
     isTracked: false
   }
+
   componentDidMount = () => {
     const supportsNativeSmoothScroll =
       'scrollBehavior' in document.documentElement.style
@@ -66,7 +67,7 @@ export default class View extends Component<Props> {
     return (
       <Connect mapDispatchToProps={{ trackPage }}>
         {({ trackPage }) => {
-          if (isTracked && typeof window !== 'undefined') {
+          if (!isTracked && typeof window !== 'undefined') {
             trackPage({ title: trackPageAs || title })
             this.setState({ isTracked: true })
           }
