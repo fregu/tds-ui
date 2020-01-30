@@ -29,7 +29,7 @@
 
 .Link-wrapper {
   flex: 1 0 auto;
-  display: flex;
+  display: inline-flex;
   flex-direction: row;
 }
 .Link--withIcon .Link-wrapper {

@@ -1,6 +1,6 @@
 // @flow
 import React from 'react'
-import Link from 'ui/components/Link'
+import { NavLink } from 'react-router-dom'
 import Icon, { type Props as IconProps } from 'ui/components/Icon'
 import classNames from 'classnames/bind'
 import styles from './index.css'
@@ -31,6 +31,7 @@ export type Props = {
   disabled?: boolean,
   attributes?: any,
   primary?: boolean,
+  secondary?: boolean,
   confirm?: string | DialogProps,
   round?: boolean,
   trackClick?: string
@@ -55,14 +56,20 @@ export default function Button({
   noPadding,
   confirm,
   primary,
+  secondary,
   size,
   round,
   trackClick,
   ...attributes
 }: Props) {
-  const isLink = to || href
-  const ButtonTag = tag || (isLink ? Link : 'button')
-  const clickProps = isLink ? { to, href } : {}
+  const url = to || href || ''
+  const localPath = url && url.match(/^\//)
+  const isLink = url
+
+  const ButtonTag = tag || (isLink ? (localPath ? NavLink : 'a') : 'button')
+  const clickProps = isLink
+    ? { to: localPath ? url : null, href: localPath ? null : url }
+    : {}
 
   return (
     <Connect mapDispatchToProps={{ confirmAction, trackEvent }}>
@@ -80,6 +87,7 @@ export default function Button({
               'Button--withIcon': icon,
               'Button--iconAfter': iconAfter,
               'Button--primary': primary,
+              'Button--secondary': secondary,
               'Button--round': round,
               'Button--linked': isLink,
               [`Button--${align}`]: align,

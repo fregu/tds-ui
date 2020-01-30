@@ -28,7 +28,7 @@ export default function Content({
   const paragraphs = (Array.isArray(content)
     ? content
     : typeof content === 'string'
-    ? content.split('\n')
+    ? content.split(/\n/).filter(Boolean)
     : []
   ).filter(Boolean)
 
@@ -45,8 +45,9 @@ export default function Content({
                   className={className}
                   dangerouslySetInnerHTML={{
                     __html: marked(p)
+                      .trim()
                       .replace(/^<p>/, '')
-                      .replace(/<\/p>$/, '')
+                      .replace(/<\/p>/, '')
                   }}
                 />
               )

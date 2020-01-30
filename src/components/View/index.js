@@ -99,15 +99,7 @@ export default class View extends Component<Props> {
                     to={backTo}
                   />
                 ) : null}
-                <div
-                  className={cx(
-                    'View-content',
-                    'layout-bottom-gutter',
-                    small ? 'layout-small-container' : 'layout-container'
-                  )}
-                >
-                  {children}
-                </div>
+                <div className={cx('View-content')}>{children}</div>
               </article>
             </div>
           )

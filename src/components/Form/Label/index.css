@@ -9,3 +9,6 @@
 .Label-requiredLabel {
   margin-left: 0.5em;
 }
+.Label--withContent .Label-wrapper {
+  flex-grow: 1;
+}

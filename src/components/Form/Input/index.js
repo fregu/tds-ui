@@ -48,10 +48,11 @@ export type Props = {
   errorMessage?: string,
   defaultValue?: string | number | Array<string | number>,
   /** TODO: handle help texts */
-  // description?: string,
+  description?: string,
   hiddenLabel?: boolean,
   floatingLabel?: boolean,
   discreet?: boolean,
+  unit?: string,
   plain?: boolean,
   hideCaret?: boolean,
   theme?: string,
@@ -249,7 +250,9 @@ class Input extends Component<Props, State> {
       plain,
       theme,
       discreet,
+      unit,
       style,
+      description,
       details,
       hideCaret,
       ...props
@@ -283,8 +286,11 @@ class Input extends Component<Props, State> {
             })}
             disabled={disabled}
             required={required}
-            content={label}
-          />
+            text={label}
+            content={label.content}
+          >
+            {label.children}
+          </Label>
         ) : null}
         <span
           className={cx('Input-inputWrapper', {
@@ -316,12 +322,16 @@ class Input extends Component<Props, State> {
             name={hashed ? this.hashName(prefix + name) : name}
           />
           {details ? <span className={'Input-details'}>{details}</span> : null}
+          {unit ? <span className={'Input-unit'}>{unit}</span> : null}
         </span>
         {errors.length ? (
           <span className={cx('Input-error')}>
             <Icon className={cx('Input-errorIcon')} type="warning" />
             {errors[0]}
           </span>
+        ) : null}
+        {description ? (
+          <p className={cx('Input-description', 'text-small')}>{description}</p>
         ) : null}
       </div>
     )

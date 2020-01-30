@@ -2,8 +2,9 @@
 import React, { type Node } from 'react'
 import classNames from 'classnames/bind'
 import { NavLink } from 'react-router-dom'
+import Button from 'ui/components/Button'
 import Icon, { type Props as IconProps } from 'ui/components/Icon'
-import ConditionalWrapper from 'ui/helpers/ConditionalWrapper'
+// import ConditionalWrapper from 'ui/helpers/ConditionalWrapper'
 import Connect from 'ui/helpers/Connect'
 import { trackEvent } from 'ui/store/actions/analytics'
 import styles from './index.css'
@@ -43,6 +44,8 @@ export default function Link({
   ...attributes
 }: Props) {
   const url = to || href || ''
+  const localPath = url.match(/^\//)
+  const TagName = url ? (localPath ? NavLink : 'a') : Button
   const linkProps = {
     className: cx(
       'Link',
@@ -61,54 +64,26 @@ export default function Link({
   return (
     <Connect mapDispatchToProps={{ trackEvent }}>
       {({ trackEvent }) => (
-        <ConditionalWrapper
-          if={url.match(/^\//)}
-          wrap={children => (
-            <NavLink
-              to={!disabled && url}
-              {...linkProps}
-              onClick={event => {
-                if (trackClick) {
-                  trackEvent({
-                    action: 'click',
-                    category: 'Link',
-                    label: trackClick
-                  })
-                }
-                if (disabled || onClick) {
-                  event.stopPropagation()
-                }
-                if (typeof onClick === 'function') {
-                  onClick(event)
-                }
-              }}
-            >
-              {children}
-            </NavLink>
-          )}
-          else={children => (
-            <a
-              href={!disabled && url}
-              {...linkProps}
-              onClick={event => {
-                if (trackClick) {
-                  trackEvent({
-                    action: 'click',
-                    category: 'Link',
-                    label: trackClick
-                  })
-                }
-                if (disabled || onClick) {
-                  event.stopPropagation()
-                }
-                if (typeof onClick === 'function') {
-                  onClick(event)
-                }
-              }}
-            >
-              {children}
-            </a>
-          )}
+        <TagName
+          to={(localPath && !disabled && url) || null}
+          href={(!localPath && !disabled && url) || null}
+          {...linkProps}
+          plain={!url}
+          onClick={event => {
+            if (trackClick) {
+              trackEvent({
+                action: 'click',
+                category: 'Link',
+                label: trackClick
+              })
+            }
+            if (disabled || onClick) {
+              event.stopPropagation()
+            }
+            if (typeof onClick === 'function') {
+              onClick(event)
+            }
+          }}
         >
           <div className={cx('Link-wrapper')}>
             {icon ? (
@@ -125,7 +100,7 @@ export default function Link({
               {text ? null : children}
             </span>
           </div>
-        </ConditionalWrapper>
+        </TagName>
       )}
     </Connect>
   )

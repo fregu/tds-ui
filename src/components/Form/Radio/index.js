@@ -17,7 +17,8 @@ type Props = {
   children?: Node,
   checked?: boolean,
   className?: string,
-  modifiers?: Array<string>
+  modifiers?: Array<string>,
+  plain?: boolean
 }
 
 export default function Radio({
@@ -33,6 +34,7 @@ export default function Radio({
   checked,
   defaultChecked,
   modifiers = [],
+  plain,
   ...attributes
 }: Props) {
   return (
@@ -41,7 +43,8 @@ export default function Radio({
         'Radio',
         className,
         {
-          'Radio--disabled': disabled
+          'Radio--disabled': disabled,
+          'Radio--plain': plain
         },
         modifiers.map(mod => 'Radio--' + mod)
       )}
@@ -66,7 +69,7 @@ export default function Radio({
         text={typeof label === 'string' ? label : null}
         disabled={disabled}
         {...(typeof label !== 'string' ? label : {})}
-        className={cx('Radio-label', label.className)}
+        className={cx('Radio-label', label?.className)}
       >
         {children}
       </Label>

@@ -24,6 +24,18 @@
   --button-primary-background-active: var(--color-white);
   --button-primary-color-active: var(--color-primary-action);
   --button-primary-shadow-active: inset 0 0 0 2em rgba(0, 0, 0, 0.3);
+
+  --button-secondary-background: var(--color-secondary-action);
+  --button-secondary-color: var(--color-white);
+  --button-secondary-shadow: 0 0 0 2px var(--color-white);
+
+  --button-secondary-background-hover: var(--color-white);
+  --button-secondary-color-hover: var(--color-secondary-action);
+  --button-secondary-shadow-hover: inset 0 0 0 2em rgba(0, 0, 0, 0.8);
+
+  --button-secondary-background-active: var(--color-white);
+  --button-secondary-color-active: var(--color-secondary-action);
+  --button-secondary-shadow-active: inset 0 0 0 2em rgba(0, 0, 0, 0.3);
 }
 .Button {
   border-radius: var(--button-radius);
@@ -40,7 +52,7 @@
   color: var(--button-color);
   box-shadow: var(--button-shadow);
   box-sizing: border-box;
-  /* min-width: 8em; */
+  text-align: center;
 }
 .Button--small {
   padding: 0 0.5em;
@@ -61,24 +73,26 @@
   font-size: 1.25em;
 }
 
-.Button:not(.Button--plain):not(.Button--disabled):not(.Button--withTheme):hover {
+.Button:not(.Button--plain, .Button--disabled, .Button--withTheme, .Button--primary, .Button--secondary):hover {
   background-color: var(--button-background-hover, var(--button-background));
   color: var(--button-color-hover, var(--button-color));
   box-shadow: var(--button-shadow-hover, var(--button-shadow));
 }
-.Button:not(.Button--plain):not(.Button--disabled):active {
+
+.Button:not(.Button--plain, .Button--disabled, .Button--withTheme, .Button--primary, .Button--secondary):active {
   transition: all var(--transition-quick, var(--transition));
   background-color: var(--button-background-active, var(--button-background));
   color: var(--button-color-active, var(--button-color));
   box-shadow: var(--button-shadow-active, var(--button-shadow));
 }
+
 .Button--primary {
   border: none;
   background: var(--button-primary-background);
   color: var(--button-primary-color);
   box-shadow: var(--button-primary-shadow);
 }
-.Button--primary:not(.Button--plain):not(.Button--disabled):hover {
+.Button--primary:not(.Button--plain, .Button--disabled):hover {
   background-color: var(
     --button-primary-background-hover,
     var(--button-background)
@@ -86,7 +100,7 @@
   color: var(--button-primary-color-hover, var(--button-color));
   box-shadow: var(--button-primary-shadow-hover, var(--button-shadow));
 }
-.Button--primary:not(.Button--plain):not(.Button--disabled):active {
+.Button--primary:not(.Button--plain, .Button--disabled):active {
   transition: all var(--transition-quick, var(--transition));
   background-color: var(
     --button-primary-background-active,
@@ -95,6 +109,30 @@
   color: var(--button-primary-color-active, var(--button-color));
   box-shadow: var(--button-primary-shadow-active, var(--button-shadow));
 }
+.Button--secondary {
+  border: none;
+  background: var(--button-secondary-background);
+  color: var(--button-secondary-color);
+  box-shadow: var(--button-secondary-shadow);
+}
+.Button--secondary:not(.Button--plain, .Button--disabled):hover {
+  background-color: var(
+    --button-secondary-background-hover,
+    var(--button-background)
+  );
+  color: var(--button-secondary-color-hover, var(--button-color));
+  box-shadow: var(--button-secondary-shadow-hover, var(--button-shadow));
+}
+.Button--secondary:not(.Button--plain, .Button--disabled):active {
+  transition: all var(--transition-quick, var(--transition));
+  background-color: var(
+    --button-secondary-background-active,
+    var(--button-background)
+  );
+  color: var(--button-secondary-color-active, var(--button-color));
+  box-shadow: var(--button-secondary-shadow-active, var(--button-shadow));
+}
+
 .Button--plain {
   color: inherit;
   background: transparent;

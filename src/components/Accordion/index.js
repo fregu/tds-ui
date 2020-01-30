@@ -34,12 +34,14 @@ export default class Accordion extends Component<Props, State> {
       this.wrapper.addEventListener('closeAccordion', this.onClose)
     }
   }
+
   componentWillUnmount = () => {
     if (typeof window !== 'undefined') {
       window.removeEventListener('resize', this.onResize)
       this.wrapper.removeEventListener('closeAccordion', this.onClose)
     }
   }
+
   onClick = () => {
     if (this.state.isOpen) {
       this.onClose()
@@ -47,6 +49,7 @@ export default class Accordion extends Component<Props, State> {
       this.onOpen()
     }
   }
+
   onResize = () => {
     if (this.resizing || !this.state.isOpen) {
       return false
@@ -54,6 +57,7 @@ export default class Accordion extends Component<Props, State> {
     this.resizing = true
     requestAnimationFrame(this.setHeight)
   }
+
   onOpen = () => {
     this.setState({
       isOpen: true
@@ -63,6 +67,7 @@ export default class Accordion extends Component<Props, State> {
       window.addEventListener('resize', this.onResize)
     }
   }
+
   onClose = () => {
     this.setHeight()
     setTimeout(() => {
@@ -74,12 +79,15 @@ export default class Accordion extends Component<Props, State> {
       window.removeEventListener('resize', this.onResize)
     }
   }
+
   onMouseOver = () => {
     this.setState({ hover: true })
   }
+
   onMouseOut = () => {
     this.setState({ hover: false })
   }
+
   setHeight = (callback?: Function = () => {}) => {
     this.setState(
       {
@@ -93,6 +101,7 @@ export default class Accordion extends Component<Props, State> {
       }
     )
   }
+
   onTransitionEnd = () => {
     this.setState({
       height: null

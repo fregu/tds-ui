@@ -1,8 +1,7 @@
 .Divider {
   border: none;
   background: none;
-  color: var(--color-light-grey);
-  border-top: 1px solid;
+  border-top: 1px solid var(--color-light-grey);
   margin: calc(var(--layout-gutter) * 3) 0;
   display: block;
   clear: both;
@@ -13,4 +12,16 @@
 }
 .Divider--thin {
   margin: var(--layout-gutter) 0;
+}
+.Divider[data-text]::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 50%;
+  color: inherit;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  display: block;
+  background: white;
+  padding: 1em;
+  font-size: 0.85em;
 }

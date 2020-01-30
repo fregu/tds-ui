@@ -76,6 +76,7 @@ export default function RadioList({
                 defaultChecked={defaultValue === value}
                 disabled={disabled || listDisabled}
                 required={required || listRequired}
+                {...props}
               />
             )
           })

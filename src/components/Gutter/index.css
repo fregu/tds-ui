@@ -8,6 +8,7 @@
 }
 .Gutter-wrapper {
   /* overflow: hidden; */
+  display: contents;
 }
 .Gutter {
   margin: calc(var(--gutter-gap-vertical) / -2) calc(var(--gutter-gap) / -2);
@@ -23,6 +24,7 @@
 
 .Gutter-item {
   box-sizing: border-box;
+  max-width: 100%;
 }
 .Gutter--fill {
   min-width: 100%;
@@ -39,7 +41,8 @@
 .Gutter--noGrow > .Gutter-item {
   flex-grow: 0;
 }
-.Gutter--vertical > .Gutter-item {
+.Gutter--vertical:not(.Gutter--center, .Gutter--start, .Gutter--end)
+  > .Gutter-item {
   width: 100%;
 }
 .Gutter > .Gutter-item {
@@ -62,6 +65,9 @@
 .Gutter--vertical {
   flex-direction: column;
 }
+/* .Gutter--vertical > .Gutter-item {
+  width: 100%;
+} */
 .Gutter--start {
   justify-content: flex-start;
 }
@@ -96,4 +102,13 @@
 .Gutter--vertical.Gutter--middle {
   align-items: flex-start;
   justify-content: center;
+}
+.Gutter--vertical.Gutter--center {
+  align-items: center;
+}
+.Gutter--vertical.Gutter--start {
+  align-items: flex-start;
+}
+.Gutter--vertical.Gutter--end {
+  align-items: flex-end;
 }

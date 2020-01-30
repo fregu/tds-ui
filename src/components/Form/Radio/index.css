@@ -1,5 +1,6 @@
 .Radio {
   padding: 1px;
+  position: relative;
 }
 .Radio-inputWrapper {
 }
@@ -15,11 +16,11 @@
   background: var(--color-disabled);
   box-shadow: 0 0 0 1px var(--color-grey);
 }
-.Radio-label {
+.Radio:not(.Radio--plain) .Radio-label {
   padding-left: 1.5em;
   position: relative;
 }
-.Radio-label::before {
+.Radio:not(.Radio--plain) .Radio-label::before {
   content: '';
   text-align: center;
   line-height: 1em;

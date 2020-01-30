@@ -41,7 +41,8 @@ export default function Label({
         className,
         {
           'Label--required': required,
-          'Label--disabled': disabled
+          'Label--disabled': disabled,
+          'Label--withContent': children || content
         },
         modifiers.map(mod => 'Label--' + mod)
       )}
