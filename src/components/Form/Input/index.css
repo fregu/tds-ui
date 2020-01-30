@@ -18,6 +18,10 @@
 .Input {
   width: var(--input-width);
 }
+.Input--inline {
+  display: inline-block;
+  width: auto;
+}
 .Input-inputWrapper {
   width: 100%;
   display: inline-block;

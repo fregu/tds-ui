@@ -9,6 +9,10 @@
   font-family: var(--font-family-form, inherit);
   width: var(--select-width);
 }
+.Select--inline {
+  display: inline-block;
+  width: auto;
+}
 .Select-inputWrapper {
   position: relative;
   display: inline-block;
@@ -47,6 +51,7 @@
 }
 
 .Select--plain .Select-input,
+.Select--discreet .Select-input,
 .Select--plain .Select-pickerIcon {
   background: none;
   border: none;
@@ -83,4 +88,22 @@
   border-color: var(--select-border-color-focus);
   box-shadow: 0 1px 3px rgba(0, 160, 186, 0.25);
   outline: none;
+}
+
+.Select--discreet .Select-inputWrapper::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-bottom: 2px solid;
+  opacity: 0.25;
+  pointer-events: none;
+}
+.Select--discreet.Select--floatingLabel.Select--hasFocus .Select-label {
+  color: var(--color-primary-action);
+}
+.Select--discreet.Select--hasFocus .Select-inputWrapper::after {
+  border-bottom-color: var(--color-primary-action);
+  opacity: 1;
 }

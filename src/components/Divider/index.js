@@ -20,7 +20,7 @@ export default function Divider({
   modifiers = []
 }: Props) {
   return (
-    <hr
+    <div
       data-text={text}
       className={cx(
         'Divider',
@@ -31,6 +31,10 @@ export default function Divider({
         },
         modifiers.map(mod => 'Divider--' + mod)
       )}
-    />
+    >
+      <hr className={cx('Divider-line')} />
+      {text ? <span className={cx('Divider-text')}>{text}</span> : null}
+      {text ? <hr className={cx('Divider-line')} /> : null}
+    </div>
   )
 }

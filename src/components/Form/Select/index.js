@@ -25,16 +25,20 @@ export type Props = {
   id?: string,
   placeholder?: string,
   /** TODO: handle help texts */
-  description?: string
+  description?: string,
+  inline?: boolean,
+  discreet?: boolean,
+  floatingLabel?: boolean
 }
 
-const blankChars = '         '
+const blankChars = '    '
 export default class Select extends Component<Props> {
   input: HTMLSelectElement
   state = {}
   componentDidMount = () => {
     this.triggerInitEvent()
   }
+
   componentDidUpdate = (prevProps: Props) => {
     if (
       JSON.stringify(this.props.options) !== JSON.stringify(prevProps.options)
@@ -42,6 +46,22 @@ export default class Select extends Component<Props> {
       this.triggerInitEvent()
     }
   }
+
+  onFocus = (event: Event) => {
+    this.setState({ hasFocus: true })
+
+    if (this.props.onFocus) {
+      this.props.onFocus(event)
+    }
+  }
+
+  onBlur = (event: Event) => {
+    this.setState({ hasFocus: false })
+    if (this.props.onBlur) {
+      this.props.onBlur(event)
+    }
+  }
+
   triggerInitEvent = () => {
     if (this.input) {
       let changeEvent
@@ -55,6 +75,7 @@ export default class Select extends Component<Props> {
       this.input.dispatchEvent(changeEvent)
     }
   }
+
   renderOptions = (options: Array<OptionProps>) =>
     options.map(({ value, text, options = [] }, index) =>
       options.length ? (
@@ -67,12 +88,13 @@ export default class Select extends Component<Props> {
         </option>
       )
     )
+
   render() {
-    const { inputValue } = this.state
+    const { inputValue, hasFocus } = this.state
     const {
       id,
       className,
-      options = {},
+      options = [],
       label,
       fill,
       required,
@@ -81,7 +103,9 @@ export default class Select extends Component<Props> {
       name = '',
       placeholder,
       floatingLabel,
+      discreet,
       plain,
+      inline,
       ...attributes
     } = this.props
     return (
@@ -89,8 +113,11 @@ export default class Select extends Component<Props> {
         className={cx('Select', {
           'Select--fill': fill,
           'Select--plain': plain,
+          'Select--inline': inline,
+          'Select--discreet': discreet,
           'Select--floatingLabel': floatingLabel,
-          'Select--hasValue': inputValue
+          'Select--hasValue': inputValue,
+          'Select--hasFocus': hasFocus
         })}
       >
         {label ? (
@@ -130,6 +157,8 @@ export default class Select extends Component<Props> {
               id={id}
               name={prefix + name}
               disabled={disabled}
+              onFocus={this.onFocus}
+              onBlur={this.onBlur}
               ref={el => el && (this.input = el)}
               className={cx('Select-input')}
             >

@@ -32,6 +32,7 @@ export default class Carousel extends Component<Props, State> {
   state = {
     activeIndex: this.props.activeIndex || 0
   }
+
   stepLeft = () => {
     const { activeIndex } = this.state
     const newIndex = activeIndex > 0 ? activeIndex - 1 : 0
@@ -41,6 +42,7 @@ export default class Carousel extends Component<Props, State> {
       activeIndex: newIndex
     })
   }
+
   stepRight = () => {
     const { activeIndex } = this.state
     const { items } = this.props
@@ -52,11 +54,13 @@ export default class Carousel extends Component<Props, State> {
       activeIndex: newIndex
     })
   }
+
   onResize = () => {
     if (typeof requestAnimationFrame !== 'undefined') {
       requestAnimationFrame(() => this.scrollToItem(this.state.activeIndex, 0))
     }
   }
+
   onScroll = () => {
     const { activeIndex } = this.state
     clearTimeout(scrollingTimeout)
@@ -95,6 +99,7 @@ export default class Carousel extends Component<Props, State> {
       this.setState({ activeIndex: currentIndex })
     }
   }
+
   scrollStop = (snapToActive?: boolean) => {
     clearTimeout(scrollingTimeout)
     const { activeIndex } = this.state
@@ -119,11 +124,13 @@ export default class Carousel extends Component<Props, State> {
       isAnimating = false
     }
   }
+
   scrollTo = (leftPos, duration = 0) => {
     return new Promise(resolve =>
       scrollTo(this.wrapper, leftPos, duration, 'scrollLeft', resolve)
     )
   }
+
   scrollToItem = (index: number, duration: number = 500) => {
     const wrapperWidth = this.wrapper.clientWidth
     clearTimeout(scrollingTimeout)
@@ -139,6 +146,7 @@ export default class Carousel extends Component<Props, State> {
       isAnimating = false
     })
   }
+
   onMouseDown = e => {
     touching = {
       start: e.pageX,
@@ -148,11 +156,13 @@ export default class Carousel extends Component<Props, State> {
     document.addEventListener('mouseleave', this.onMouseUp)
     document.addEventListener('mouseup', this.onMouseUp)
   }
+
   onMouseMove = e => {
     if (touching && e.pageX) {
       this.scrollTo(touching.scroll + touching.start - e.pageX)
     }
   }
+
   onMouseUp = e => {
     touching = false
     this.scrollStop(true)
@@ -160,6 +170,7 @@ export default class Carousel extends Component<Props, State> {
     document.removeEventListener('mouseleave', this.onMouseUp)
     document.removeEventListener('mouseup', this.onMouseUp)
   }
+
   onKeyPress = e => {
     if (typeof requestAnimationFrame !== 'undefined') {
       requestAnimationFrame(() => {
@@ -174,6 +185,7 @@ export default class Carousel extends Component<Props, State> {
       })
     }
   }
+
   bindInitEvents = () => {
     this.wrapper.addEventListener('scroll', this.onScroll)
     this.wrapper.addEventListener('mousedown', this.onMouseDown)
@@ -182,6 +194,7 @@ export default class Carousel extends Component<Props, State> {
       window.addEventListener('resize', this.onResize)
     }
   }
+
   unBindInitEvents = () => {
     this.wrapper.removeEventListener('scroll', this.onScroll)
     this.wrapper.removeEventListener('mousedown', this.mouseDown)
@@ -190,6 +203,7 @@ export default class Carousel extends Component<Props, State> {
     document.removeEventListener('mouseup', this.onMouseUp)
     document.removeEventListener('keydown', this.onKeyPress)
   }
+
   componentDidMount = () => {
     if (this.props.activeIndex) {
       setTimeout(
@@ -203,12 +217,20 @@ export default class Carousel extends Component<Props, State> {
       this.bindInitEvents()
     }
   }
+
   componentWillUnmount = () => {
     this.unBindInitEvents()
   }
 
   render() {
-    const { items = [], className, multiple, controls, style } = this.props
+    const {
+      items = [],
+      children,
+      className,
+      multiple,
+      controls,
+      style
+    } = this.props
     const { activeIndex } = this.state
     return (
       <div

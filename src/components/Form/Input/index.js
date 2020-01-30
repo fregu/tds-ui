@@ -54,6 +54,7 @@ export type Props = {
   discreet?: boolean,
   unit?: string,
   plain?: boolean,
+  inline?: boolean,
   hideCaret?: boolean,
   theme?: string,
   autoFocus?: boolean
@@ -255,6 +256,7 @@ class Input extends Component<Props, State> {
       description,
       details,
       hideCaret,
+      inline,
       ...props
     } = this.props
 
@@ -275,6 +277,7 @@ class Input extends Component<Props, State> {
           'Input--hasFocus': hasFocus,
           'Input--withTheme': theme,
           'Input--hideCaret': hideCaret,
+          'Input--inline': inline,
           [`Input--${type}`]: type
         })}
       >
