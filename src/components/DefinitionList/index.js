@@ -23,6 +23,7 @@ type ColumnProps = {
 type Props = {
   className?: string,
   inline?: boolean,
+  spread?: boolean,
   hiddenTitle?: boolean,
   noMargin?: boolean,
   items: Array<DefinitionPairProps>,
@@ -33,6 +34,7 @@ type Props = {
 export default function DefinitionList({
   className,
   inline,
+  spread,
   hiddenTitle,
   noMargin,
   items = [],
@@ -46,6 +48,7 @@ export default function DefinitionList({
         className,
         {
           'DefinitionList--inline': inline,
+          'DefinitionList--spread': spread,
           'DefinitionList--hiddenTitle': hiddenTitle,
           'DefinitionList--noMargin': noMargin
         },

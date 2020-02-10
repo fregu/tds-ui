@@ -68,7 +68,7 @@ export default function Link({
           to={(localPath && !disabled && url) || null}
           href={(!localPath && !disabled && url) || null}
           {...linkProps}
-          plain={!url}
+          plain={linkProps.plain || !url || null}
           onClick={event => {
             if (trackClick) {
               trackEvent({

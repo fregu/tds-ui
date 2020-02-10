@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react'
-import Label from '../Label'
+import Label, { type Props as LabelProps } from '../Label'
 import Icon, { type Props as IconProps } from 'ui/components/Icon'
 import classNames from 'classnames/bind'
 import { system } from 'ui/lang'
@@ -31,7 +31,7 @@ export type Props = {
   className?: string,
   inputClassName?: string,
   fill?: boolean,
-  label?: string,
+  label?: LabelProps | string,
   prefix?: string,
   name?: string,
   size?: number,
@@ -289,10 +289,12 @@ class Input extends Component<Props, State> {
             })}
             disabled={disabled}
             required={required}
-            text={label}
-            content={label.content}
+            text={label.text || (typeof label === 'string' && label)}
+            {...(typeof label === 'object' ? label : {})}
           >
-            {label.children}
+            {label.content ||
+              label.children ||
+              (typeof label !== 'string' && label)}
           </Label>
         ) : null}
         <span
@@ -334,7 +336,9 @@ class Input extends Component<Props, State> {
           </span>
         ) : null}
         {description ? (
-          <p className={cx('Input-description', 'text-small')}>{description}</p>
+          <p className={cx('Input-description', 'text-size-small')}>
+            {description}
+          </p>
         ) : null}
       </div>
     )

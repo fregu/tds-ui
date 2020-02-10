@@ -96,8 +96,8 @@ export default function Button({
             },
             className
           )}
-          plain={isLink || null}
-          title={(hiddenText && text) || null}
+          plain={isLink || undefined}
+          title={(hiddenText && text) || undefined}
           disabled={disabled}
           onClick={
             confirm || onClick || trackClick

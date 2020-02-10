@@ -8,6 +8,7 @@
 .Select {
   font-family: var(--font-family-form, inherit);
   width: var(--select-width);
+  box-sizing: border-box;
 }
 .Select--inline {
   display: inline-block;
@@ -17,6 +18,7 @@
   position: relative;
   display: inline-block;
   width: 100%;
+  box-sizing: border-box;
 }
 .Select--fill {
   width: 100%;
@@ -38,6 +40,7 @@
   appearance: none;
   border-radius: var(--select-border-radius);
   padding: 0 1em;
+  box-sizing: border-box;
 }
 .Select-input:hover {
   border: 1px solid var(--select-border-color-hover);
