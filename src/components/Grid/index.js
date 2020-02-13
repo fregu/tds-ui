@@ -44,7 +44,7 @@ type GridProps = {
   align?: 'top' | 'bottom' | 'center',
   divided?: boolean
 }
-export default function Grid({
+export function Grid({
   className,
   align,
   withGap,
@@ -101,3 +101,4 @@ export class GridCell extends Component<GridCellProps> {
     )
   }
 }
+export default Grid

@@ -1,7 +1,7 @@
 @import './breakpoints.css';
 
 html {
-  column-gap: 20px;
+  column-gap: var(--layout-gutter, 20px);
 }
 .columns-1 {
   column-count: 1;

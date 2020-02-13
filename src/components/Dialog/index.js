@@ -40,9 +40,11 @@ export default class Dialog extends Component<Props> {
       callback()
     }
   }
+
   setFocus = () => {
     this.box.focus()
   }
+
   render() {
     const {
       className,
@@ -91,7 +93,6 @@ export default class Dialog extends Component<Props> {
                   <Gutter tight align="end">
                     {actions.map((action, index) => (
                       <Button
-                        size="small"
                         key={action.text || index}
                         {...action}
                         modifiers={['square']}

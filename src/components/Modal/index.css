@@ -15,7 +15,7 @@
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: var(--z-modal);
+  z-index: var(--z-modal, 5);
   background: rgba(0, 0, 0, 0.6);
 }
 .Modalbox {
@@ -27,12 +27,12 @@
 
   transform: translateY(-50%);
   min-height: 100px;
-  max-height: 100vh;
+  max-height: 90vh;
   width: 624px;
   max-width: 90vw;
   overflow: auto;
   background: #fff;
-  z-index: var(--z-modal);
+  z-index: var(--z-modal, 5);
   transform-origin: 50% 0;
   animation: appear 0.2s ease-out;
   box-shadow: 0 0 24px 4px rgba(33, 33, 33, 0.08);

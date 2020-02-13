@@ -42,6 +42,9 @@
   padding: 0 1em;
   box-sizing: border-box;
 }
+.Select--multiple .Select-input {
+  height: 8em;
+}
 .Select-input:hover {
   border: 1px solid var(--select-border-color-hover);
 }

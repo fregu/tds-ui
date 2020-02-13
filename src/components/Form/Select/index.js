@@ -28,7 +28,8 @@ export type Props = {
   description?: string,
   inline?: boolean,
   discreet?: boolean,
-  floatingLabel?: boolean
+  floatingLabel?: boolean,
+  multiple?: boolean
 }
 
 const blankChars = '    '
@@ -106,6 +107,7 @@ export default class Select extends Component<Props> {
       discreet,
       plain,
       inline,
+      multiple,
       ...attributes
     } = this.props
     return (
@@ -117,7 +119,8 @@ export default class Select extends Component<Props> {
           'Select--discreet': discreet,
           'Select--floatingLabel': floatingLabel,
           'Select--hasValue': inputValue,
-          'Select--hasFocus': hasFocus
+          'Select--hasFocus': hasFocus,
+          'Select--multiple': multiple
         })}
       >
         {label ? (
@@ -136,6 +139,7 @@ export default class Select extends Component<Props> {
               key=""
               {...attributes}
               key={id + 'disabled'}
+              multiple={multiple}
               id={id}
               name={prefix + name}
               disabled={disabled}
@@ -157,6 +161,7 @@ export default class Select extends Component<Props> {
               id={id}
               name={prefix + name}
               disabled={disabled}
+              multiple={multiple}
               onFocus={this.onFocus}
               onBlur={this.onBlur}
               ref={el => el && (this.input = el)}
@@ -170,9 +175,11 @@ export default class Select extends Component<Props> {
               {this.renderOptions(options)}
             </select>
           )}
-          <span className={cx('Select-pickerIcon')}>
-            <Icon type="chevronDown" />
-          </span>
+          {!multiple ? (
+            <span className={cx('Select-pickerIcon')}>
+              <Icon type="chevronDown" />
+            </span>
+          ) : null}
         </div>
       </div>
     )

@@ -3,7 +3,7 @@ export const CLOSE_DIALOG = 'CLOSE_DIALOG'
 
 export const confirmAction = (confirm, callback) => {
   return showDialog({
-    title: confirm.title || 'Är du säker?',
+    title: confirm.title,
     headerContent: confirm.headerContent || null,
     content: confirm.content || (typeof confirm === 'string' && confirm),
     modifiers: confirm.modifiers,

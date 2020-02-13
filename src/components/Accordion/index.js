@@ -14,7 +14,8 @@ type Props = {
   noPadding?: boolean,
   theme?: string,
   isOpen?: boolean,
-  rounded?: boolean
+  rounded?: boolean,
+  noMargin?: boolean
 }
 type State = {
   isOpen?: boolean,
@@ -115,6 +116,7 @@ export default class Accordion extends Component<Props, State> {
       children,
       fill,
       noPadding,
+      noMargin,
       rounded,
       theme
     } = this.props
@@ -131,6 +133,7 @@ export default class Accordion extends Component<Props, State> {
             'Accordion--fill': fill,
             'Accordion--rounded': rounded,
             'Accordion--noPadding': noPadding,
+            'Accordion--noMargin': noMargin,
             'Accordion--themed': theme,
             [`theme-${theme}`]: theme
           },

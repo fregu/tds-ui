@@ -7,12 +7,16 @@
   }
 }
 :root {
+  --accordion-border-color: var(--color-light-grey);
   --accordion-padding: 1em var(--layout-gutter);
   --accordion-reverse-margin: -1em calc(-1 * var(--layout-gutter));
 }
 .Accordion {
   position: relative;
   margin-bottom: 1em;
+}
+.Accordion--noMargin {
+  margin: 0;
 }
 
 .Accordion + .Accordion {
@@ -41,7 +45,7 @@
   width: 100%;
   transition: border var(--aniation-transition);
   box-sizing: border-box;
-  border: 1px solid var(--color-light-grey);
+  border: 1px solid var(--accodion-border-color);
 }
 .Accordion:not(.Accordion--themed)::before {
   background: var(--color-white);

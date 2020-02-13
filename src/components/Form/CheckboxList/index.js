@@ -2,6 +2,7 @@
 import React from 'react'
 import classnames from 'classnames/bind'
 import List from 'ui/components/List'
+import Accordion from 'ui/components/Accordion'
 import Checkbox from '../Checkbox'
 import State from 'ui/helpers/State'
 import styles from './index.css'
@@ -21,6 +22,7 @@ type Props = {
   modifiers?: Array<string>,
   defaultValue?: Array<string>,
   name?: string,
+  columns?: { ''?: number, s?: number, m?: number, l?: number, xl?: number },
   options: Array<CheckBoxItemProps>,
   disabled?: boolean,
   /** TODO: handle required and valitidy as a group */
@@ -41,7 +43,8 @@ export default function CheckboxList({
   disabled: listDisabled,
   required: listRequired,
   theme,
-  striped
+  striped,
+  columns
 }: Props) {
   return (
     <State>
@@ -60,6 +63,7 @@ export default function CheckboxList({
             </legend>
           ) : null}
           <List
+            columns={columns}
             className={cx('CheckboxList-list')}
             striped={striped}
             items={options.map(
@@ -71,15 +75,41 @@ export default function CheckboxList({
                   disabled,
                   required,
                   defaultChecked,
+                  className,
+                  options,
+                  columns,
                   ...props
                 },
                 index
               ) => ({
-                content: (
+                content: options ? (
+                  <Accordion
+                    theme={theme}
+                    title={`${text} (${options.length})`}
+                    noMargin
+                    noPadding
+                    bordered
+                  >
+                    <CheckboxList
+                      className={cx('CheckboxList-subList', className)}
+                      {...{
+                        disabled: listDisabled,
+                        name,
+                        options,
+                        defaultValue,
+                        striped,
+                        theme,
+                        onChange,
+                        columns
+                      }}
+                    />
+                  </Accordion>
+                ) : (
                   <Checkbox
+                    className={cx('CheckboxList-checkbox', className)}
                     key={value}
                     id={id || `${listId || name}-${value || index}`}
-                    name={name ? name + '[]' : ''}
+                    name={name && !name.match(/\[\]$/) ? name + '[]' : name}
                     value={value}
                     label={text}
                     onChange={(e, isChecked) => {

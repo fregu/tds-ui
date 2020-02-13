@@ -15,7 +15,7 @@
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: var(--z-dialog);
+  z-index: var(--z-dialog, 5);
   background: rgba(0, 0, 0, 0.6);
 }
 .Dialog {
@@ -25,12 +25,12 @@
   right: 0;
   margin: auto;
   transform: translateY(-50%);
-  max-height: 100vh;
+  max-height: 80vh;
   width: 430px;
   max-width: 80vw;
   overflow: auto;
   background: #fff;
-  z-index: var(--z-dialog);
+  z-index: var(--z-dialog, 5);
   transform-origin: 50% 0;
   animation: appear 0.2s ease-out;
   box-shadow: 0 0 24px 4px rgba(33, 33, 33, 0.08);
@@ -53,7 +53,6 @@
 .Dialog-content {
   padding: var(--layout-gutter) var(--layout-gutter)
     calc(var(--layout-gutter) * 2);
-  min-height: 100px;
   overflow: auto;
   max-height: 60vh;
   line-height: 1.45em;
@@ -91,6 +90,6 @@
 .Dialog-actions {
   margin-top: -1px;
   position: relative;
-  padding: var(--layout-gutter);
+  padding: calc(var(--layout-gutter) / 2) var(--layout-gutter);
   border-top: thin solid var(--color-light-grey);
 }
