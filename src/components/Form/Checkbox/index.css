@@ -2,6 +2,7 @@
   --color-checkbox-border: var(--color-light-grey, #eee);
   --color-checkbox-background: var(--color-white, #fff);
   --color-checkbox-check: var(--color-dark-grey, #666);
+  --checkbox-border-radius: 0;
 }
 .FormCheckbox {
   padding: 1px 0;
@@ -26,6 +27,7 @@
   margin-top: -0.5em;
   width: 1em;
   height: 1em;
+  border-radius: var(--checkbox-border-radius);
   box-shadow: 0 0 0 1px var(--color-checkbox-border);
   background: var(--color-checkbox-background, white);
   transition: var(--transition);

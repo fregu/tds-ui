@@ -13,6 +13,7 @@ export type Props = {
   level?: number,
   asLevel?: number | string,
   icon?: string | IconProps,
+  iconAfter?: boolean,
   text?: string,
   to?: string,
   children?: Node
@@ -23,6 +24,7 @@ export default function Title({
   level = 1,
   asLevel,
   icon,
+  iconAfter,
   text,
   to,
   children,
@@ -38,6 +40,7 @@ export default function Title({
         `text-heading${asLevel || level}`,
         {
           'Title--withIcon': icon,
+          'Title--iconAfter': iconAfter,
           [`Title--${align}`]: align,
           [`Title--themed theme-${theme}`]: theme,
           'Title--inline': inline

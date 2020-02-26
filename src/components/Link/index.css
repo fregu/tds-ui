@@ -32,6 +32,9 @@
   display: inline-flex;
   flex-direction: row;
 }
+.Link--block .Link-wrapper {
+  display: flex;
+}
 .Link--withIcon .Link-wrapper {
   display: flex;
   flex-direction: row;

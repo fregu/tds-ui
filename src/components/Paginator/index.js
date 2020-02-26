@@ -4,7 +4,7 @@ import classNames from 'classnames/bind'
 import Connect from 'ui/helpers/Connect'
 import Loader from 'ui/components/Loader'
 import Button, { type Props as ButtonProps } from 'ui/components/Button'
-//import 'index.css'
+// import 'index.css'
 const cx = classNames.bind({})
 
 type Props = {
@@ -54,7 +54,6 @@ export default function Paginator({
           (typeof counts === 'undefined' && count) ||
           (screen &&
             Object.keys(counts || {}).reduce((showCount, prefix) => {
-              console.log('text', prefix, breakpoints[prefix], counts[prefix])
               return !prefix || breakpoints[prefix] ? counts[prefix] : showCount
             }, false))
 

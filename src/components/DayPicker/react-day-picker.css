@@ -4,7 +4,7 @@
   --daypicker-todayButton-color: var(--color-primary-secondary);
   --daypicker-selected-color: var(--color-primary-action);
   --daypicker-selected-hover-color: var(--color-hover);
-  --daypicker-highlighted-color: pink;
+  --daypicker-highlighted-color: none;
   --daypicker-navbutton-color: #8b9898;
   --daypicker-weeknumber-color: #8b9898;
   --daypicker-day-color: #8b9898;

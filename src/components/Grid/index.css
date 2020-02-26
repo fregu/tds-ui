@@ -4,6 +4,8 @@
   --grid-gap-vertical: var(--layout-vertical-gap, var(--grid-gap));
   --grid-wide-gap: calc(var(--grid-gap) * 1.5);
   --grid-wide-gap-vertical: calc(var(--grid-gap-vertical) * 1.5);
+  --grid-tight-gap: calc(var(--grid-gap) / 2);
+  --grid-tight-gap-vertical: calc(var(--grid-gap-vertical) / 2);
 }
 .Grid {
   display: flex;
@@ -39,10 +41,12 @@
 }
 
 .Grid--tightGap {
-  margin: calc(var(--grid-gap-vertical) / -4) calc(var(--grid-gap) / -4);
+  margin: calc(var(--grid-tight-gap-vertical) / -2)
+    calc(var(--grid-tight-gap) / -2);
 }
 .Grid--tightGap > .Grid-cell {
-  padding: calc(var(--grid-gap-vertical) / 4) calc(var(--grid-gap) / 4);
+  padding: calc(var(--grid-tight-gap-vertical) / 2)
+    calc(var(--grid-tight-gap) / 2);
 }
 
 @media (--min-small) {

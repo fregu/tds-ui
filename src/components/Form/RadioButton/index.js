@@ -40,6 +40,7 @@ export default function RadioButton({
           tag={'div'}
         >
           <Radio
+            plain={hiddenInput}
             className={cx('RadioButton-radio')}
             {...{
               name,
@@ -61,19 +62,20 @@ export default function RadioButton({
               className: 'RadioButton-label',
               fill: true,
               content: (
-                <div className="flex-row flex-spread flex-middle">
-                  {icon ? (
-                    <Icon
-                      {...icon}
-                      type={icon.type || icon}
-                      className={cx('RadioButton-icon', icon.className)}
-                    />
-                  ) : null}
-                  <span className={cx('RadioButton-text')}>{label}</span>
-                  <Icon
-                    type={'check'}
-                    className={cx('RadioButton-checkIcon')}
-                  />
+                <div className="flex-row flex-middle">
+                  <div className="flex-row flex-middle flex-grow">
+                    {icon ? (
+                      <Icon
+                        {...icon}
+                        type={icon.type || icon}
+                        className={cx('RadioButton-icon', icon.className)}
+                      />
+                    ) : null}
+                    <span className={cx('RadioButton-text flex-grow')}>
+                      {label}
+                    </span>
+                  </div>
+                  <Icon type="check" className={cx('RadioButton-checkIcon')} />
                 </div>
               )
             }}

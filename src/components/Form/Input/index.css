@@ -11,12 +11,13 @@
   --input-background-color: var(--color-white);
   --input-text-color: var(--color-black, #000);
   --input-background-color-disabled: var(--color-light-grey);
-
+  --input-floating-label-opacty: 1;
   --input-line-height: 2.25em;
   --input-min-height: 2.5em;
 }
 .Input {
   width: var(--input-width);
+  max-width: 100%;
 }
 .Input--inline {
   display: inline-block;
@@ -59,6 +60,7 @@
 .Input--floatingLabel .Input-label {
   transition: all var(--animation-transition, 0.25s ease-in);
   transform: scale(0.75) translateY(0.5em);
+  opacity: 1;
   transform-origin: 0;
   position: relative;
   z-index: 1;
@@ -71,7 +73,9 @@
   font-weight: var(--font-weight-bold);
 }
 .Input--floatingLabel:not(.Input--hasValue, .Input--hasFocus) .Input-label {
-  transform: translateY(2.15em) translateX(0.75em) scale(1);
+  transform: translateY(calc(1.1em + (var(--input-min-height) / 2)))
+    translateX(0.75em) scale(1);
+  opacity: var(--input-floating-label-opacty);
 }
 .Input--floatingLabel.Input--discreet:not(.Input--hasValue, .Input--hasFocus)
   .Input-label {

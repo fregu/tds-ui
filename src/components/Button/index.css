@@ -1,9 +1,12 @@
 :root {
   --button-radius: 0;
   --button-border: none;
+  --button-line-height: 2em;
   --button-background: var(--color-white);
   --button-color: var(--color-primary-action);
   --button-shadow: inset 0 0 0 2em rgba(0, 0, 0, 0);
+  --button-padding: 0 1em;
+  --button-font-weight: normal;
 
   --button-background-hover: var(--color-white);
   --button-color-hover: var(--color-primary-action);
@@ -40,8 +43,9 @@
 .Button {
   border-radius: var(--button-radius);
   font: inherit;
-  line-height: 2em;
-  padding: 0 1em;
+  line-height: var(--button-line-height);
+  font-weight: var(--button-font-weight);
+  padding: var(--button-padding);
   box-shadow: 0 0 0.25em rgba(0, 0, 0, 0.15);
   text-decoration: none;
   display: inline-block;

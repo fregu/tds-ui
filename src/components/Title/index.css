@@ -8,6 +8,9 @@
   display: inline-flex;
   align-items: center;
 }
+.Title--withIcon.Title--iconAfter .Title-wrapper  {
+  flex-direction: row-reverse;
+}
 .Title--themed {
   padding: 0.25em 0.5em;
 }

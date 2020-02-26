@@ -20,7 +20,8 @@ type Props = {
   required?: boolean,
   theme?: string,
   striped?: boolean,
-  fill?: boolean
+  fill?: boolean,
+  hiddenInput?: boolean
 }
 
 export default function RadioButtonList({
@@ -36,6 +37,7 @@ export default function RadioButtonList({
   required: listRequired,
   theme,
   icon,
+  hiddenInput,
   striped,
   fill
 }: Props) {
@@ -46,14 +48,15 @@ export default function RadioButtonList({
           className={cx(
             'RadioButtonList',
             className,
-            { [`RadioButtonList--withTheme theme-${theme}`]: theme },
+            {
+              'RadioButtonList--hiddenInput': hiddenInput,
+              [`RadioButtonList--withTheme theme-${theme}`]: theme
+            },
             modifiers.map(mod => 'RadioButtonList--' + mod)
           )}
         >
           {label ? (
-            <legend className={cx('text-weight-bold ui-text-label')}>
-              {label}
-            </legend>
+            <legend className={cx('ui-text-label')}>{label}</legend>
           ) : null}
           <List
             className={cx('RadioButtonList-list')}
@@ -81,6 +84,7 @@ export default function RadioButtonList({
                     fill={fill}
                     disabled={disabled || listDisabled}
                     required={required}
+                    hiddenInput={hiddenInput}
                     {...props}
                     onChange={(e, isChecked) => {
                       if (isChecked) {
