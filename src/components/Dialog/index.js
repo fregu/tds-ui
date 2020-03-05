@@ -42,7 +42,7 @@ export default class Dialog extends Component<Props> {
   }
 
   setFocus = () => {
-    this.box.focus()
+    // this.box.focus()
   }
 
   render() {

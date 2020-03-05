@@ -45,7 +45,7 @@
   width: 100%;
   transition: border var(--aniation-transition);
   box-sizing: border-box;
-  border: 1px solid var(--accodion-border-color);
+  border: 1px solid var(--accordion-border-color);
 }
 .Accordion:not(.Accordion--themed)::before {
   background: var(--color-white);

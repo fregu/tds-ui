@@ -105,3 +105,27 @@
   background: var(--color-white);
   color: var(--color-primary-action, var(--color-checkbox-check));
 }
+
+.FormCheckbox--tag {
+  display: inline-block;
+  background: var(--color-primary-action, var(--color-checkbox-check));
+  color: var(--color-white);
+  border-radius: 1em;
+  padding: 0.25em 0.5em;
+}
+.FormCheckbox--tag .FormCheckbox-label {
+  padding-right: 1em;
+  padding-left: 0;
+}
+.FormCheckbox--tag .FormCheckbox-label::before {
+  content: none;
+}
+.FormCheckbox--tag .FormCheckbox-checkIcon {
+  width: 1.1em;
+  height: 1.1em;
+  float: right;
+  text-align: center;
+  right: -0.25em;
+  left: auto;
+  color: currentColor;
+}

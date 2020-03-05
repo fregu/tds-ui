@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import classNames from 'classnames/bind'
 import Label from '../Label'
 import Icon from 'ui/components/Icon'
+import { Checkbox } from 'ui/components/Form'
 import styles from './index.css'
 const cx = classNames.bind(styles)
 
@@ -29,10 +30,11 @@ export type Props = {
   inline?: boolean,
   discreet?: boolean,
   floatingLabel?: boolean,
-  multiple?: boolean
+  multiple?: boolean,
+  onChange?: Function
 }
 
-const blankChars = '    '
+const blankChars = '&nbsp;&nbsp;&nbsp;&nbsp;'
 export default class Select extends Component<Props> {
   input: HTMLSelectElement
   state = {}
@@ -83,15 +85,19 @@ export default class Select extends Component<Props> {
         <optgroup key={'optgroup' + index} label={text}>
           {this.renderOptions(options)}
         </optgroup>
-      ) : (
-        <option key={'option' + value + '-' + index} value={value}>
-          {text + blankChars}
-        </option>
-      )
+      ) : !(this.state.values || []).find(
+          ({ value: valuesVal }) => String(valuesVal) === String(value)
+        ) ? (
+        <option
+          key={'option' + value + '-' + index}
+          value={value}
+          dangerouslySetInnerHTML={{ __html: text + blankChars }}
+        />
+      ) : null
     )
 
   render() {
-    const { inputValue, hasFocus } = this.state
+    const { inputValue, hasFocus, values = [] } = this.state
     const {
       id,
       className,
@@ -108,6 +114,7 @@ export default class Select extends Component<Props> {
       plain,
       inline,
       multiple,
+      onChange,
       ...attributes
     } = this.props
     return (
@@ -133,16 +140,40 @@ export default class Select extends Component<Props> {
             {label}
           </Label>
         ) : null}
+
         <div className={cx('Select-inputWrapper', className)}>
+          {multiple && values.length ? (
+            <div className={cx('Select-values')}>
+              {values.map(option => (
+                <Checkbox
+                  className={cx('Select-valueTag')}
+                  key={option.value}
+                  id={`${id}-check-${option.value}`}
+                  tag
+                  label={option?.text}
+                  defaultChecked
+                  onChange={(e, checked) => {
+                    if (!checked) {
+                      this.setState({
+                        values: values.filter(
+                          ({ value: valValue }) =>
+                            String(valValue) !== String(option?.value)
+                        )
+                      })
+                    }
+                  }}
+                  name={prefix + name.replace(/(\[\])?$/, '[]')}
+                  value={option?.value}
+                />
+              ))}
+            </div>
+          ) : null}
           {disabled ? (
             <select
-              key=""
               {...attributes}
               key={id + 'disabled'}
-              multiple={multiple}
               id={id}
-              name={prefix + name}
-              disabled={disabled}
+              disabled
               onChange={event =>
                 this.setState({ inputValue: event.target.value })
               }
@@ -159,9 +190,27 @@ export default class Select extends Component<Props> {
             <select
               {...attributes}
               id={id}
-              name={prefix + name}
+              name={multiple ? null : prefix + name}
+              onChange={e => {
+                const selectedOption = options
+                  .reduce(
+                    (all, option) => [
+                      ...all,
+                      ...(option.options ? option.options : [option])
+                    ],
+                    []
+                  )
+                  .find(
+                    option => String(option.value) === String(e.target.value)
+                  )
+                if (multiple) {
+                  this.setState({ values: [...(values || []), selectedOption] })
+                }
+                if (onChange) {
+                  onChange(e, selectedOption)
+                }
+              }}
               disabled={disabled}
-              multiple={multiple}
               onFocus={this.onFocus}
               onBlur={this.onBlur}
               ref={el => el && (this.input = el)}
@@ -175,11 +224,10 @@ export default class Select extends Component<Props> {
               {this.renderOptions(options)}
             </select>
           )}
-          {!multiple ? (
-            <span className={cx('Select-pickerIcon')}>
-              <Icon type="chevronDown" />
-            </span>
-          ) : null}
+
+          <span className={cx('Select-pickerIcon')}>
+            <Icon type="chevronDown" />
+          </span>
         </div>
       </div>
     )

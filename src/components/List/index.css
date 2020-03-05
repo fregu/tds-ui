@@ -73,6 +73,8 @@
 }
 .List-link {
   display: block;
+}
+.List:not(.List--plain) .List-link {
   margin: -0.5em -1em;
   padding: 0.5em 1em;
 }
@@ -87,9 +89,4 @@
 .List--plain .List-item--linked:hover,
 .List--plain.List--striped .List-item:nth-child(2n) {
   background: none;
-}
-.List--plain.List--vertical .List-item,
-.List--plain.List--vertical .List-link {
-  padding: 0;
-  margin: 0;
 }

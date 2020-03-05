@@ -75,6 +75,7 @@
 .Button--large.Button--withIcon.Button--hiddenText {
   padding: 0.5em;
   font-size: 1.25em;
+  height: 2em;
 }
 
 .Button:not(.Button--plain, .Button--disabled, .Button--withTheme, .Button--primary, .Button--secondary):hover {
@@ -145,6 +146,7 @@
   padding: 0;
   line-height: inherit;
   text-transform: inherit;
+  outline: none;
 }
 .Button--disabled {
   cursor: inherit;
@@ -170,12 +172,15 @@
   justify-content: center;
   width: 100%;
 }
-.Button--left .Button-wrapper {
+.Button--left .Button-wrapper,
+.Button--right.Button--iconAfter .Button-wrapper {
   justify-content: flex-start;
 }
-.Button--right .Button-wrapper {
+.Button--right .Button-wrapper,
+.Button--left.Button--iconAfter .Button-wrapper {
   justify-content: flex-end;
 }
+
 .Button--spread .Button-wrapper {
   justify-content: space-between;
 }

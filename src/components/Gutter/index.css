@@ -8,7 +8,7 @@
   );
 }
 .Gutter-wrapper {
-  overflow: hidden;
+  /* overflow: hidden; */
   /* display: contents; */
 }
 .Gutter {

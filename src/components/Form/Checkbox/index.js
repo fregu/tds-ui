@@ -17,7 +17,8 @@ type Props = {
   checked?: boolean,
   className?: string,
   modifiers?: Array<string>,
-  toggle?: boolean
+  toggle?: boolean,
+  tag?: boolean
 }
 
 export default function Checkbox({
@@ -33,6 +34,7 @@ export default function Checkbox({
   modifiers = [],
   onChange,
   toggle,
+  tag,
   ...attributes
 }: Props) {
   return (
@@ -42,7 +44,8 @@ export default function Checkbox({
         className,
         {
           'FormCheckbox--disabled': disabled,
-          'FormCheckbox--toggle': toggle
+          'FormCheckbox--toggle': toggle,
+          'FormCheckbox--tag': tag
         },
         modifiers.map(mod => 'FormCheckbox--' + mod)
       )}
@@ -66,7 +69,10 @@ export default function Checkbox({
         className={cx('FormCheckbox-label')}
         htmlFor={id}
         text={label}
-        icon={{ type: 'check', className: cx('FormCheckbox-checkIcon') }}
+        icon={{
+          type: tag ? 'cross' : 'check',
+          className: cx('FormCheckbox-checkIcon')
+        }}
         optionalLabel={false}
       />
     </div>
