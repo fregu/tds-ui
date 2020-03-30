@@ -2,6 +2,8 @@
   margin: 0;
   position: relative;
   font-size: var(--text-size-small);
+  overflow: auto;
+  max-width: 100%;
 }
 
 .Table-table {
@@ -41,7 +43,7 @@
 }
 
 .Table-head {
-  font-weight: var(--font-wight-medium);
+  font-weight: var(--font-weight-bold);
 }
 
 .Table-head--sortable {
@@ -67,7 +69,7 @@
 .Table--striped .Table-head {
   padding-top: 0.75em !important;
   padding-bottom: 0.75em !important;
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-weight-bold);
 }
 
 .Table-cellLink::before {
