@@ -147,6 +147,8 @@
   line-height: inherit;
   text-transform: inherit;
   outline: none;
+  text-align: inherit;
+  border-radius: 0;
 }
 .Button--disabled {
   cursor: inherit;

@@ -53,12 +53,14 @@ export default class Table extends Component<Props, StateTypes> {
     sortOn: this.props.sortOn || -1,
     asc: true
   }
+
   sortOn = (index: number) => {
     this.setState({
       sortOn: index,
       asc: this.state.sortOn === index ? !this.state.asc : true
     })
   }
+
   sortRows = (row1: Array<any>, row2: Array<any>) => {
     const { sortOn, asc = 1 } = this.state
     const cells1 = Array.isArray(row1) ? row1 : row1.cells
@@ -162,7 +164,7 @@ export default class Table extends Component<Props, StateTypes> {
                 {({ expanded, setState }) => (
                   <Fragment>
                     <tr
-                      className={cx('Table-row', {
+                      className={cx('Table-row', row.className, {
                         'Table-row--expanded': expanded,
                         'Table-row--linked': row.to
                       })}

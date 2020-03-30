@@ -149,8 +149,8 @@ export default class Accordion extends Component<Props, State> {
           <Title
             {...title}
             className={cx('Accordion-title', title.className)}
-            level={2}
-            asLevel={5}
+            level={title.level || 2}
+            asLevel={title.asLevel || title.level || 5}
             text={title.text || title}
           />
           <Icon

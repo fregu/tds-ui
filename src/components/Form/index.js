@@ -8,6 +8,7 @@ import styles from './index.css'
 const cx = classNames.bind(styles)
 
 export { default as Input } from './Input'
+export { default as Fieldset } from './Fieldset'
 export { default as Select } from './Select'
 export { default as Textarea } from './Textarea'
 export { default as Checkbox } from './Checkbox'

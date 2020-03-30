@@ -80,16 +80,16 @@ export default class Select extends Component<Props> {
   }
 
   renderOptions = (options: Array<OptionProps>) =>
-    options.map(({ value, text, options = [] }, index) =>
+    options.map(({ value, text, key, options = [] }, index) =>
       options.length ? (
-        <optgroup key={'optgroup' + index} label={text}>
+        <optgroup key={'optgroup' + (key || index)} label={text}>
           {this.renderOptions(options)}
         </optgroup>
       ) : !(this.state.values || []).find(
           ({ value: valuesVal }) => String(valuesVal) === String(value)
         ) ? (
         <option
-          key={'option' + value + '-' + index}
+          key={'option' + value + '-' + (key || index)}
           value={value}
           dangerouslySetInnerHTML={{ __html: text + blankChars }}
         />

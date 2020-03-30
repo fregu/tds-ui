@@ -24,7 +24,8 @@ export type Props = {
   onClick?: Function,
   attributes?: any,
   trackClick?: string,
-  textClass?: string
+  textClass?: string,
+  cover?: boolean
 }
 
 export default function Link({
@@ -41,6 +42,7 @@ export default function Link({
   onClick,
   trackClick,
   textClass,
+  cover,
   ...attributes
 }: Props) {
   const url = to || href || ''
@@ -54,6 +56,7 @@ export default function Link({
         'Link--plain': plain,
         'Link--block': block,
         'Link--disabled': disabled,
+        'Link--cover': cover,
         [`Link--withColor color-${color}`]: color
       },
       className
