@@ -15,7 +15,7 @@ export type Props = {
   className?: string,
   children?: any,
   text?: string,
-  size?: 'tiny' | 'small' | 'large' | 'normal',
+  size?: 'tiny' | 'small' | 'large' | 'larger' | 'normal',
   theme?: string,
   align?: 'left' | 'center' | 'right' | 'spread',
   onClick?: Function,
@@ -65,7 +65,7 @@ export default function Button({
   const [redirect, redirectTo] = useState()
   const url = to || href || ''
   const localPath = url && url.match(/^\//)
-  const isLink = url
+  const isLink = url && !disabled
 
   const ButtonTag = tag || (isLink ? (localPath ? NavLink : 'a') : 'button')
   const clickProps = isLink
@@ -105,6 +105,12 @@ export default function Button({
             onClick={
               confirm || onClick || trackClick
                 ? event => {
+                    console.log('clicked', disabled)
+                    if (disabled) {
+                      event.stopPropagation()
+                      event.preventDefault()
+                      return false
+                    }
                     if (trackClick) {
                       console.log('trackevent', {
                         action: 'click',
@@ -117,11 +123,6 @@ export default function Button({
                         label: trackClick
                       })
                     }
-                    if (disabled) {
-                      event.stopPropagation()
-                      return
-                    }
-
                     if (confirm) {
                       event.preventDefault()
                       confirmAction(confirm, () =>

@@ -1,5 +1,5 @@
 // @flow
-import React from 'react'
+import React, { useState } from 'react'
 import classnames from 'classnames/bind'
 import List from 'ui/components/List'
 import Accordion from 'ui/components/Accordion'
@@ -38,6 +38,7 @@ export default function CheckboxList({
   defaultValue = [],
   className,
   onChange,
+  inline,
   options = [],
   modifiers = [],
   disabled: listDisabled,
@@ -46,94 +47,90 @@ export default function CheckboxList({
   striped,
   columns
 }: Props) {
+  const [values, setValues] = useState(defaultValue || [])
   return (
-    <State>
-      {({ values = defaultValue || [], setState }) => (
-        <fieldset
-          className={cx(
-            'CheckboxList',
-            className,
-            { [`CheckboxList--withTheme theme-${theme}`]: theme },
-            modifiers.map(mod => 'CheckboxList--' + mod)
-          )}
-        >
-          {label ? (
-            <legend className={cx('text-weight-bold ui-text-label')}>
-              {label}
-            </legend>
-          ) : null}
-          <List
-            columns={columns}
-            className={cx('CheckboxList-list')}
-            striped={striped}
-            items={options.map(
-              (
-                {
-                  id,
-                  value,
-                  text,
-                  disabled,
-                  required,
-                  defaultChecked,
-                  className,
-                  options,
-                  columns,
-                  ...props
-                },
-                index
-              ) => ({
-                content: options ? (
-                  <Accordion
-                    theme={theme}
-                    title={`${text} (${options.length})`}
-                    noMargin
-                    noPadding
-                    bordered
-                  >
-                    <CheckboxList
-                      className={cx('CheckboxList-subList', className)}
-                      {...{
-                        disabled: listDisabled,
-                        name,
-                        options,
-                        defaultValue,
-                        striped,
-                        theme,
-                        onChange,
-                        columns
-                      }}
-                    />
-                  </Accordion>
-                ) : (
-                  <Checkbox
-                    className={cx('CheckboxList-checkbox', className)}
-                    key={value}
-                    id={id || `${listId || name}-${value || index}`}
-                    name={name && !name.match(/\[\]$/) ? name + '[]' : name}
-                    value={value}
-                    label={text}
-                    onChange={(e, isChecked) => {
-                      const newValues = isChecked
-                        ? [...values, value]
-                        : values.filter(val => val !== value)
-
-                      if (typeof onChange === 'function') {
-                        setState({ values: newValues })
-                        onChange(e, newValues)
-                      }
-                    }}
-                    defaultChecked={
-                      defaultValue.includes(value) || defaultChecked
-                    }
-                    disabled={disabled || listDisabled}
-                    required={required}
-                  />
-                )
-              })
-            )}
-          />
-        </fieldset>
+    <fieldset
+      className={cx(
+        'CheckboxList',
+        className,
+        { [`CheckboxList--withTheme theme-${theme}`]: theme },
+        modifiers.map(mod => 'CheckboxList--' + mod)
       )}
-    </State>
+    >
+      {label ? (
+        <legend className={cx('text-weight-bold ui-text-label')}>
+          {label}
+        </legend>
+      ) : null}
+      <List
+        horizontal={inline}
+        columns={columns}
+        className={cx('CheckboxList-list')}
+        striped={striped}
+        items={options.map(
+          (
+            {
+              id,
+              value,
+              text,
+              disabled,
+              required,
+              defaultChecked,
+              className,
+              options,
+              columns,
+              ...props
+            },
+            index
+          ) => ({
+            content: options ? (
+              <Accordion
+                theme={theme}
+                title={`${text} (${options.length})`}
+                noMargin
+                noPadding
+                bordered
+              >
+                <CheckboxList
+                  className={cx('CheckboxList-subList', className)}
+                  {...{
+                    disabled: listDisabled,
+                    name,
+                    options,
+                    defaultValue,
+                    striped,
+                    theme,
+                    onChange,
+                    columns
+                  }}
+                />
+              </Accordion>
+            ) : (
+              <Checkbox
+                className={cx('CheckboxList-checkbox', className)}
+                key={value}
+                id={id || `${listId || name}-${value || index}`}
+                name={name && !name.match(/\[\]$/) ? name + '[]' : name}
+                value={value}
+                label={text}
+                onChange={(e, isChecked) => {
+                  const newValues = isChecked
+                    ? [...values, value]
+                    : values.filter(val => val !== value)
+
+                  if (typeof onChange === 'function') {
+                    setValues(newValues)
+                    onChange(e, newValues)
+                  }
+                }}
+                defaultChecked={defaultValue.includes(value) || defaultChecked}
+                disabled={disabled || listDisabled}
+                required={required}
+              />
+            )
+          })
+        )}
+      />
+    </fieldset>
   )
 }

@@ -62,7 +62,8 @@
   padding: 0 0.5em;
   line-height: 1.5em;
 }
-.Button--large {
+.Button--large,
+.Button--larger {
   padding: 0.75em 1.5em;
 }
 .Button--round {
@@ -76,6 +77,10 @@
   padding: 0.5em;
   font-size: 1.25em;
   height: 2em;
+}
+.Button--larger.Button--withIcon.Button--hiddenText {
+  padding: 0;
+  font-size: 1.75em;
 }
 
 .Button:not(.Button--plain, .Button--disabled, .Button--withTheme, .Button--primary, .Button--secondary):hover {

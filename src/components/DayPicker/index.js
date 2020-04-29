@@ -47,6 +47,10 @@ export default function DayPicker({
       component={props => <Input placeholder="yyyy-mm-dd" {...props} />}
     />
   ) : (
-    <ReactDayPicker className={cx('DayPicker', className)} {...props} />
+    <ReactDayPicker
+      className={cx('DayPicker', className)}
+      {...props}
+      {...attributes}
+    />
   )
 }

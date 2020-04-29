@@ -1,4 +1,5 @@
 @import 'base/breakpoints.css';
+
 :root {
   --grid-gap: var(--layout-gutter, 20px);
   --grid-gap-vertical: var(--layout-vertical-gap, var(--grid-gap));
@@ -12,6 +13,9 @@
   flex-direction: row;
   flex-wrap: wrap;
   align-items: stretch;
+}
+.Grid--reversed {
+  flex-direction: row-reverse;
 }
 .Grid--top {
   align-items: flex-start;

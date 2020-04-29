@@ -38,6 +38,7 @@ type GridProps = {
   className?: string,
   /** 'withGap' | 'wideGap' | 'inline' */
   modifiers?: Array<Modifier>,
+  reversed?: boolean,
   withGap?: boolean,
   wideGap?: boolean,
   tightGap?: boolean,
@@ -52,6 +53,7 @@ export function Grid({
   tightGap,
   modifiers = [],
   widths = {},
+  reversed,
   children
 }: GridProps) {
   return (
@@ -63,7 +65,8 @@ export function Grid({
         {
           'Grid--withGap': withGap,
           'Grid--wideGap': wideGap,
-          'Grid--tightGap': tightGap
+          'Grid--tightGap': tightGap,
+          'Grid--reversed': reversed
         },
         modifiers.map(mod => `Grid--${mod}`)
       )}

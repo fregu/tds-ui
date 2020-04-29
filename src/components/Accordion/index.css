@@ -10,6 +10,7 @@
   --accordion-border-color: var(--color-light-grey);
   --accordion-padding: 1em var(--layout-gutter);
   --accordion-reverse-margin: -1em calc(-1 * var(--layout-gutter));
+  --accordion-header-icon-right: 1em;
 }
 .Accordion {
   position: relative;
@@ -141,7 +142,7 @@
 }
 .Accordion-headerIcon {
   position: absolute;
-  right: 1em;
+  right: var(--accordion-header-icon-right);
   top: 50%;
   transform: translateY(-50%);
 }

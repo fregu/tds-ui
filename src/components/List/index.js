@@ -55,7 +55,6 @@ export const ListItem = ({
         <Link
           to={to}
           {...attributes}
-          plain
           block
           icon={icon}
           className={cx('List-link', linkClassName)}

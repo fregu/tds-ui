@@ -53,7 +53,7 @@ dateFormat.i18n = {
 }
 
 export default function dateHandler(startDate) {
-  let date = !isNaN(startDate) || startDate ? new Date(startDate) : new Date()
+  const date = !isNaN(startDate) || startDate ? new Date(startDate) : new Date()
 
   return (
     !isNaN(date.getDate()) && {
@@ -141,8 +141,8 @@ export default function dateHandler(startDate) {
       get(format) {
         switch (format) {
           case 'relative':
-            let today = new Date()
-            let yesterday = new Date()
+            const today = new Date()
+            const yesterday = new Date()
             yesterday.setDate(yesterday.getDate() - 1)
             if (
               dateFormat(date, 'yyyy-mm-dd') === dateFormat(today, 'yyyy-mm-dd')

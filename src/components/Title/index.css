@@ -17,3 +17,8 @@
 .Title--inline {
   display: inline-block;
 }
+.Title-wrapper,
+.Title-link {
+  display: block;
+}
+ 
