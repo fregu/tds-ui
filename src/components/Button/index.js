@@ -48,6 +48,8 @@ export default function Button({
   onClick,
   icon,
   iconAfter,
+  iconAbove,
+  iconBelow,
   theme,
   align,
   to,
@@ -89,6 +91,8 @@ export default function Button({
                 'Button--noPadding': noPadding,
                 'Button--withIcon': icon,
                 'Button--iconAfter': iconAfter,
+                'Button--iconAbove': iconAbove,
+                'Button--iconBelow': iconBelow,
                 'Button--primary': primary,
                 'Button--secondary': secondary,
                 'Button--round': round,
@@ -99,24 +103,17 @@ export default function Button({
               },
               className
             )}
-            plain={isLink || undefined}
             title={(hiddenText && text) || undefined}
             disabled={disabled}
             onClick={
               confirm || onClick || trackClick
                 ? event => {
-                    console.log('clicked', disabled)
                     if (disabled) {
                       event.stopPropagation()
                       event.preventDefault()
                       return false
                     }
                     if (trackClick) {
-                      console.log('trackevent', {
-                        action: 'click',
-                        category: 'Button',
-                        label: trackClick
-                      })
                       trackEvent({
                         action: 'click',
                         category: 'Button',

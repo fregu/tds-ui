@@ -26,7 +26,8 @@ type Props = {
   required?: boolean,
   theme?: string,
   onChange?: Function,
-  striped?: boolean
+  striped?: boolean,
+  inline?: boolean
 }
 
 export default function RadioList({
@@ -41,7 +42,8 @@ export default function RadioList({
   required: listRequired,
   theme,
   onChange,
-  striped
+  striped,
+  inline
 }: Props) {
   return (
     <fieldset
@@ -58,6 +60,7 @@ export default function RadioList({
         </legend>
       ) : null}
       <List
+        horizontal={inline}
         striped={striped}
         items={options.map(
           ({ id, value, text, disabled, required, ...props }, index) => ({

@@ -154,6 +154,7 @@
   outline: none;
   text-align: inherit;
   border-radius: 0;
+  font-weight: inherit;
 }
 .Button--disabled {
   cursor: inherit;
@@ -179,6 +180,7 @@
   justify-content: center;
   width: 100%;
 }
+
 .Button--left .Button-wrapper,
 .Button--right.Button--iconAfter .Button-wrapper {
   justify-content: flex-start;
@@ -199,20 +201,33 @@
   flex: 1 0 auto;
 }
 .Button--withIcon .Button-text {
-  padding-left: 0.5em;
+  padding: 0 0 0 0.5em;
   flex: 0 0 auto;
+}
+.Button--plain .Button-text {
+  flex-shrink: 1;
 }
 .Button--withIcon.Button--iconAfter .Button-wrapper {
   flex-direction: row-reverse;
 }
-.Button--withIcon.Button--iconAfter .Button-text {
-  padding-right: 0.5em;
-  padding-left: 0;
+.Button--withIcon.Button--iconAbove .Button-wrapper {
+  flex-direction: column;
 }
-.Button--withIcon.Button--plain .Button-text {
-  padding-left: 0.5em;
+.Button--withIcon.Button--iconBelow .Button-wrapper {
+  flex-direction: column-reverse;
+}
+.Button--withIcon.Button--iconAfter .Button-text {
+  padding: 0 0.5em 0 0;
+}
+.Button--withIcon.Button--iconAbove .Button-text {
+  padding: 0.5em 0 0 0;
+}
+.Button--withIcon.Button--iconBelow .Button-text {
+  padding: 0 0 0.5em 0;
+}
+/* .Button--withIcon.Button--plain .Button-text {
+  padding: 0 0 0 0.5em;
 }
 .Button--withIcon.Button--plain.Button--iconAfter .Button-text {
-  padding-right: 0.5em;
-  padding-left: 0;
-}
+  padding: 0 0 0 0.5em;
+} */

@@ -19,7 +19,6 @@
 .Accordion--noMargin {
   margin: 0;
 }
-
 .Accordion + .Accordion {
   margin-top: -0.5em;
 }
@@ -48,11 +47,24 @@
   box-sizing: border-box;
   border: 1px solid var(--accordion-border-color);
 }
-.Accordion:not(.Accordion--themed)::before {
+.Accordion:not(.Accordion--themed, .Accordion--plain)::before {
   background: var(--color-white);
 }
 .Accordion--hover::before {
   border: 1px solid var(--color-light-grey);
+}
+.Accordion--plain {
+  --accordion-padding: 0.75em 0.5em;
+  --accordion-header-icon-right: 0.5em;
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+}
+.Accordion--plain + .Accordion--plain {
+  border-top: none;
+}
+.Accordion--plain::before {
+  background: none;
+  border: none;
 }
 
 .Accordion--fill::before {

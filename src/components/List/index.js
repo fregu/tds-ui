@@ -7,7 +7,7 @@ import Icon, { type Props as IconProps } from 'ui/components/Icon'
 import styles from './index.css'
 const cx = classNames.bind(styles)
 
-type Props = {
+export type Props = {
   className?: string,
   modifiers?: Array<string>,
   horizontal?: boolean,
@@ -25,6 +25,17 @@ type Props = {
   divided?: boolean,
   bulletIcon?: IconProps
 }
+export type ListItemProps = {
+  className?: string,
+  to?: string,
+  children?: Node,
+  icon?: IconProps,
+  linkClassName?: string,
+  text?: string,
+  content?: string | Node,
+  tag?: Node | string,
+  bulletIcon?: IconProps
+}
 export const ListItem = ({
   className,
   to,
@@ -33,10 +44,11 @@ export const ListItem = ({
   linkClassName,
   text,
   content,
+  tag: Tag = 'li',
   bulletIcon,
   ...attributes
-}) => (
-  <li
+}: ListItemProps) => (
+  <Tag
     {...attributes}
     className={cx('List-item', className, {
       'List-item--linked': to
@@ -72,7 +84,7 @@ export const ListItem = ({
       ) : null}
       {content || text || children}
     </ConditionalWrapper>
-  </li>
+  </Tag>
 )
 export default function List({
   items = [],
@@ -87,7 +99,8 @@ export default function List({
   plain,
   theme,
   divided,
-  bulletIcon
+  bulletIcon,
+  noPadding
 }: Props) {
   const ListTag = type === 'ordered' ? 'ol' : 'ul'
   return (
@@ -107,6 +120,7 @@ export default function List({
           'List--divided': divided,
           'List--horizontal': horizontal,
           'List--vertical': !horizontal,
+          'List--noPadding': noPadding,
           'List--withBulletIcon': bulletIcon,
           [`List--withTheme theme-${theme}`]: theme
         },

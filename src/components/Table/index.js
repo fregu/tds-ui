@@ -14,7 +14,6 @@ type Props = {
   fill?: boolean,
   sortable?: boolean,
   modifiers?: Array<string>,
-  modifiers?: Array<string>,
   inlinePadding?: boolean,
   style?: any,
   sortOn?: number
@@ -91,7 +90,8 @@ export default class Table extends Component<Props, StateTypes> {
       style,
       inlinePadding
     } = this.props
-
+    const headerRows =
+      headers?.length && Array.isArray(headers[0]) ? headers : [headers]
     const { sortOn, asc } = this.state
     const tableRows = rows
       .map(row => ({ ...(Array.isArray(row) ? { cells: row } : row) }))
@@ -119,40 +119,45 @@ export default class Table extends Component<Props, StateTypes> {
         <table className={cx('Table-table')} style={style}>
           {headers ? (
             <thead className={cx('Table-header')}>
-              <tr className={cx('Table-row')}>
-                {headers.map((cell, index) => {
-                  const isSortable =
-                    sortable &&
-                    typeof tableRows[0].cells[index] === 'object' &&
-                    'sortOn' in tableRows[0].cells[index]
-                  return (
-                    <th
-                      onClick={isSortable ? () => this.sortOn(index) : null}
-                      key={`head-${index}`}
-                      width={cell.width || null}
-                      align={cell.align || null}
-                      valign={cell.valign || null}
-                      colSpan={cell.span || null}
-                      className={cx(
-                        'Table-head',
-                        { 'Table-head--sortable': isSortable },
-                        cell.className || null
-                      )}
-                      style={inlinePadding ? { padding: '0.25em 0.5em' } : null}
-                    >
-                      {cell?.content || cell || ''}
-                      {sortOn === index ? (
-                        <Icon
-                          className={cx('Table-headSortIcon')}
-                          type={asc ? 'chevronDown' : 'chevronUp'}
-                          size={'small'}
-                        />
-                      ) : null}
-                    </th>
-                  )
-                })}
-                <td className={cx('Table-cell Table-cell--empty')} />
-              </tr>
+              {headerRows.map((headerRow, index) => (
+                <tr key={`headerRow-${index}`} className={cx('Table-row')}>
+                  {headerRow.map((cell, index) => {
+                    const isSortable =
+                      sortable &&
+                      typeof tableRows[0].cells[index] === 'object' &&
+                      'sortOn' in tableRows[0].cells[index]
+                    return (
+                      <th
+                        onClick={isSortable ? () => this.sortOn(index) : null}
+                        key={`head-${index}`}
+                        width={cell.width || null}
+                        align={cell.align || null}
+                        valign={cell.valign || null}
+                        colSpan={cell.span || cell.colspan}
+                        rowSpan={cell.rowspan}
+                        className={cx(
+                          'Table-head',
+                          { 'Table-head--sortable': isSortable },
+                          cell.className || null
+                        )}
+                        style={
+                          inlinePadding ? { padding: '0.25em 0.5em' } : null
+                        }
+                      >
+                        {cell?.content || cell || ''}
+                        {sortOn === index ? (
+                          <Icon
+                            className={cx('Table-headSortIcon')}
+                            type={asc ? 'chevronDown' : 'chevronUp'}
+                            size={'small'}
+                          />
+                        ) : null}
+                      </th>
+                    )
+                  })}
+                  <td className={cx('Table-cell Table-cell--empty')} />
+                </tr>
+              ))}
             </thead>
           ) : null}
           <tbody className={cx('Table-body')}>
@@ -194,7 +199,8 @@ export default class Table extends Component<Props, StateTypes> {
                             width={cell.width}
                             align={cell.align}
                             valign={cell.valign}
-                            colSpan={cell.span}
+                            colSpan={cell.span || cell.colspan}
+                            rowSpan={cell.rowspan}
                             className={cx('Table-cell', cell.className, {
                               'Table-head': CellTag === 'th'
                             })}

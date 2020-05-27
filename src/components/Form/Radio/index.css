@@ -1,3 +1,25 @@
+:root {
+  --radio-border-color: var(--color-grey, #999);
+  --radio-background-color: transparent;
+
+  --radio-border-color-hover: var(--color-dark-grey, var(--radio-border-color));
+  --radio-background-color-hover: transparent;
+
+  --radio-border-color-focus: var(--color-dark-grey, var(--radio-border-color));
+  --radio-background-color-focus: transparent;
+
+  --radio-border-color-selected: var(
+    --color-primary-action,
+    var(--radio-border-color)
+  );
+  --radio-background-color-selected: var(
+    --color-primary-action,
+    var(--radio-border-color)
+  );
+
+  --radio-border-color-disabled: var(--color-grey);
+  --radio-background-color-disabled: var(--color-disabled);
+}
 .Radio {
   padding: 1px;
   position: relative;
@@ -13,8 +35,8 @@
 }
 .Radio--disabled .Radio-label::before,
 .Radio--disabled .Radio-label:hover::before {
-  background: var(--color-disabled);
-  box-shadow: 0 0 0 1px var(--color-grey);
+  background: var(--radio-background-color-disabled);
+  box-shadow: 0 0 0 1px var(--radio-border-color-disabled);
 }
 .Radio:not(.Radio--plain) .Radio-label {
   padding-left: 1.5em;
@@ -30,19 +52,21 @@
   margin-top: -0.5em;
   width: 1em;
   height: 1em;
-  box-shadow: 0 0 0 1px var(--color-grey);
+  box-shadow: 0 0 0 1px var(--radio-border-color);
+  background: var(--radio-background-color);
   transition: var(--transition);
   border-radius: 2em;
 }
 .Radio-label:hover::before {
-  box-shadow: 0 0 0 1px var(--color-dark-grey);
+  box-shadow: 0 0 0 1px var(--radio-border-color-hover);
+  background: var(--radio-background-color-hover);
 }
 .Radio-input:focus + .Radio-label::before {
-  box-shadow: 0 1px 2px 0 var(--color-focus), inset 0 0 1px 0 var(--color-focus);
+  box-shadow: 0 1px 2px 0 var(--radio-border-color-focus),
+    inset 0 0 1px 0 var(--radio-border-color-focus);
 }
 .Radio-input:checked + .Radio-label::before {
-  color: var(--color-white);
-  background: var(--color-dark-grey);
-  box-shadow: 0 0 0 1px var(--color-dark-grey),
+  background: var(--radio-background-color-selected);
+  box-shadow: 0 0 0 1px var(--radio-border-color-selected),
     inset 0 0 0 3px var(--color-white);
 }

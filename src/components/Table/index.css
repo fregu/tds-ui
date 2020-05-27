@@ -1,3 +1,7 @@
+:root {
+  --table-cell-vertical-padding: 1em;
+  --table-cell-horizontal-padding: 1em;
+}
 .Table {
   margin: 0;
   position: relative;
@@ -63,7 +67,8 @@
 .Table-cell {
   position: relative;
   text-align: left;
-  padding: 1em var(--layout-gutter) !important;
+  padding: var(--table-cell-vertical-padding)
+    var(--table-cell-horizontal-padding) !important;
   border-top: none !important;
 }
 .Table--striped .Table-head {

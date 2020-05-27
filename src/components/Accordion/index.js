@@ -11,6 +11,7 @@ type Props = {
   children: any,
   className?: string,
   fill?: boolean,
+  plain?: boolean,
   noPadding?: boolean,
   theme?: string,
   isOpen?: boolean,
@@ -115,6 +116,7 @@ export default class Accordion extends Component<Props, State> {
       className,
       children,
       fill,
+      plain,
       noPadding,
       noMargin,
       rounded,
@@ -127,6 +129,7 @@ export default class Accordion extends Component<Props, State> {
         className={cx(
           'Accordion',
           {
+            'Accordion--plain': plain,
             'Accordion--open': isOpen,
             'Accordion--hover': hover,
             'Accordion--closed': !isOpen,
