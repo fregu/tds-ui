@@ -84,6 +84,9 @@
   overflow: auto;
   padding: var(--layout-gutter);
 }
+.Modalbox--full .Modalbox-content {
+  padding: 0;
+}
 
 .Modalbox-closebutton {
   position: absolute;
