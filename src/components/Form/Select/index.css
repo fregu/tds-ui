@@ -1,6 +1,7 @@
 :root {
   --select-width: 280px;
   --select-border-radius: 0;
+  --select-color: var(--color-text, var(--color-black, #000));
   --select-border-color: var(--color-grey);
   --select-border-color-hover: var(--color-grey);
   --select-border-color-focus: var(--color-grey);
@@ -26,6 +27,10 @@
 .Select--fill .Select-input {
   width: 100%;
 }
+.Select-inputWrapper {
+  background: #fff;
+  color: var(--select-color);
+}
 .Select-input {
   background: #fff;
   box-sizing: border-box;
@@ -41,6 +46,7 @@
   border-radius: var(--select-border-radius);
   padding: 0 1em;
   box-sizing: border-box;
+  color: currentColor;
 }
 
 .Select-input:hover {
@@ -54,11 +60,13 @@
   font-weight: normal;
 }
 
+.Select--plain .Select-inputWrapper,
 .Select--plain .Select-input,
 .Select--discreet .Select-input,
 .Select--plain .Select-pickerIcon {
   background: none;
   border: none;
+  color: currentColor;
 }
 .Select-label {
   margin-bottom: 0.25em;
