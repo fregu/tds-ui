@@ -221,6 +221,8 @@
 .Input--discreet .Input-input[disabled] {
   border: none;
   background: none;
+  opacity: 0.7;
+  font-style: italic;
 }
 
 .Input--rounded .Input-input {
