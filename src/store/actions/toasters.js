@@ -1,4 +1,4 @@
-import uuid from 'uuid/v1'
+import { v1 as uuid } from 'uuid'
 
 export const SHOW_TOASTER = 'SHOW_TOASTER'
 export const HIDE_TOASTER = 'HIDE_TOASTER'

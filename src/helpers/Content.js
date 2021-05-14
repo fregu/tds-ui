@@ -1,27 +1,43 @@
 // @flow
 import React, { Fragment, type Node } from 'react'
+import cx from 'classnames'
 import marked from 'marked'
 
 type Props = {
   tag?: string,
-  content: Array<string | Node> | string,
+  content?: Array<string | Node> | string,
   html?: string,
-  markdown?: string
+  markdown?: string,
+  className?: string,
+  replace?: {},
+  partials?: {}
 }
-
+function replacer(string: string, patterns: {}) {
+  let replaceString = string
+  if (patterns) {
+    Object.keys(patterns).forEach(
+      pattern =>
+        (replaceString = replaceString.replaceAll(pattern, patterns[pattern]))
+    )
+  }
+  return replaceString
+}
 export default function Content({
   content,
   html,
   markdown,
   className,
   partials = {},
+  replace = {},
   tag: Tag = 'p'
 }: Props) {
   if (html || markdown) {
+    const raw = replacer(markdown || html || '', replace)
+    let output = markdown ? marked(raw) : raw
     return (
       <div
-        className={'htmlContent'}
-        dangerouslySetInnerHTML={{ __html: markdown ? marked(markdown) : html }}
+        className={cx('htmlContent', className)}
+        dangerouslySetInnerHTML={{ __html: output }}
       />
     )
   }
@@ -44,7 +60,7 @@ export default function Content({
                   key={index}
                   className={className}
                   dangerouslySetInnerHTML={{
-                    __html: marked(p)
+                    __html: marked(replacer(p, replace))
                       .trim()
                       .replace(/^<p>/, '')
                       .replace(/<\/p>/, '')

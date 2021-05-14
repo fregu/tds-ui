@@ -3,7 +3,6 @@ import React, { type Node, Component } from 'react'
 import classNames from 'classnames/bind'
 import { Redirect } from 'react-router'
 import Button from 'ui/components/Button'
-import State from 'ui/helpers/State'
 import styles from './index.css'
 const cx = classNames.bind(styles)
 
@@ -29,7 +28,8 @@ export type Props = {
   contentClassName?: string,
   panelClassName?: string,
   selectedTabClassName?: string,
-  sticky?: boolean
+  sticky?: boolean,
+  onClick?: Function
 }
 
 type StateType = {
@@ -50,6 +50,9 @@ export default class Tabs extends Component<Props, StateType> {
         selectedTabIndex: index,
         minHeight
       })
+      if (this.props.onClick) {
+        this.props.onClick(index)
+      }
     }
   }
   render() {

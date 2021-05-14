@@ -15,7 +15,7 @@ export type Props = {
 }
 
 export default function Icon({ type, size, className, theme }: Props) {
-  const icon = iconset[type.replace(/[ -]/g, '_')]
+  const icon = typeof type === 'string' && iconset[type.replace(/[ -]/g, '_')]
   return icon ? (
     <span
       className={cx('Icon', className, {
