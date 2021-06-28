@@ -21,7 +21,8 @@ export type Props = {
   name?: string,
   /** TODO: handle help texts */
   description?: string,
-  hiddenLabel?: boolean
+  hiddenLabel?: boolean,
+  value?: string
 }
 
 type State = {
@@ -34,6 +35,13 @@ export default class Textarea extends Component<Props, State> {
   onInput = (event: Event) => {
     this.setState({ value: this.input.value })
   }
+
+  componentDidUpdate(prev: Props) {
+    if (prev.value !== this.props.value) {
+      this.setState({ value: this.props.value })
+    }
+  }
+
   render() {
     const {
       id,
@@ -51,6 +59,7 @@ export default class Textarea extends Component<Props, State> {
       ...props
     } = this.props
     const { value } = this.state
+
     return (
       <div className={cx('Textarea', { 'Textarea--fill': fill }, className)}>
         {label ? (

@@ -3,6 +3,17 @@ import React, { Fragment, type Node } from 'react'
 import cx from 'classnames'
 import marked from 'marked'
 
+marked.setOptions({
+  renderer: new marked.Renderer(),
+  pedantic: false,
+  gfm: true,
+  breaks: true,
+  sanitize: false,
+  smartLists: true,
+  smartypants: false,
+  xhtml: false
+})
+
 type Props = {
   tag?: string,
   content?: Array<string | Node> | string,
@@ -31,6 +42,7 @@ export default function Content({
   replace = {},
   tag: Tag = 'p'
 }: Props) {
+  console.log('Content', markdown, (markdown || '').split('\n'))
   if (html || markdown) {
     const raw = replacer(markdown || html || '', replace)
     let output = markdown ? marked(raw) : raw
@@ -44,7 +56,7 @@ export default function Content({
   const paragraphs = (Array.isArray(content)
     ? content
     : typeof content === 'string'
-    ? content.split(/\n/).filter(Boolean)
+    ? content.split(/\n/)
     : []
   ).filter(Boolean)
 
