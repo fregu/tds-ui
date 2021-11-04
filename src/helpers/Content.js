@@ -25,10 +25,13 @@ type Props = {
 }
 function replacer(string: string, patterns: {}) {
   let replaceString = string
-  if (patterns) {
+  if (patterns && typeof replaceString === 'string') {
     Object.keys(patterns).forEach(
       pattern =>
-        (replaceString = replaceString.replaceAll(pattern, patterns[pattern]))
+        (replaceString = replaceString.replace(
+          new RegExp(pattern, 'g'),
+          patterns[pattern]
+        ))
     )
   }
   return replaceString
@@ -42,10 +45,9 @@ export default function Content({
   replace = {},
   tag: Tag = 'p'
 }: Props) {
-  console.log('Content', markdown, (markdown || '').split('\n'))
-  if (html || markdown) {
+  if (html || (markdown && typeof (html || markdown) === 'string')) {
     const raw = replacer(markdown || html || '', replace)
-    let output = markdown ? marked(raw) : raw
+    const output = markdown ? marked(raw) : raw
     return (
       <div
         className={cx('htmlContent', className)}
